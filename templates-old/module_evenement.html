@@ -1,0 +1,84 @@
+<div id = "evenements" class="well">
+	<p class="well-header">
+		Evénements à venir
+	</p>
+	<hr>
+	<div class="module_middle">
+		{% load obtenir_evenements %}
+		{% get_next_events 14 as events_list %}
+		{% if events_list %}
+		{% regroup events_list by date_debut.date as date_list %}
+		<ul class="nav nav-list">
+		{% for date in date_list %}
+			<li class="nav-header">{{ date.grouper|date:"l d b"|title }}</li>
+				{% for item in date.list %}
+				  <li>
+				  <a class = "event"
+					   link = "<a href='/evenements/{{ item.id}}.ics'>Ajouter au calendrier</a>"
+				     titre = "Organisé par {{ item.auteur }}"
+				     contenu = "<div class='event_proprietes'><p class='event_auteur'><img src='{{ STATIC_URL }}logo_{{ item.auteur_slug }}.png'><br/>
+								Organisé par <strong><a href='/associations/{{ item.auteur_slug }}/'>{{ item.auteur }}</a></strong><br/>
+								Le <strong>{{ item.date_debut|date:'d F' }}</strong><br/>
+								De <strong>{{ item.date_debut|date:'H:i' }}</strong> à <strong>{{ item.date_fin|date:'H:i' }}</strong><br/>
+								Lieu : <strong>{{ item.lieu }}</strong></p></div>"
+					 description = "<p>{{ item.description }}</p>"
+				  >
+				  {{ item.titre }}
+				  </a>
+				  </li>
+				{% endfor %}
+		{% endfor %}
+		</ul>
+		{% else %}
+		<p>Aucun événement planifié</p>
+		{% endif %}
+	</div>
+	<div class="module_bottom">
+	</div>
+</div>
+
+
+<script type="text/javascript">
+// Create the tooltips only on document load
+$(document).ready(function()
+{
+   // Use the each() method to gain access to each elements attributes
+   $('.event').each(function()
+   {
+      $(this).qtip(
+      {
+         content: {
+
+            text: ($(this).attr('contenu')) + ($(this).attr('description')).replace(/\n/g,'<br/>'), // Use the rel attribute of each element for the url to load
+            title: {
+               text: $(this).attr('titre'), // Give the tooltip a title using each elements text
+							 button: $(this).attr('link') // Show a close link in the title
+            }
+         },
+         position: {
+            corner: {
+               target: 'rightMiddle',
+			   tooltip: 'leftTop'
+            },
+            adjust: {
+               screen: true // Keep the tooltip on-screen at all times
+            }
+         },
+         show: {
+            when: 'click',
+            solo: true // Only show one tooltip at a time
+         },
+         hide: 'unfocus',
+         style: {
+            tip: true, // Apply a speech bubble tip to the tooltip at the designated tooltip corner
+            border: {
+               width: 0,
+               radius: 4
+            },
+            name: 'light', // Use the default light style
+            width: 520 // Set the tooltip width
+         }
+      })
+   });
+});
+</script>

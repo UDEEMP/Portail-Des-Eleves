@@ -1,0 +1,13 @@
+{% for comment in comment_list %}
+   <div class="comment">
+   <img class = "miniature" src= '{{ STATIC_URL }}{{ comment.user.username }}.jpg'/>
+   
+   <input type="hidden" name = "comment_id" value = "{{ comment.id }}"> {% csrf_token %}
+   {% if request.user = comment.user %}<a class = "comment_delete" href="/comments/delete/"><img src="{{ STATIC_URL }}comment_delete.png"/></a>{% endif %}
+  
+   <p>   
+      <strong><a href="{{ comment.user.get_profile.get_absolute_url }}">{{ comment.user.get_profile.first_name }} {{ comment.user.get_profile.last_name }}</a></strong> {{ comment.comment }}<br>
+	  <span class="comment_date">il y a {{ comment.submit_date|timesince }}</span>     
+   </p>
+   </div>
+{% endfor %}

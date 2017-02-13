@@ -1,0 +1,28 @@
+{% if request.user.is_authenticated %}
+
+
+<div id="soldes_bar">
+	<div class="module_top">
+		<p style="margin-left:15px;">Soldes 
+		</p>
+	</div>
+	<div class="module_middle">		
+		<div id="photo_vp_octo">
+			{% if request.user.get_profile.solde_octo < 0 %}
+				<img id="kevin_venere" src="{{ STATIC_URL }}dettes_octo.png">
+			{% elif request.user.get_profile.solde_biero < 0 %}
+				<img id="yi_venere" src="{{ STATIC_URL }}dettes_biero.png">
+			{% else %}
+				<img id="kevin_cool" src="{{ STATIC_URL }}dettes_ok.png">
+			{% endif %}
+		</div>
+		
+			<p {% if request.user.get_profile.solde_octo < 0 %} class = "negatif" {% else %} class = "positif" {% endif %}>Octo : {{ request.user.get_profile.solde_octo }} €</p>
+			<p {% if request.user.get_profile.solde_biero < 0 %} class = "negatif" {% else %} class = "positif" {% endif %}>Biéro : {{ request.user.get_profile.solde_biero }} €</p>
+		
+	</div>
+	<div class="module_bottom">
+	</div>
+</div>
+{% endif %}
+

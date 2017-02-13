@@ -1,0 +1,25 @@
+{% load static %}
+TEST
+
+{% block header %}
+<link rel="stylesheet" type="text/css" href="{% static "association.css" %}" />
+{% endblock %}
+TEST
+<div id="assoce" class="well">
+    <div><h3>Associations</h3></div>
+    <ul class="liste_assoce">
+    
+	{% load obtenir_pages_abatage %}
+    {% obtenir_pages_associations_abatage %}
+    {% for association, page in abatage_pages_associations.items %}
+        <li>
+        <p>
+            <a href="{{ MEDIA_URL }}abatage/Abatage_2015_Web.pdf#page={{ page }}"><img src="{{ STATIC_URL }}logo_{{ association.pseudo }}.png" width="50" height="50"/>
+            {{ association.nom }}</a>
+        </p>
+        </li>
+    {% endfor %}
+	
+</ul>
+    </ul>
+</div>

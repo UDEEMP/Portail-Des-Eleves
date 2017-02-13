@@ -1,0 +1,66 @@
+img.logo_assoce {
+	position: relative;
+	height:80px;
+	margin-right:15px;
+}
+@font-face {
+	font-family: menu_font;
+	src: url('menu_font.otf');
+}
+
+#menu_onglets h1 {
+	font-size:69px;
+	text-align:center;
+	font-family:menu_font, Arial;
+	margin:0;
+}
+
+/*
+#menu_onglets ul {
+list-style: none;
+height:32px;
+}
+*/
+
+.portrait {
+    width: 100px;
+    height: 260px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 2px;
+}
+
+.portrait p {
+	margin:0;
+	text-align:center;
+}
+
+.portrait img {
+	width:100%;
+}
+
+
+#equipe {
+    margin: 0 auto;
+    text-align: center;
+}
+
+p.actions {
+	text-align:right;
+}
+
+ul.liste_assoce {
+	list-style:none;
+	text-align:center;
+}
+
+ul.liste_assoce li {
+	display:inline-block;
+	width:90px;
+	height:130px;
+}
+
+ul.liste_assoce li img {
+	width:80px;
+	height:80px;
+}

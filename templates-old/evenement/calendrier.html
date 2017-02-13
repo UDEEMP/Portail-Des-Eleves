@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block header %}
+    <link rel='stylesheet' type='text/css' href='{{ STATIC_URL }}jquery-ui-1.8.11.custom.css' />
+	<link rel='stylesheet' type='text/css' href='{{ STATIC_URL }}jquery.weekcalendar.css' />
+	<link rel='stylesheet' type='text/css' href='{{ STATIC_URL }}calendrier.css' />
+	<link rel='stylesheet' type='text/css' href='{{ STATIC_URL }}calendrier_skin.css' />
+	
+    <script type='text/javascript' src='{{ STATIC_URL }}jquery-ui-1.8.21.custom.min.js'></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}date.js"></script>
+	<script type='text/javascript' src='{{ STATIC_URL }}jquery.weekcalendar.js'></script>
+	<script type='text/javascript' src='{{ STATIC_URL }}calendrier.js'></script>
+
+{% endblock %}
+{% block content %}	
+	<form id="tokenform">{% csrf_token %}</form>
+	<div id='calendar'></div>
+	<div id="event_edit_container">
+		<form>
+			<input type="hidden" />
+			<ul>
+				<li>
+					<span>Date: </span><span class="date_holder"></span> 
+				</li>
+				<li>
+					<span>Auteur: </span><span class="auteur_holder"></span> 
+				</li>
+				<li>
+					<label for="start">Heure de début : </label><select name="start"><option value="">Choisir l'heure de début</option></select>
+				</li>
+				<li>
+					<label for="end">Heure de fin : </label><select name="end"><option value="">Choisir l'heure de fin</option></select>
+				</li>
+				<li>
+					<label for="title">Titre : </label><input type="text" name="title" />
+				</li>
+				<li>
+					<label for="body">Description : </label><textarea name="body"></textarea>
+				</li>
+			</ul>
+		</form>
+	</div>
+	<p>coucou</p>
+{% endblock %}

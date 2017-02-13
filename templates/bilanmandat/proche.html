@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static "association.css" %}" />
+{% endblock %}
+
+{% block onglets %}
+<div id="menu_onglets">
+<h1><img class="logo_assoce" src = "{% static "logo_bde.png" %}">BDE</h1>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<h1>Vainqueur</h1>
+{% if question %}
+<p>Question : {{question}}</p>
+{% if question.trouve %}
+<p>La question a été trouvée !</p>
+{% else %}
+<p>La question n'a pas été trouvée mais la personne la plus proche est : {{vainqueur}}</p>
+{% endif %}
+{% else %}
+<p>Pas de question disponible</p>
+
+{% endif %}
+
+{% endblock %}

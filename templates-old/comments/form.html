@@ -1,0 +1,19 @@
+{% load comments %}
+{% load i18n %}
+
+
+<div class="comment">
+   
+   <img class = "miniature" src= '{{ STATIC_URL }}{{ request.user.username }}.jpg'/>
+   <form action="{% comment_form_target %}" method="POST">{% csrf_token %}
+   <p>   
+      {# form.comment #}<textarea name="comment" cols=50 placeholder="Poster un commentaire"></textarea>
+	  <!--<input type="submit" name="post" class="submit-post" value="Poster" />-->
+   </p>
+   <input type="hidden" name="next" value="{{ request.path }}" />
+  {{ form.content_type }}
+  {{ form.object_pk }}
+  {{ form.timestamp }}
+  {{ form.security_hash }}
+   </form>
+</div>

@@ -1,0 +1,112 @@
+body {
+	/*background: url("background.jpg") no-repeat center center fixed; */
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+@keyframes pulse {
+  80% {
+	  transform: translateX(0px);
+  }
+  90% {
+	  transform: translateX(-10px);
+  }
+  100% {
+	  transform: translateX(10px);
+  }
+  66%{
+	 background-color: #ffffff;
+  }
+  0% {
+  }
+}
+
+.sidebar-nav {
+	padding: 9px 0;
+}
+
+#content{
+	background-color: #FFFFFF;
+    /*border-bottom: 1px solid #E8E8E8;*/
+    border-radius: 10px;
+	padding:10px;
+}
+
+.well-header {
+	text-align:center;
+	font-weight:bold;
+}
+
+.well-header img{
+	height:16px;
+}
+
+.well hr {
+	margin:0 0 5px 0;
+}
+
+.emoji img {
+	width: 1.4em;
+	margin-bottom: 4px;
+	margin-right: 3px;
+}
+
+/*
+#menu ul.nav li.dropdown:hover ul.dropdown-menu{
+    display: block;
+}
+
+#menu a.menu:after, #menu .dropdown-toggle:after {
+  content: none;
+}
+*/
+#menu.navbar .nav .dropdown-toggle .caret {
+	margin-top:19px;
+}
+
+ul.nav li a img {
+height:32px;
+margin-right:5px;
+}
+
+#menu div div div ul.nav li {
+	line-height:40px;
+}
+
+#menu .nav > li > a {
+	padding:0 15px;
+}
+
+
+.nav-tabs > li, .nav-pills > li {
+    float:none;
+    display:inline-block;
+    *display:inline; /* ie7 fix */
+     zoom:1; /* hasLayout ie7 trigger */
+}
+
+.nav-tabs, .nav-pills {
+    text-align:center;
+}
+
+
+/* Pour l'administration */
+#content-main .module table{
+	text-align:center;
+	width:100%;
+}
+
+#content-main .module table td{
+	width:33%;
+}
+
+#content-main .module table caption {
+	font-size:1.5em;
+	margin-top:10px;
+}
+
+a#menu_notifications {
+	color:#fff;
+}

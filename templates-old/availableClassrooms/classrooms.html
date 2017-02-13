@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block right_panel %}{% endblock %}
+{% block content %}
+<select id="choices">
+  	<option value="all">Journée</option>
+		<option value="08h30-09h45">08h30-09h45</option>
+  	<option value="10h00-11h15">10h00-11h15</option>
+  	<option value="11h30-12h30">11h30-12h30</option>
+		<option value="HHm">Pause midi</option>
+		<option value="14h00-15h15">14h00-15h15</option>
+		<option value="15h30-16h45">15h30-16h45</option>
+		<option value="17h00-18h15">17h00-18h15</option>
+		<option value="HHs">Soirée</option>
+</select>
+<script>
+$('#choices').change(function(event) {
+	var val=$(this).attr("value");
+	var poststr="slot="+val
+	$.ajax({
+			url:"/availableClassrooms/classrooms.dat",
+			cache:0,
+			data:poststr,
+			success:function(result){
+				 $('#classrooms').html(result);
+			 }
+	});
+});
+document.addEventListener('DOMContentLoaded', function() {
+	var val=$('#choices').attr("value");
+	var poststr="slot="+val
+	$.ajax({
+			url:"/availableClassrooms/classrooms.dat",
+			cache:0,
+			data:poststr,
+			success:function(result){
+				 $('#classrooms').html(result);
+			 }
+	});
+}, false);
+</script>
+<div id="classrooms"></div>
+<br /><br />
+<div><p>Pour réserver une salle c'est par ici : <a href='http://marjolaine.minesdeparis.fr/login.php'>http://marjolaine.minesdeparis.fr/login.php</a></p></div>
+{% endblock %}

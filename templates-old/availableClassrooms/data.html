@@ -1,0 +1,55 @@
+<style>
+table.classrooms {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td.classrooms, th.classrooms {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    text-align: center;
+}
+
+tr.classrooms:nth-child(even) {
+    background-color: #eeeeee;
+}
+</style>
+{% load getValue %}
+{% if slot %}
+  <h2>Salles disponibles {{slot}}</h2>
+  <p>
+  {% for o in content %}
+    {{o}}<br>
+  {% endfor %}
+  </p>
+{% else %}
+  <h2>Salles disponibles</h2>
+  <table class="classrooms">
+  <tr class="classrooms">
+    <th class="classrooms">Salle</th>
+    <th class="classrooms">8h30</th>
+    <th class="classrooms">10h</th>
+    <th class="classrooms">11h30</th>
+    <th class="classrooms">Midi</th>
+    <th class="classrooms">14h</th>
+    <th class="classrooms">15h30</th>
+    <th class="classrooms">17h</th>
+    <th class="classrooms">Soirée</th>
+  </tr>
+  {% for key in content %}
+  <tr class="classrooms">
+    <td class="classrooms">{{key}}</td>
+    {% for v in content|getValue:key %}
+      {% if v == 0 %}
+        <td class="classrooms" style="background-color: #eeaaaa;">❌</td>
+      {% else %}
+        <td class = "classrooms" style="background-color: #aaeeaa;">✔️</td>
+      {% endif %}
+    {% endfor %}
+  </tr>
+  {% endfor %}
+</table>
+
+{% endif %}

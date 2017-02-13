@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static "association.css" %}" />
+<link rel="stylesheet" href="{% static "bda-revue.css" %}" />
+{% endblock %}
+
+{% block onglets %}
+<div id="menu_onglets">
+<h1><img class="logo_assoce" src = "{% static "logo_bda.png" %}">BDA</h1>
+<ul class="nav nav-pills">
+    <li><a href="/associations/bda/messages/"><img src="{% static "mail.png" %}"/><span>Messages</span></a></li>
+    <li><a href="/associations/bda/evenements/"><img src="{% static "date.png" %}"/><span>Événements</span></a></li>
+    <li><a href="/associations/bda/equipe/"><img src="{% static "user.png" %}"/><span>Équipe</span></a></li>
+    <li><a href="/associations/bda/medias/"><img src="{% static "clapperboard.png" %}"/><span>Médias</span></a></li>
+    <li><a href="/associations/bda/archives/"><img src="{% static "page_archives.png" %}"/><span>Revues</span></a></li>
+    <li class="active"><a href="/associations/bda/musiciens/"><img src="{% static "page_musiciens.png" %}"/><span>Musiciens</span></a></li>
+    <li><a href="/associations/bda/credit_debit_eleve/"><img src="{% static "credit_debit_eleves.png" %}"/><span>Soldes</span></a></li>
+    <li><a href="http://bda-mines.alwaysdata.net/index.php"><img src="/static/page_site.png"><span>Site web</span></a></li>
+
+</ul>
+<hr />
+</div>
+{% endblock %}
+
+{% block content %}
+<table width="100%" cellspacing="0" style="text-align:center" >
+<tbody><tr>
+  <td  colspan="4"><a href="https://docs.google.com/spreadsheets/d/1ttfnFNpV480bDqHPweNBE3NZSF6prIdqkb6MA6C08NQ/edit?usp=sharing" class="center"  >Planning salle piano</a></td>
+  <td  colspan="4"><a href="https://docs.google.com/spreadsheets/d/1Ir3HBUnRJIB0XVVidXr-omCIg8KxEQVxk_u4CX2_6Dw/edit?usp=sharing" class="center" >Planning salle ins'</a></td>
+    </tr>
+</tbody></table>
+<hr/>
+
+
+<table class="table table-striped">
+<thead>
+<tr>
+	<th><a href = "?order_by=eleve">Élève</a></th>
+	<th><a href = "?order_by=promo">Promo</th>
+	<th><a href = "?order_by=instrument">Instrument</th>
+	<th><a href = "?order_by=niveau">Niveau</th>
+</tr>
+</thead>
+<tbody>
+{% for maitrise in maitrise_list.all %}
+<tr>
+	<td><a href = "{{ maitrise.eleve.get_absolute_url }}">{{ maitrise.eleve }}</a></td>
+	<td>P{{ maitrise.eleve.promo }}</td>
+	<td>{{ maitrise.instrument.nom }}</td>
+	<td><em>{{ maitrise.niveau }}</em></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+{% endblock %}

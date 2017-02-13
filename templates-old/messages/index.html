@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block header %}
+	<link rel="stylesheet" href="{{ STATIC_URL }}messages.css" />
+	<script type="text/javascript" src="{{ STATIC_URL }}jquery.autosize.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}commentaires.js"></script>	   
+	<script type="text/javascript" src="{{ STATIC_URL }}read.js"></script>
+
+
+{% endblock %}
+
+{% block onglets %}
+    <!--<iframe height="250" src="http://mines-paristech.1year1book.com/sso/iframe/6Xr6U8WE%2Bzg%2FL1ZkAuGhJwJbgjni6OzGKS%2Fvo5XjSKRmh4xqxA%3D%3D%0A" style="overflow: hidden; width: 100%;"  scrolling="no" frameborder="0"></iframe>-->
+    <ul class="nav nav-tabs">
+    <li class="active"><a href="#">Nouveaux</a></li>
+    <li><a href="/messages/importants/">Importants</a></li>
+    <li><a href="/messages/tous/">Tous</a></li>
+    </ul>	
+{% endblock %}
+
+{% block content %}
+{% if list_messages %}
+<!--PRECHARGEMENT IMAGES HOVER -->
+<img src="{{STATIC_URL}}readhover.png" style="display:none;"/>
+<img src="{{STATIC_URL}}unreadhover.png" style="display:none;"/>
+<img src="{{STATIC_URL}}favouritehover.png" style="display:none;"/>
+<img src="{{STATIC_URL}}unfavouritehover.png" style="display:none;"/>
+
+<div class="accordion" id="message_accordion">
+{% for message in list_messages %}
+{% load comments %}
+{% get_comment_count for message as comment_count %}
+
+<div class="accordion-group message">
+<div class="accordion-heading">
+<span class = "pull-right message-icone">
+	{% if request.user.get_profile in message.lu.all %}
+	<a href="/messages/{{ message.id }}/"><img class='action_message unread' src="{{ STATIC_URL }}unread.png" /></a>
+	{% else %}
+	<a href="/messages/{{ message.id }}/"><img class='action_message read disparait' src="{{ STATIC_URL }}read.png" /></a>
+	{% endif %}
+	
+	{% if request.user.get_profile in message.important.all %}
+	<a href="/messages/{{ message.id }}/"><img class='action_message unfavourite' src="{{ STATIC_URL }}unfavourite.png" /></a>
+	{% else %}
+	<a href="/messages/{{ message.id }}/"><img class='action_message favourite disparait' src="{{ STATIC_URL }}favourite.png" /></a>
+	{% endif %}
+	</span>
+				
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#message_accordion" href="#message{{ forloop.counter }}">
+<img src = "{{ STATIC_URL }}logo_{{message.association.pseudo}}.png" width="40">
+{{ message.objet }}
+</a>
+</div>
+<div id="message{{ forloop.counter }}" class="accordion-body collapse">
+<div class="accordion-inner">
+<p class="message-info"><span class="message-legende">Posté par</span> {{message.association.nom}}
+	{% if message.est_recent %}
+	<span class="message-legende">il y a</span> {{ message.date|timesince }}
+	{% else %}
+	<span class="message-legende">le</span> {{ message.date|date:"d F Y" }}  <!-- a H:i -->
+	{% endif %}</p>
+<p>{{ message.contenu|removetags:"script"|safe}}</p>
+<hr>
+	<p class="message-pied">Visible par tous
+	<span class="pull-right">Posté par <a href="{{ message.expediteur.user.username.get_absolute_url }}">{{ message.expediteur.first_name }} {{ message.expediteur.last_name }}</a></span>
+	</p>
+	
+	
+	<div class="comments">
+	{% load comments %}
+	{% render_comment_list for message %}
+	</div>
+	<div class="comment_form">
+	{% render_comment_form for message %}
+	</div>
+</div>
+</div>
+</div>
+{% endfor %}
+</div>
+{% if list_messages.has_other_pages  %}
+<div class="pagination">
+  <ul>
+    {% if list_messages.has_previous %}
+    	<li><a href="?page={{ list_messages.previous_page_number }}"><span aria-hidden="true">&laquo;</span></a></li>
+    	<li><a href="?page={{ list_messages.previous_page_number }}">{{ list_messages.previous_page_number }}</a></li>
+    {% else %}
+     	<li class="disabled"><a><span aria-hidden="true">&laquo;</span></a></li>
+   {% endif %}
+    <li class="active"><a>{{ list_messages.number }}</a></li>
+    {% if list_messages.has_next %}
+    	<li><a href="?page={{ list_messages.next_page_number }}">{{ list_messages.next_page_number }}</a></li>
+    	<li><a href="?page={{ list_messages.next_page_number }}"><span aria-hidden="true">&raquo;</span></a></li>
+    {% else %}
+     	<li class="disabled"><a><span aria-hidden="true">&raquo;</span></a></li>
+    {% endif %}
+  </ul>
+</div>
+{% endif %}
+
+{% else %}
+<p>Bravo ! Tu as lu tous tes messages !</p>
+{% endif %}
+
+{% endblock %}

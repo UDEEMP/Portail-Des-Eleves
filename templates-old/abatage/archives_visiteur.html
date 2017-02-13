@@ -1,0 +1,20 @@
+{% extends "base_visiteur.html" %}
+
+{% block header %}
+<link rel="stylesheet" href="{{ STATIC_URL }}vendome.css" />
+{% endblock %}
+
+{% block content %}
+
+<h1>L'Abatage</h1>
+<p>L'Abatage est la plaquette de présentation de l'école des Mines et de toutes ses associations. Tu pourras trouver dans ces pages quelques sources de motivations pour tes révisions d'oraux.</p>
+
+<div class="pagination-centered">
+	<a href="{{ MEDIA_URL }}{{ abatage_annuel.fichier }}">
+	<img src="{{ MEDIA_URL }}{{ abatage_annuel.thumbnail }}" />
+	<p>{{abatage_annuel.date|date:"Y"}}</p>
+	</a>
+
+
+
+{% endblock %}

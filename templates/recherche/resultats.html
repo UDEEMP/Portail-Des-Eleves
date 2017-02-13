@@ -1,0 +1,97 @@
+﻿{% extends "base.html" %}
+{% load static %}
+{% block header %}
+    <link rel="stylesheet" href="{% static "recherche.css" %}" />
+	<link rel="stylesheet" href="{% static "messages.css" %}" />
+    <script type="text/javascript" src="{% static "commentaires.js" %}"></script>    
+	<script type="text/javascript" src="{% static "read.js" %}"></script>
+{% endblock %}
+
+{% block content %}
+
+<div id = "div_eleves">
+<h2>Les élèves</h2>
+{% if list_users %}
+<ul>
+{% for user in list_users %}
+<li>
+<img class = "trombi" src= '{% static "{{user.user.username}}.jpg" %}'/> 
+<a href="{{ user.get_absolute_url }}">{{ user.first_name }} {{ user.last_name }}</a>
+<br>
+Promo : {{user.promo}}
+Promo : {{user.promo}}
+</li>
+{% endfor %}
+</ul>
+{% else %}
+<p>Aucun élève trouvé.</p>
+{% endif %}
+</div>
+
+<div>
+<h2>Les messages</h2>
+{% if list_messages %}
+<!--PRECHARGEMENT IMAGES HOVER -->
+<img src="{% static "readhover.png" %}" style="display:none;"/>
+<img src="{% static "unreadhover.png" %}" style="display:none;"/>
+<img src="{% static "favouritehover.png" %}" style="display:none;"/>
+<img src="{% static "unfavouritehover.png" %}" style="display:none;"/>
+
+<div class="accordion" id="message_accordion">
+{% for message in list_messages %}
+{% load comments %}
+{% get_comment_count for message as comment_count %}
+
+<div class="accordion-group message">
+<div class="accordion-heading">
+<span class = "pull-right message-icone">
+	{% if request.user.get_profile in message.lu.all %}
+	<a href="/messages/{{ message.id }}/"><img class='action_message unread' src="{{ STATIC_URL }}unread.png" /></a>
+	{% else %}
+	<a href="/messages/{{ message.id }}/"><img class='action_message read' src="{{ STATIC_URL }}read.png" /></a>
+	{% endif %}
+	
+	{% if request.user.get_profile in message.important.all %}
+	<a href="/messages/{{ message.id }}/"><img class='action_message unfavourite' src="{{ STATIC_URL }}unfavourite.png" /></a>
+	{% else %}
+	<a href="/messages/{{ message.id }}/"><img class='action_message favourite' src="{{ STATIC_URL }}favourite.png" /></a>
+	{% endif %}
+	</span>
+				
+<a class="accordion-toggle" data-toggle="collapse" data-parent="#message_accordion" href="#message{{ forloop.counter }}">
+<img src = "{% static "logo_{{message.association.pseudo}}.png" %}" width="40">
+{{ message.objet }}
+</a>
+</div>
+<div id="message{{ forloop.counter }}" class="accordion-body collapse">
+<div class="accordion-inner">
+<p class="message-info"><span class="message-legende">Posté par</span> {{message.association.nom}}
+	{% if message.est_recent %}
+	<span class="message-legende">il y a</span> {{ message.date|timesince }}
+	{% else %}
+	<span class="message-legende">le</span> {{ message.date|date:"d F Y" }}  <!-- a H:i -->
+	{% endif %}</p>
+<p>{{ message.contenu|removetags:"script"|safe}}</p>
+<hr>
+	<p class="message-pied">Visible par tous
+	<span class="pull-right">Posté par <a href="{{ message.expediteur.get_absolute_url }}">{{ message.expediteur.first_name }} {{ message.expediteur.last_name }}</a></span>
+	</p>
+	
+	
+	<div class="comments">
+	{% load comments %}
+	{% render_comment_list for message %}
+	</div>
+	<div class="comment_form">
+	{% render_comment_form for message %}
+	</div>
+</div>
+</div>
+</div>
+{% endfor %}
+</div>
+{% else %}
+<p>Aucun message trouvé</p>
+{% endif %}
+</div>
+{% endblock %}

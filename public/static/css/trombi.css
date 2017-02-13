@@ -1,0 +1,73 @@
+table {
+	width: 774px;
+	text-align: center;
+	border: none;
+}
+th {
+	background: #eee;
+}
+tr {
+	margin: 0px;
+	padding: 2px;
+}
+tr:hover {
+	background: #eee;
+}
+td {
+	margin: 0px;
+	padding: 2px;
+}
+#picture img{ /* dans les pages d�tail */
+  border: 1px solid #ccc;
+  box-shadow: 0px 0px 4px #aaa;
+}
+#pictures img {
+	display: none;
+}
+
+#pictures {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: 285px;
+  /*margin-top: 192px;*/
+  border: 1px solid #ccc;
+  box-shadow: 0px 0px 4px #aaa;
+}
+
+#pictures.fixed {
+  position: fixed;
+  top: 0;
+}
+
+table.edit {
+	width:100%;
+}
+
+ul.promo {
+	text-align: center;
+}
+
+li.portrait {
+	display: inline-block;
+	vertical-align: top;
+	width:100px;
+	/* for ie7 */
+    zoom: 1;
+    *display: inline;
+
+}
+
+li.portrait p {
+	margin:0;
+	text-align:center;
+}
+
+li.portrait img {
+	width:100px;
+}
+
+h1.promo {
+	font-size:30pt;
+	text-align:center;
+}

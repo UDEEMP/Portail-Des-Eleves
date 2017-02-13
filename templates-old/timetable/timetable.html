@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block header %}
+	<title>Emploi du temps</title>
+	<link rel="stylesheet" href="{{ STATIC_URL }}list.css" />
+	<link rel="stylesheet" href="{{ STATIC_URL }}chosen.css" />
+	<script type="text/javascript" src="{{ STATIC_URL }}chosen.jquery.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<h2>Emploi du temps en ligne</h2>
+<table>
+<tbody><tr>
+<td>Cette semaine</td>
+<td><a target="_blank" href="http://marjolaine.minesdeparis.fr/export.php?this_week&type=1A"><b>1A</b></a></td>
+<td><a target="_blank" href="http://marjolaine.minesdeparis.fr/export.php?this_week&type=2A"><b>2A</b></a></td>
+<td><a target="_blank" href="http://marjolaine.minesdeparis.fr/export.php?this_week&type=3A"><b>3A</b></a></td>
+</tr>
+<tr>
+<td>Semaine prochaine</td>
+<td><a target="_blank" href="http://marjolaine.minesdeparis.fr/export.php?next_week&type=1A"><b>1A</b></a></td>
+<td><a target="_blank" href="http://marjolaine.minesdeparis.fr/export.php?next_week&type=2A"><b>2A</b></a></td>
+<td><a target="_blank" href="http://marjolaine.minesdeparis.fr/export.php?next_week&type=3A"><b>3A</b></a></td>
+</tr>
+</tbody></table>
+
+<table width="100%" cellspacing="0" style="text-align:center" >
+<tbody><tr>
+
+  <td  colspan="2">1e année</td>
+  <td  colspan="2">2e année</td>
+  <td colspan="3">3e année</td>
+</tr>
+<tr>
+  <td><a href="http://intranet.mines-paristech.fr/Intra/IngCivil/EmploiTemps/2016/S1.pdf"><strong>S1</strong></a></td>
+  <td><a href="http://intranet.mines-paristech.fr/Intra/IngCivil/EmploiTemps/2016/S2.pdf"><strong>S2</strong></a></td>
+  <td><a href="http://intranet.mines-paristech.fr/Intra/IngCivil/EmploiTemps/2016/S3.pdf"><strong>S3</strong></a></td>
+  <td><a href="http://intranet.mines-paristech.fr/Intra/IngCivil/EmploiTemps/2016/S4.pdf"><strong>S4</strong></a></td>
+  <td><a href="http://intranet.mines-paristech.fr/Intra/IngCivil/EmploiTemps/2016/VS.pdf">Septembre Voie Spécialisée</a></div></td>
+  <td><a href="http://intranet.mines-paristech.fr/Intra/IngCivil/EmploiTemps/2016/S5.pdf"><strong>S5</strong></a></td>
+  <td><a href="http://intranet.mines-paristech.fr/Intra/IngCivil/EmploiTemps/2016/S6.pdf"><strong>S6</strong></a></td>
+</tr>
+</tbody></table>
+<p>Si on vous les demande, les identifiants sont <i>ensmp</i> et <i>mines</i></p>
+<p>Vous trouverez tous les autres emplois du temps de la DE sur <a href="http://intranet.mines-paristech.fr/Intra/IngCivil/EmploiTemps/calendrier.php">http://intranet.mines-paristech.fr/Intra/IngCivil/EmploiTemps/calendrier.php</a></p>
+
+
+<h2>Emploi du temps format ICS</h2>
+	<form id="codesform" action="mines.ics" method="GET">
+	<label for="codes">Entrez la liste de vos cours (en effectuant une recherche par titre)<br /></label>
+	<p></p>
+	<div><select data-placeholder="Liste de cours" multiple class="chzn-select chzn-add" name="codes">
+	{% for c in cours %}
+		<option value="{{ c.code }}">{{ c.description }}</option>
+	{% endfor %}
+	</select></div>
+	<p></p>
+	<input type="submit" id="poutre" value="Poutre" />
+	</form>
+<!--	<p id="lien">Vous pouvez utiliser le lien suivant: <a id=""></a></p>
+
+	<p> Une vidéo pour comprendre comment s'y prendre :</p>
+	<iframe width="640" height="480" src="http://www.youtube.com/embed/PKop1m-jLAU" frameborder="0" allowfullscreen></iframe>
+-->
+	<p><br></p>
+	<p>Ceci permet d'avoir l'agenda des mines sur son TMP/ordinateur/google calendar.</p>
+	<p>Mais je vous rappelle que seul l'emploi du temps affiché devant les BAL est à jour.</p>
+	<p>D'autre part il n'y a pas les salles.</p>
+	<p><br><br><br><br><br></p>
+
+	<script type="text/javascript">
+		$(".chzn-select").chosen();
+	</script>
+
+{% endblock %}

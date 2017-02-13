@@ -1,0 +1,25 @@
+{% load static %}
+	<div id = "menu" class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+	        <a class="brand" href="/"><!--<img src="{% static "logo_portail.png" %}" width="38">-->Le Portail des élèves</a>
+	        <div class="nav-collapse collapse">
+			<ul class="nav">
+				{% load active %}
+				<li class="{% active request "^/accueil/" %}"><a href="/accueil/"><img src="{% static "accueil.png" %}"/>Accueil</a></li>
+				<li class="{% active request "^/entreprises/" %}"><a href="/entreprises/"><img src="{% static "entreprises.png" %}"/>Entreprises</a></li>
+				<li class="{% active request "^/petitscours/" %}"><a href="/petitscours/demander/"><img src="{% static "petitscours.png" %}"/>Cours particuliers</a></li>
+				<li class="{% active request "^/abatage/" %}"><a href="/abatage/"><img src="{% static "abatage.png" %}"/>Abatage</a></li>
+				<li class="{% active request "^/admissibles/" %}"><a href="/admissibles/"><img src="{% static "admissibles.png" %}"/>Admissibles</a></li>
+				<li class="{% active request "^/admis/" %}"><a href="/admis/"><img src="{% static "admis.png" %}"/>Admis</a></li>
+				<li class="{% active request "^/faq/" %}"><a href="/faq/"><img src="{% static "faq.png" %}"/>FAQ</a></li>
+
+				
+			</ul>
+			<ul class="nav pull-right">				
+					<li class="{% active request "^/accounts" %}"><a href="/accounts/login"><img src="{% static "user_guy.png" %}"/>Se connecter</a></li>  
+	        </ul>
+          </div>
+        </div>
+      </div>
+    </div>

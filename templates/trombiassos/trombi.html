@@ -1,0 +1,35 @@
+{% load static %}
+
+
+{% block header %}
+    <link rel="stylesheet" href="{% static "trombi.css" %}" />
+    <link rel="stylesheet" href="{% static "list.css" %}" />
+	<title>Trombi</title>
+	
+{% endblock %}
+
+
+{% block content %}
+<table width="100%" cellspacing="0" style="text-align:center" >                
+<tbody><tr>  
+        {% for mineur in mineur_list %}
+    {% for ad in adhesions %}
+    {% if ad.eleve_id == mineur.id %}
+    {% for as in assoces %}
+    {% if as.id == ad.association_id %}
+    {% if as.id == 1 %}
+                     
+                  
+  <td>  <img src="{% static "{{mineur.user.username}}.jpg" %}" />
+    <p>{{mineur.first_name}}<br/>{{mineur.last_name|upper}} </p></td>               
+        </tr> 
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+</tbody> </table>
+
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static "association.css" %}" />
+{% endblock %}
+
+{% block onglets %}
+<div id="menu_onglets">
+<h1><img class="logo_assoce" src = "{% static "logo_paindemine.png" %}">Pain de Mine</h1>
+<ul class="nav nav-pills">
+<li><a href="/associations/paindemine/messages/"><img src="{% static "mail.png" %}"/><span>Messages</span></a></li>
+<li><a href="/associations/paindemine/evenements/"><img src="{% static "date.png" %}"/><span>Évenements</span></a></li>
+<li><a href="/associations/paindemine/equipe/"><img src="{% static "user.png" %}"/><span>Équipe</span></a></li>
+<li><a href="/associations/paindemine/medias/"><img src="{% static "clapperboard.png" %}"/><span>Médias</span></a></li>
+<li class="active"><a href="/associations/paindemine/catalogue_pain/"><img src="{% static "page_catalogue_pain.png" %}"/><span>Catalogue</span></a></li>
+<li><a href="/associations/paindemine/soldespaindemine/"><img src="{% static "page_soldespaindemine.png" %}"/><span>Soldes</span></a></li>
+<li><a href="/associations/paindemine/affichagesoldes/"><img src="{% static "page_comptes.png" %}"/><span>Comptes</span></a></li>
+</ul>
+<hr />
+</div>
+{% endblock %}
+
+{% block content %}
+<p style="text-align:center;"><a href="/associations/paindemine/catalogue_pain/"><img src="{% static "market_catalogue.jpg" %}"></a></p>
+<ul>
+{% for achat in liste_achats %}
+	<li>{{ achat.quantite }} {{ achat.produit.nom }}(s) chaque jour suivant : {{achat.liste_jours}}<br/>
+	Prix unitaire: <strong>{{ achat.produit.prix_vente }}€</strong><br/>
+	<a href="/associations/paindemine/supprimer_achat/{{ achat.id }}/">Supprimer l'achat</a></li>
+{% endfor %}
+</ul>
+{% if liste_achats %}
+<a href="/associations/paindemine/supprimer_tous_achats/">Supprimer tous les achats</a></li>
+{% endif %}
+
+<h2><span style="color:#ff8c00;"><u><strong>Total à payer :</strong></u> <strong>{{ total }}€</strong></span></h2>
+
+{% endblock %}

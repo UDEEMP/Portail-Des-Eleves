@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="pagination-centered">
+    <a href="{{ url }}"><img src="{{ url }}" width="60%"></a>
+    <form method="GET" action="{{ request.url }}">
+        <label for="nombre_promos">Nombre de promos</label>
+        <select name="nombre_promos" style="width:64px">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3" selected="selected">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="999">Toutes</option>
+        </select>
+        <input type="submit" value="Changer">
+    </form>
+</div>
+{% endblock %}

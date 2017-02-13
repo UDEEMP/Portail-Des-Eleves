@@ -1,0 +1,32 @@
+{% extends "base_visiteur.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<div class = "pagination-centered">
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+	<h1>Identification au Portail des élèves</h1>
+	<p>
+		{{ form.username.label_tag }}
+		{{ form.username }}
+	</p>
+	<p>
+		{{ form.password.label_tag }}
+		{{ form.password }}
+	</p>
+	<p><a href="/accounts/password_reset/">J'ai oublié mon mot de passe</a></p>
+	{% if form.errors %}
+	<p>Identifiant ou mot de passe incorrect, veuillez réessayer.</p>
+	{% endif %}
+	<p class="center">
+		<button type="submit" class="btn">Se connecter</button>
+		<input type="hidden" name="next" value="{{ next }}" />
+	</p>
+</form>
+<p id="credits">Accès au <strong>Portail des élèves</strong> de l'École des  <strong>Mines de Paris</strong>.<br />
+En cas de problèmes d'identification, contacter le <a href="mailto:florian.veaux@mines-paristech.fr">VP Geek</a></p>
+</div>
+
+{% endblock %}

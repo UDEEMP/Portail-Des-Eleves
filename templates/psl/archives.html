@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static "association.css" %}" />
+<link rel="stylesheet" href="{% static "psl-newsletter.css" %}" />
+{% endblock %}
+
+{% block onglets %}
+<div id="menu_onglets">
+<h1><img class="logo_assoce" src = "{% static "logo_psl.png" %}">PSL</h1>
+<ul class="nav nav-pills">
+    <li><a href="/associations/psl/messages/"><img src="{% static "mail.png" %}"/><span>Messages</span></a></li>
+    <li><a href="/associations/psl/evenements/"><img src="{% static "date.png" %}"/><span>Événements</span></a></li>
+    <li><a href="/associations/psl/equipe/"><img src="{% static "user.png" %}"/><span>Équipe</span></a></li>
+    <li><a href="/associations/psl/medias/"><img src="{% static "clapperboard.png" %}"/><span>Médias</span></a></li>
+    <li class="active"><a href="/associations/psl/archives/"><img src="{% static "page_archives.png" %}"/><span>Archives</span></a></li>
+</ul>
+<hr />
+</div>
+{% endblock %}
+
+{% block content %}
+<ul class="liste_newsletters">
+{% for newsletter in liste_newsletters %}
+	<li class="newsletter">
+    	<a href="{{ MEDIA_URL }}{{ newsletter.fichier }}">
+    	<img src="{{ MEDIA_URL }}{{ newsletter.thumbnail }}" />
+    	<p>{{ newsletter.titre }}</p>
+    	</a>
+    	<p class="date">{{ newsletter.date|date:"d F Y" }}</p>
+	</li>
+{% endfor %}
+</ul>
+{% endblock %}

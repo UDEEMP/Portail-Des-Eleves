@@ -1,0 +1,39 @@
+{% extends "mediamines/root.html" %}
+{% load static %}
+
+{% block onglets %}
+<div id="menu_onglets">
+<h1><img class="logo_assoce" src = "{% static "logo_mediamines.png" %}">MediaMines</h1>
+
+
+<ul class="nav nav-pills">
+<li><a href="/associations/mediamines/messages/"><img src="{% static "mail.png" %}"><span>Messages</span></a></li>
+<li><a href="/associations/mediamines/evenements/"><img src="{% static "date.png" %}"><span>Évenements</span></a></li>
+<li><a href="/associations/mediamines/equipe/"><img src="{% static "user.png" %}"><span>Équipe</span></a></li>
+<li class="active"><a href="/associations/mediamines/medias/"><img src="{% static "clapperboard.png" %}"><span>Médias</span></a></li>
+</ul>
+
+<hr>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<h1>{{ album.title }}</h1>
+<h2>Le {{ album.date_added|date:"l j F Y" }}</h2>
+{% if album.description %}<p>{{ album.description }}</p>{% endif %}
+<h3 style="text-align:center;">Voir le <a href="diaporama">diaporama</a></h3>
+<h3><a href="{{ MEDIA_URL }}{{ album.archive }}">Télécharger</a> les photos</h3>
+<div class="list-gallery-photo">
+	<ul class = "gallery-photo">
+    {% for photo in album.photos.all %}
+    <li>
+        <a href="{{ photo.get_absolute_url }}"><img src="{{ photo.get_thumbnail_url }}" alt="{{ photo.title }}"/></a>
+    </li>
+    {% endfor %}
+	</ul>
+</div>
+<p><br clear="all" style="page-break-before: always;"></p>
+<p><a href="{% url 'pl-gallery-list' 1 %}">Voir tous les albums</a></p>
+
+{% endblock %}

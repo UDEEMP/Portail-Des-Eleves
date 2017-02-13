@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static "association.css" %}" />
+{% endblock %}
+
+{% block onglets %}
+<div id="menu_onglets">
+<h1><img class="logo_assoce" src = "{% static "logo_radiopsl.png" %}">Radio PSL</h1>
+<ul class="nav nav-pills">
+    <li><a href="/associations/radiopsl/messages/"><img src="{% static "mail.png" %}"/><span>Messages</span></a></li>
+    <li><a href="/associations/radiopsl/evenements/"><img src="{% static "date.png" %}"/><span>Événements</span></a></li>
+    <li><a href="/associations/radiopsl/equipe/"><img src="{% static "user.png" %}"/><span>Équipe</span></a></li>
+    <li><a href="/associations/radiopsl/medias/"><img src="{% static "clapperboard.png" %}"/><span>Médias</span></a></li>
+    <li class="active"><a href="/associations/radiopsl/lecteur/"><img src="{% static "page_lecteur.png" %}"/><span>Lecteur</span></a></li>
+</ul>
+<hr />
+</div>
+{% endblock %}
+
+{% block content %}
+<iframe allowtransparency="true" scrolling="no" frameborder="no" src="https://w.soundcloud.com/icon/?url=http%3A%2F%2Fsoundcloud.com%2Fradio-psl&color=black_white&size=64" style="width: 64px; height: 64px;"></iframe>
+{% endblock %}
+
+

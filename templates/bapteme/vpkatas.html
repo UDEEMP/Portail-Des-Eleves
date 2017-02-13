@@ -1,0 +1,39 @@
+﻿{% extends "base.html" %}
+{% load static %}
+{% static "" as static %}
+{% block header %}
+<link rel="stylesheet" href="{% static "association.css" %}" />
+{% endblock %}
+{% block title %}{{association.nom}}{% endblock %}
+
+
+
+
+{% block onglets %}
+<div id="menu_onglets">
+<h1><img class="logo_assoce" src = "{% static "logo_" %}{{association.pseudo}}.png">{{association.nom}}</h1>
+
+<ul class="nav nav-pills">
+<li><a href="/associations/{{association.pseudo}}/messages/"><img src="{% static "mail.png" %}">Messages</a></li>
+<li><a href="/associations/{{association.pseudo}}/evenements/"><img src="{% static "date.png" %}">Évenements</a></li>
+<li><a href="/associations/{{association.pseudo}}/equipe/"><img src="{% static "user.png" %}">Équipe</a></li>
+<li><a href="/associations/{{association.pseudo}}/medias/"><img src="{% static "clapperboard.png" %}">Médias</a></li>
+<li class="active"><a href="/associations/{{association.pseudo}}/vpkata"><img src="{% static "page_vpkatas.png" %}"><span>VP Katas</span></a></li>
+</ul>
+<hr />
+</div>
+{% endblock %}
+{% block content %}
+
+<div id="equipe">
+	{% for adhesion in membres %}
+		<div class="portrait">
+		<img src="{% static "" %}{{adhesion.eleve.user.username}}.jpg" />
+		<p><a href = "{{ adhesion.eleve.get_absolute_url }}">{{ adhesion.eleve.first_name }} {{ adhesion.eleve.last_name|upper }}</a> {% if adhesion.role != "" %}<br />VP Katas {{adhesion.promo}}{% endif %}
+		</div>
+	{% endfor %}
+</div>
+<br>
+<!--<h2>Liste des messages</h2>-->
+
+{% endblock %}

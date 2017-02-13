@@ -1,0 +1,29 @@
+
+
+{% block header %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}trombi.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}list.css" />
+	<title>Trombi</title>
+	
+{% endblock %}
+
+
+{% block content %}
+<table width="100%" cellspacing="0" style="text-align:center" >                
+<tbody>
+        {% for mineur_list in mineur_list2 %}<tr>
+    {% for mineur in mineur_list %}
+   
+                     
+                  
+  <td>  <img src="{{ STATIC_URL }}{{ mineur.user.username }}.jpg" />
+    <p>{{mineur.first_name}}<br/>{{mineur.last_name|upper}} </p></td>               
+        
+    
+    
+    {% endfor %}</tr> 
+    {% endfor %}
+</tbody> </table>
+
+
+{% endblock %}

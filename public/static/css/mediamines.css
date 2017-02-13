@@ -1,0 +1,107 @@
+.photo-gallery {
+	position:relative;
+	text-align:center;
+	margin: 0 auto;
+	width:430px;
+}
+
+.gallery {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.gallery li {
+	padding: 10px;
+	margin: 0;
+	float: left;
+	position: relative;
+	width: 180px;
+	height: 130px;
+}
+.gallery li:hover img {
+	border-color: #000;
+}
+.gallery img {
+	background: #fff;
+	border: solid 1px #888;
+	padding: 5px;
+}
+.gallery em {
+	background: #fff url(grey-gradient.gif) repeat-y;
+	color: #000;
+	font-style: normal;
+	padding: 2px 10px;
+	display: block;
+	position: absolute;
+	top: 110px;
+	left: 9px;
+	border: 1px solid #999;
+	border-left-color: #888;
+}
+.gallery a {
+	text-decoration: none;
+}
+.gallery a:hover em {
+	background: #ffdb01 url(orange-gradient.gif) repeat-y;
+	border-color: #c25b08;
+}
+
+
+.list-gallery-photo {
+	position:relative;
+	text-align:center;
+	margin: 0 auto;
+	width:100%;
+}
+
+.gallery-photo {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.gallery-photo li {
+	/*padding: 10px;*/
+	padding:0;
+	margin: 0;
+	float: left;
+	position: relative;
+	/*width: 180px;*/
+	width:170px;
+	height: 130px;
+}
+
+#navigation_photos {
+	text-align:center;
+}
+
+#legende_photo {
+	text-align:center;
+}
+
+#photo_precedente {
+	width:84px;
+}
+#photo_suivante {
+	width:84px;
+}
+
+.bloc_photo {
+	display:inline-block;
+	vertical-align:middle;	
+}
+
+
+a.mini_photo img {
+	width:84px;
+	filter:alpha(opacity=50);
+	-moz-opacity: 0.5;
+	opacity: 0.5;
+	-khtml-opacity: 0.5;
+}
+
+a.mini_photo:hover img {
+	filter:alpha(opacity=100);
+	-moz-opacity: 1.0;
+	opacity: 1.0;
+	-khtml-opacity: 1.0; 
+}

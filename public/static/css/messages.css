@@ -1,0 +1,58 @@
+
+	
+img.miniature {
+	float:left;
+	height:42px;
+	margin-right:5px;
+}
+
+div.comment {
+	padding:5px;
+	margin-left:42px;
+	background-color:#fafafa;
+	min-height: 42px;
+	border: solid 1px #eef;
+	clear:both;
+}
+
+.comment a {
+	color:#3B5998;
+	font-family:'lucida grande',tahoma,verdana,arial,sans-serif;
+}
+
+.comment p {
+	margin:0;
+}
+
+.comment textarea {
+	resize: none;
+}
+
+.comment_date {
+	color:gray;
+	font-family:'lucida grande',tahoma,verdana,arial,sans-serif;
+}
+
+a.comment_delete img {
+	display:block;
+	float:right;
+}
+
+
+.message-icone {
+	margin-right:10px;
+	margin-top:10px;
+}
+
+.message-info{	
+	font-size:12px;
+	font-style:italic;	
+	color:#000;
+}
+.message-legende{		
+	color:#727272;
+}
+
+.pied-message {
+	line-height:90%;
+}

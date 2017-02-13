@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static "association.css" %}" />
+{% endblock %}
+
+{% block onglets %}
+<div id="menu_onglets">
+<h1><img class="logo_assoce" src = "{% static "logo_bdtek.png" %}">BD-Tek</h1>
+
+<ul class="nav nav-pills">
+<li><a href="/associations/bdtek/messages/"><img src="{% static "mail.png" %}"/><span>Messages</span></a></li>
+<li><a href="/associations/bdtek/evenements/"><img src="{% static "date.png" %}"/><span>Évenements</span></a></li>
+<li><a href="/associations/bdtek/equipe/"><img src="{% static "user.png" %}"/><span>Équipe</span></a></li>
+<li><a href="/associations/bdtek/medias/"><img src="{% static "clapperboard.png" %}"/><span>Médias</span></a></li>
+<li class="active"><a href="/associations/bdtek/bd/"><img src="{% static "page_bd.png" %}"/><span>BD</span></a></li>
+</ul>
+<hr />
+</div>
+{% endblock %}
+
+{% block content %}
+{% if perms.bdtek %}
+<p class="actions">
+	<a href="/associations/bdtek/edit_csv"><img src="{% static "user_add.png" %}" title="Modifier données"></a>
+</p>
+{% endif %}
+
+{% for s in serie %}
+<p><h2><u>{{s}}</u></h2></p>
+	{% for bd in bds %}
+		{% if bd.serie == s %}
+		<p>
+			<h3>{{bd.titre}} - <i>N°{{bd.numero}}</i></h3>
+			Éditeur : {{bd.editeur}}
+			<br>Scénariste : {{bd.scenariste}}
+			<br>Dessinateur : {{bd.dessinateur}}
+			{% if perms.bdtek and bd.emprunte %}
+			<br>Emprunte par : <a href="/people/{{bd.empruntePar.user.username}}/">{{bd.empruntePar}}</a>
+			<br>Date d'emprunt : {{ bd.date|date:"SHORT_DATE_FORMAT" }}
+			{% endif %}
+		</p>
+		{% endif %}
+	{% endfor %}
+{% endfor %}
+{% endblock %}

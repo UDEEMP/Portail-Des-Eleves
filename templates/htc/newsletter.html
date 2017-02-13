@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static "association.css" %}" />
+<link rel="stylesheet" href="{% static "htc-revue.css" %}" />
+{% endblock %}
+
+{% block onglets %}
+<div id="menu_onglets">
+<h1><img class="logo_assoce" src = "{% static "logo_htc.png" %}">htc</h1>
+<ul class="nav nav-pills">
+    <li><a href="/associations/htc/messages/"><img src="{% static "mail.png" %}"/><span>Messages</span></a></li>
+    <li><a href="/associations/htc/evenements/"><img src="{% static "date.png" %}"/><span>Événements</span></a></li>
+    <li><a href="/associations/htc/equipe/"><img src="{% static "user.png" %}"/><span>Équipe</span></a></li>
+    <li><a href="/associations/htc/medias/"><img src="{% static "clapperboard.png" %}"/><span>Médias</span></a></li>
+    <li class="active"><a href="/associations/htc/archives/"><img src="{% static "page_newsletter.png" %}"/><span>Newsletters</span></a></li>
+</ul>
+<hr />
+</div>
+{% endblock %}
+
+{% block content %}
+<ul class="liste_revues">
+{% for revue in liste_newsletter %}
+	<li class="revue">
+    	<a href="{{ MEDIA_URL }}{{ revue.fichier }}">
+    	<img src="{{ MEDIA_URL }}{{ revue.thumbnail }}" />
+    	<p>{{ revue.titre }}</p>
+    	</a>
+    	<p class="date">{{ revue.date|date:"d F Y" }}</p>
+	</li>
+{% endfor %}
+</ul>
+{% endblock %}

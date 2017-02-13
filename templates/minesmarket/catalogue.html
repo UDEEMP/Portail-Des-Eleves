@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static "association.css" %}" />
+<link rel="stylesheet" href="{% static "minesmarket.css" %}" />
+
+<script>
+$(document).ready(function(){
+    
+    $(".lien_categorie").click(function () { 
+      $(this).parent().next().slideToggle(); 
+    });
+	
+	$(".quantite_plus").click(function () { 
+		var input = $(this).parent().parent().find("input[name=quantite]");
+		input.val(parseInt(input.val())+1);
+	});
+	
+	$(".quantite_moins").click(function () { 
+		var input = $(this).parent().parent().find("input[name=quantite]");
+		if (parseInt(input.val()) > 0) input.val(parseInt(input.val())-1);
+	});
+	
+	
+	$(".actions").submit(function(){
+        $.ajax({type:"POST", data: $(this).serialize(), url:"/associations/minesmarket/acheter/",
+            context: this, 
+			success: function(data){					
+				$(this).find('.callback').text('Achat validé').hide().fadeIn("slow").delay(1000).fadeOut("slow");
+            },
+            error: function(){
+                $(this).find('.callback').text('Erreur : commande déjà validée').hide().fadeIn("slow").delay(1000).fadeOut("slow");
+            }
+        });
+        return false;
+    });
+	
+  });
+  
+  
+</script>
+
+{% endblock %}
+
+{% block onglets %}
+<div id="menu_onglets">
+<h1><img class="logo_assoce" src = "{% static "logo_minesmarket.png" %}">MinesMarket</h1>
+<ul class="nav nav-pills">
+<li><a href="/associations/minesmarket/messages/"><img src="{% static "mail.png" %}"/><span>Messages</span></a></li>
+<li><a href="/associations/minesmarket/evenements/"><img src="{% static "date.png" %}"/><span>Évenements</span></a></li>
+<li><a href="/associations/minesmarket/equipe/"><img src="{% static "user.png" %}"/><span>Équipe</span></a></li>
+<li><a href="/associations/minesmarket/medias/"><img src="{% static "clapperboard.png" %}"/><span>Médias</span></a></li>
+<li class="active"><a href="/associations/minesmarket/catalogue/"><img src="{% static "page_catalogue.png" %}"/><span>Catalogue</span></a></li>
+<li><a href="/associations/minesmarket/catalogue_metro/"><img src="{% static "page_catalogue_metro.png" %}"/><span>Catalogue Métro</span></a></li>
+<li><a href="/associations/minesmarket/commande/"><img src="{% static "page_commande.png" %}"/><span>Panier</span></a></li>
+</ul>
+<hr />
+</div>
+{% endblock %}
+
+{% block content %}
+<p style="text-align:center;"><a href="/associations/minesmarket/commande/"><img src="{% static "market_panier.jpg" %}"></a></p>
+{% if perms.minesmarket %}
+<p><strong>Administration</strong><br/>
+<a href="/associations/minesmarket/fermer_commandes/">Fermer toutes les commandes</a><br/>
+<a href="/associations/minesmarket/dernieres_commandes/">Voir les dernières commandes</a><br/>
+<a href="/associations/minesmarket/credit_eleve/">Créditer le compte des élèves</a><br/>
+<a href="/associations/minesmarket/export_soldes/">Exporter le solde des élèves</a></p>
+{% endif %}
+
+{% regroup liste_produits by categorie as categorie_list %}
+{% for categorie in categorie_list %}
+	<h3 align="center">
+	<a class = "lien_categorie" style="cursor:pointer;">{{categorie.grouper}}</a>
+	</h3>
+<div class="produits" style="display:none">
+
+{% for produit in categorie.list %}
+		
+	<div class="produit">
+		<div class="nom"><h3>{{produit.nom}}</h3></div>
+		<div class="volume"><h3>{{produit.volume}}</h3></div>
+		<div class="prix"><h3>{{produit.prix_vente}}€</h3></div>
+	</div>
+	
+	<div class="boutons">
+		<form class="actions" method="post" action="/associations/minesmarket/acheter/">
+			{% csrf_token %}
+			<input type="hidden" name="id" value="{{ produit.id }}"/>
+			<table>
+			<tr>
+			<td>
+			<img src="{% static "market_photo.png" %}" alt="photo"
+				onmouseover="this.src='{{ MEDIA_URL }}{{ produit.image }}'"
+"{% static "" %}"	"{% static "" %}"	"{% static "" %}"	"{% static "" %}"	"{% static "" %}"o"{% static "" %}"n"{% static "" %}"m"{% static "" %}"o"{% static "" %}"u"{% static "" %}"s"{% static "" %}"e"{% static "" %}"o"{% static "" %}"u"{% static "" %}"t"{% static "" %}"="{% static "" %}"""{% static "" %}"t"{% static "" %}"h"{% static "" %}"i"{% static "" %}"s"{% static "" %}"."{% static "" %}"s"{% static "" %}"r"{% static "" %}"c"{% static "" %}"="{% static "" %}"'"{% static "" %}"{"{% static "" %}"{"{% static "" %}" "{% static "" %}"S"{% static "" %}"T"{% static "" %}"A"{% static "" %}"T"{% static "" %}"I"{% static "" %}"C"{% static "" %}"_"{% static "" %}"U"{% static "" %}"R"{% static "" %}"L"{% static "" %}"}"{% static "" %}"}"{% static "" %}"m"{% static "" %}"a"{% static "" %}"r"{% static "" %}"k"{% static "" %}"e"{% static "" %}"t"{% static "" %}"_"{% static "" %}"p"{% static "" %}"h"{% static "" %}"o"{% static "" %}"t"{% static "" %}"o"{% static "" %}"."{% static "" %}"p"{% static "" %}"n"{% static "" %}"g"{% static "" %}"'"{% static "" %}";"{% static "" %}"""{% static "" %}"
+"{% static "" %}"				/>
+			</td>
+			<td class = "small">
+			<img class = "quantite_moins" src="{% static "market_moins.png" %}" style="cursor:pointer;" />
+			</td>
+			<td class = "small">
+			<input class = "quantite" type="text" value="0" name = "quantite" maxlength="4" style="font-size: 20px; height:45px; " onkeypress="return isNumberKey(event);">
+			</td>
+			<td class = "small">
+			<img class = "quantite_plus" src="{% static "market_plus.png" %}" style="cursor:pointer;" />
+			</td>
+			<td>
+			<input border=0 src="{% static "market_submit.jpg" %}" type=image Value=submit /> 
+			</td>
+			<td>			
+			<p class = "callback"></p>
+			</td>
+			</tr>
+			</table>
+		</form>
+	
+	</div>
+
+{% endfor %}
+</div>
+{% endfor %}
+{% endblock %}

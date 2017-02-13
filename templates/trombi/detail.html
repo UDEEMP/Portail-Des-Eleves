@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+    <link rel="stylesheet" href="{% static "trombi.css" %}" />
+{% endblock %}
+
+{% block content %}
+{% load avatar_tags %}
+
+<div id="picture" class="pull-right">
+<!--<img src="{% static "{{mineur.username}}.jpg" %}" />-->
+<img src = {% avatar_url mineur %}>
+</div>
+
+<h2>{{ mineur.profile.first_name }} {% if mineur.profile.surnom %}"{{ mineur.profile.surnom}}"{% endif %} {{ mineur.profile.last_name|upper }}</h2>
+
+<p><strong>Mail</strong> : <a href="mailto:{{ mineur.email }}">{{ mineur.email }}</a></p>
+<p><strong>Promotion</strong> : {{ promo }}</p>
+<p><strong>Date de naissance</strong> : {{ mineur.profile.birthday }}</p>
+
+{% if mineur.profile.phone != "" %}
+<p><strong>Téléphone</strong> : {{ mineur.profile.phone }}</p>
+{% endif %}
+
+{% if mineur.profile.chambre != "" %}
+<p><strong>Chambre</strong> : {{ mineur.profile.chambre }}</p>
+{% endif %}
+
+{% if mineur.profile.option != "" %}
+<p><strong>Option</strong> : {{ mineur.profile.option }}</p>
+{% endif %}
+
+{% if mineur.profile.ville_origine != "" %}
+<p><strong>Ville d'origine</strong> : {{ mineur.profile.ville_origine }}</p>
+{% endif %}
+
+{% if assoces %}
+<p><strong>Associations</strong> : </p>
+<ul>
+  {% if estVpkatas %}
+    <li>
+      <a href="/associations/bapteme/vpkatas/">Baptême</a> (VP Katas)
+    </li>
+  {% endif %}
+	{% for adhesion in assoces %}
+		<li>
+		<a href="/associations/{{adhesion.association.pseudo}}">{{adhesion.association.nom}}</a> {%if adhesion.role != ""%}({{adhesion.role}}){% endif %}
+		</li>
+	{% endfor %}
+</ul>
+{% endif %}
+
+{% if mineur.profile.maitrise_set.all %}
+<p><strong>Instruments</strong> : </p>
+<ul>
+	{% for maitrise in mineur.profile.maitrise_set.all %}
+		<li>
+		{{ maitrise.instrument }} - <em>{{ maitrise.niveau }}</em>
+		</li>
+	{% endfor %}
+</ul>
+{% endif %}
+
+{% if mineur.profile.co.all %}
+<p><strong>Co{{ mineur.profile.co.count|pluralize }}</strong> :
+	{% for co in mineur.profile.co.all %}
+		<a href="{{ co.get_absolute_url }}">{{ co.first_name }} {{ co.last_name|upper }}</a>{% if not forloop.last %}{% ifequal forloop.revcounter 2 %} et {% else %}, {% endifequal %}{% else %}{% endif %}
+	{% endfor %}
+</p>
+{% else %}
+<p><strong>Pas de co</strong></p>
+{% endif %}
+
+{% if mineur.profile.parrains.all %}
+<p><strong>Parrain{{ mineur.profile.parrains.count|pluralize }}</strong> :
+	{% for parrain in mineur.profile.parrains.all %}
+		<a href="{{ parrain.get_absolute_url }}">{{ parrain.first_name }} {{ parrain.last_name|upper }}</a>{% if not forloop.last %}{% ifequal forloop.revcounter 2 %} et {% else %}, {% endifequal %}{% else %}{% endif %}
+	{% endfor %}
+</p>
+{% else %}
+<p><strong>Pas de parrain</strong></p>
+{% endif %}
+
+{% if mineur.profile.fillots.all %}
+<p><strong>Fillot{{ mineur.profile.fillots.count|pluralize }}</strong> :
+	{% for fillot in mineur.profile.fillots.all %}
+		<a href="{{ fillot.get_absolute_url }}">{{ fillot.first_name }} {{ fillot.last_name|upper }}</a>{% if not forloop.last %}{% ifequal forloop.revcounter 2 %} et {% else %}, {% endifequal %}{% else %}{% endif %}
+	{% endfor %}
+</p>
+{% else %}
+<p><strong>Pas de fillot</strong></p>
+{% endif %}
+
+<hr>
+
+{% for question in liste_questions %}
+	<p><strong>{{question.enonce}}</strong>
+	{% for reponse in liste_reponses %}
+		{% if question == reponse.question %}
+			{{reponse.contenu}}
+		{% endif %}
+	{% endfor %}
+	</p>
+{% empty %}
+	<p>Questionnaire non disponible</p>
+{% endfor %}
+
+<hr>
+<p><strong>Photos <a href='/associations/mediamines/'>MediaMines</a></strong> :</p>
+{% for photo in mineur.profile.photo_set.all %}
+	<a href="{{ photo.get_absolute_url }}"><img src="{{ photo.get_display_url }}" alt="{{ photo.title }}" width=120/></a>
+{% endfor %}
+<hr>
+{% if mineur.username == user.username %}
+<p><a href="/people/edit/">Modifier</a><br/>
+<a href="/people/instruments/modifier/">Modifier les instruments</a><br/>
+<a href="{% url 'avatar_change' %}">Ajouter une photo</a><br/>
+<a href="{% url 'avatar_delete' %}">Supprimer une photo</a></p>
+
+{% endif %}
+
+{% endblock %}

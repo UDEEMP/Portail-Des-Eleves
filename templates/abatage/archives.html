@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static "association.css" %}" />
+<link rel="stylesheet" href="{% static "vendome.css" %}" />
+{% endblock %}
+
+{% block onglets %}
+<div id="menu_onglets">
+<h1><img class="logo_assoce" src = "{% static "logo_abatage.png" %}">Abatage</h1>
+
+<ul class="nav nav-pills">
+<li><a href="/associations/abatage/messages/"><img src="{% static "mail.png" %}"/><span>Messages</span></a></li>
+<li><a href="/associations/abatage/evenements/"><img src="{% static "date.png" %}"/><span>Évenements</span></a></li>
+<li><a href="/associations/abatage/equipe/"><img src="{% static "user.png" %}"/><span>Équipe</span></a></li>
+<li><a href="/associations/abatage/medias/"><img src="{% static "clapperboard.png" %}"/><span>Médias</span></a></li>
+<li class="active"><a href="/associations/abatage/archives/"><img src="{% static "page_archives.png" %}"/><span>Archives</span></a></li>
+</ul>
+<hr />
+</div>
+{% endblock %}
+
+
+{% block content %}
+
+<ul class="liste_vendomes">
+{% for abatage in liste_abatages %}
+	<li class="vendome">
+	<a href="{{ MEDIA_URL }}{{ abatage.fichier }}">
+	<img src="{{ MEDIA_URL }}{{ abatage.thumbnail }}" />
+	<p>{{abatage.date|date:"Y"}}</p>
+	</a>
+	</li>
+{% empty %}
+	<li class="vendome">Aucun abatage disponible</li>
+{% endfor %}
+</ul>
+
+{% endblock %}

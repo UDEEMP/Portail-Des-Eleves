@@ -1,0 +1,50 @@
+﻿{% extends "base.html" %}
+{% block header %}
+<link rel="stylesheet" href="{{ STATIC_URL }}association.css" />
+{% endblock %}
+{% block title %}{{association.nom}}{% endblock %}
+
+
+
+
+{% block onglets %}
+<div id="menu_onglets">
+<h1><img class="logo_assoce" src = "{{ STATIC_URL }}logo_{{association.pseudo}}.png">{{association.nom}}</h1>
+
+<ul class="nav nav-pills">
+<li><a href="/associations/{{association.pseudo}}/messages/"><img src="{{ STATIC_URL}}mail.png">Messages</a></li>
+<li><a href="/associations/{{association.pseudo}}/evenements/"><img src="{{ STATIC_URL}}date.png">Évenements</a></li>
+<li class="active"><a href="/associations/{{association.pseudo}}/equipe/"><img src="{{ STATIC_URL}}user.png">Équipe</a></li>
+<li><a href="/associations/{{association.pseudo}}/medias/"><img src="{{ STATIC_URL}}clapperboard.png">Médias</a></li>
+{% if association.page_set.all %}
+{% for page in association.page_set.all %}
+<li><a href="{% if not page.is_externe %}/associations/{{association.pseudo}}/{% endif %}{{ page.lien }}"><img src="{{ STATIC_URL}}page_{% if not page.is_externe %}{{page.lien}}{% else %}site{% endif %}.png"><span>{{page.titre}}</span></a></li>
+{% endfor %}
+{% endif %}
+</ul>
+<hr />
+</div>
+{% endblock %}
+{% block content %}
+{% for adhesion in membres %}
+{% if request.user = adhesion.eleve.user %}
+<p class="actions"><a href="/associations/{{association.pseudo}}/equipe/ajouter_membre/"><img src="{{ STATIC_URL }}user_add.png" title="Ajouter un membre"></a>
+<a href="/associations/{{association.pseudo}}/equipe/supprimer_membre/"><img src="{{ STATIC_URL }}user_delete.png" title="Supprimer un membre"></a>
+<a href="/associations/{{association.pseudo}}/equipe/changer_ordre/"><img src="{{ STATIC_URL }}user_ordre.png" title="Changer l'ordre"></a>
+<a href="/associations/{{association.pseudo}}/equipe/changer_role/"><img src="{{ STATIC_URL }}user_role.png" title="Changer le rôle"></a></p>
+{% endif %}
+{% endfor %}
+
+<div id="equipe">
+	{% for adhesion in membres %}
+		<div class="portrait">
+		<img src="{{ STATIC_URL }}{{ adhesion.eleve.user.username }}.jpg" />
+		<p><a href = "{{ adhesion.eleve.get_absolute_url }}">{{ adhesion.eleve.first_name }} {{ adhesion.eleve.last_name|upper }}</a> {% if adhesion.role != "" %}<br />({{adhesion.role}}){% endif %}
+            {% if changer_role %}<br /><br /><a href="/associations/{{ association.pseudo }}/equipe/changer_role/{{ adhesion.id }}">Modifier le rôle</a><br />{% endif %}</p>
+		</div>
+	{% endfor %}
+</div>
+<br>
+<!--<h2>Liste des messages</h2>-->
+
+{% endblock %}

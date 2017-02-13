@@ -1,0 +1,12 @@
+
+*.pyc
+
+portail/settings-private.py
+
+portail/settings.py
+
+public/.htaccess
+
+public/django.fcgi
+
+public/django.fcgi.old

@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Le Portail des élèves</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="{% static "bootstrap.css" %}" rel="stylesheet">
+	<link href="{% static "bootstrap-responsive.css" %}" rel="stylesheet">
+
+  </head>
+
+  <body data-spy="scroll" data-target="#faqbar" style="padding:0px; margin:0px;">
+
+	<!--Google Analytics -->
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-37635054-1']);
+	  _gaq.push(['_setDomainName', 'mines-paris.eu']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+  
+
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+          <div class="span4"></div>
+        <div class="span4">
+	<p>Nothing to do here (erreur 404)<br />
+	<img src="{% static "nothingtodohere.jpg" %}" /></p>
+        </div>
+      </div>
+    </div>
+
+
+</body></html>
+

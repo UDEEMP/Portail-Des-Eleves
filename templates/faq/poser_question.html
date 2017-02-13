@@ -1,0 +1,21 @@
+{% extends "base_visiteur.html" %}
+{% load static %}
+
+{% block content %}
+<div class="pagination-centered">
+<p>Remplissez ce formulaire pour poser votre question au bureau des élèves</p>
+</div>
+<form class="pagination-centered" id="addform" method="post" action="">
+{% csrf_token %}
+{{ form }}
+<br>
+<button type='submit' class="btn">Valider</button>
+</form>
+
+<p>
+<a href = "/faq/">Retour à la FAQ</a><br/>
+</p>
+
+{% endblock %}
+
+

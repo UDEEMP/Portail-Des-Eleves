@@ -1,0 +1,22 @@
+#module_sondages {
+	text-align:center;
+}
+
+#sondage_precedent {
+	margin-top:10px;
+	cursor:pointer;
+}
+#sondage_suivant {
+	margin-top:10px;
+	cursor:pointer;
+}
+
+#tableau_sondages {
+	width:100%;
+}
+
+.scores_sondages {
+	text-align: center;
+	width:50%;
+	float:left;
+}

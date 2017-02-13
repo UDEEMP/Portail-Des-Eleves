@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+	<link rel="stylesheet" href="{% static "module_chat.css" %}" />
+{% endblock %}
+
+{% block content %}
+
+<div id = "module_chat" class="well">
+	<div id="chatwindow" class = "grand"><span id="loading">Chargement...</span></div>
+
+	<form id="chatform">
+		<input type="text" id="msg" class = "grand" placeholder = "Parle moi !"/>
+	</form>
+</div>
+
+<!-- <script type="text/javascript">document.getElementById("msg").focus();</script>-->
+
+{% endblock %}

@@ -1,0 +1,2531 @@
+[
+    {
+        "pk": 2, 
+        "model": "association.page", 
+        "fields": {
+            "is_externe": "True", 
+            "titre": "Albums", 
+            "lien": "gallery"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "association.page", 
+        "fields": {
+            "is_externe": "True", 
+            "titre": "\u00c9tudes", 
+            "lien": "etudes"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "association.page", 
+        "fields": {
+            "is_externe": "True", 
+            "titre": "Archives", 
+            "lien": "archives"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "association.page", 
+        "fields": {
+            "is_externe": "True", 
+            "titre": "Catalogue", 
+            "lien": "catalogue"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "association.page", 
+        "fields": {
+            "is_externe": "True", 
+            "titre": "Site", 
+            "lien": "http:\/\/www.marduru.fr"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "association.page", 
+        "fields": {
+            "is_externe": false, 
+            "titre": "Playlist", 
+            "lien": "playlist"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "association.page", 
+        "fields": {
+            "is_externe": "True", 
+            "titre": "Site", 
+            "lien": "http:\/\/voile.mines-paris.eu\/"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "association.association", 
+        "fields": {
+            "nom": "BDE", 
+            "suivi_par": [
+                374, 
+                398, 
+                397, 
+                437, 
+                209, 
+                230, 
+                260, 
+                388, 
+                369
+            ], 
+            "ordre": 0, 
+            "pseudo": "bde", 
+            "groupe_permissions": 15, 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "association.association", 
+        "fields": {
+            "nom": "BDA", 
+            "suivi_par": [
+                374, 
+                398, 
+                397, 
+                437, 
+                209, 
+                260, 
+                388, 
+                369
+            ], 
+            "ordre": 1, 
+            "pseudo": "bda", 
+            "groupe_permissions": 16, 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "association.association", 
+        "fields": {
+            "nom": "BDS", 
+            "suivi_par": [
+                374, 
+                397, 
+                388, 
+                369
+            ], 
+            "ordre": 1, 
+            "pseudo": "bds", 
+            "groupe_permissions": 17, 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "association.association", 
+        "fields": {
+            "nom": "MediaMines", 
+            "suivi_par": [
+                374, 
+                397, 
+                437, 
+                209, 
+                260, 
+                388, 
+                406, 
+                369
+            ], 
+            "ordre": 2, 
+            "pseudo": "mediamines", 
+            "groupe_permissions": 4, 
+            "page": 2
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "association.association", 
+        "fields": {
+            "nom": "Vend\u00f4me", 
+            "suivi_par": [
+                398, 
+                397, 
+                207, 
+                209, 
+                388, 
+                369
+            ], 
+            "ordre": 3, 
+            "pseudo": "vendome", 
+            "groupe_permissions": 5, 
+            "page": 4
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "association.association", 
+        "fields": {
+            "nom": "MinesMarket", 
+            "suivi_par": [
+                398, 
+                397, 
+                437, 
+                209, 
+                388, 
+                369
+            ], 
+            "ordre": 4, 
+            "pseudo": "minesmarket", 
+            "groupe_permissions": 3, 
+            "page": 5
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "association.association", 
+        "fields": {
+            "nom": "Forum Trium", 
+            "suivi_par": [
+                374, 
+                397, 
+                437, 
+                209, 
+                388, 
+                406, 
+                369
+            ], 
+            "ordre": 5, 
+            "pseudo": "trium", 
+            "groupe_permissions": 6, 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "association.association", 
+        "fields": {
+            "nom": "JuMP", 
+            "suivi_par": [
+                437, 
+                397, 
+                209, 
+                388
+            ], 
+            "ordre": 5, 
+            "pseudo": "jump", 
+            "groupe_permissions": 7, 
+            "page": 3
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "association.association", 
+        "fields": {
+            "nom": "Bi\u00e9ro", 
+            "suivi_par": [
+                397, 
+                437, 
+                209, 
+                388, 
+                369
+            ], 
+            "ordre": 6, 
+            "pseudo": "biero", 
+            "groupe_permissions": 8, 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "association.association", 
+        "fields": {
+            "nom": "Mineshake", 
+            "suivi_par": [
+                397, 
+                209, 
+                388, 
+                369
+            ], 
+            "ordre": 6, 
+            "pseudo": "mineshake", 
+            "groupe_permissions": 9, 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "association.association", 
+        "fields": {
+            "nom": "ASTi", 
+            "suivi_par": [
+                397, 
+                388, 
+                369
+            ], 
+            "ordre": 7, 
+            "pseudo": "asti", 
+            "groupe_permissions": 19, 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "association.association", 
+        "fields": {
+            "nom": "WEI", 
+            "suivi_par": [
+                397, 
+                230, 
+                388, 
+                369
+            ], 
+            "ordre": 7, 
+            "pseudo": "wei", 
+            "groupe_permissions": 18, 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "association.association", 
+        "fields": {
+            "nom": "Cahier Vert", 
+            "suivi_par": [
+                397, 
+                388
+            ], 
+            "ordre": 8, 
+            "pseudo": "cahiervert", 
+            "groupe_permissions": 10, 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "association.association", 
+        "fields": {
+            "nom": "Rezal", 
+            "suivi_par": [
+                398, 
+                397, 
+                209, 
+                230, 
+                388
+            ], 
+            "ordre": 8, 
+            "pseudo": "rezal", 
+            "groupe_permissions": 12, 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "association.association", 
+        "fields": {
+            "nom": "Club Voile", 
+            "suivi_par": [], 
+            "ordre": 9, 
+            "pseudo": "voile", 
+            "groupe_permissions": 21, 
+            "page": 8
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "association.association", 
+        "fields": {
+            "nom": "MINEStry of Sound", 
+            "suivi_par": [
+                209, 
+                388
+            ], 
+            "ordre": 9, 
+            "pseudo": "minestryofsound", 
+            "groupe_permissions": 24, 
+            "page": 7
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "association.association", 
+        "fields": {
+            "nom": "Ski Club", 
+            "suivi_par": [], 
+            "ordre": 9, 
+            "pseudo": "skiclub", 
+            "groupe_permissions": 20, 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "association.association", 
+        "fields": {
+            "nom": "Marduru", 
+            "suivi_par": [], 
+            "ordre": 10, 
+            "pseudo": "marduru", 
+            "groupe_permissions": 25, 
+            "page": 6
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "association.association", 
+        "fields": {
+            "nom": "Minotaure", 
+            "suivi_par": [
+                207
+            ], 
+            "ordre": 10, 
+            "pseudo": "minotaure", 
+            "groupe_permissions": 22, 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "association.association", 
+        "fields": {
+            "nom": "Royal Fucking Fanfare", 
+            "suivi_par": [
+                207
+            ], 
+            "ordre": 10, 
+            "pseudo": "fanfare", 
+            "groupe_permissions": 23, 
+            "page": null
+        }
+    }, 
+    {
+        "pk": 56, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 28, 
+            "role": "Pr\u00e9sident", 
+            "association": 2, 
+            "eleve": 388
+        }
+    }, 
+    {
+        "pk": 141, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 27, 
+            "role": "Vice Prez", 
+            "association": 2, 
+            "eleve": 355
+        }
+    }, 
+    {
+        "pk": 142, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 26, 
+            "role": "Trez", 
+            "association": 2, 
+            "eleve": 396
+        }
+    }, 
+    {
+        "pk": 143, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 25, 
+            "role": "Secr\u00e9taire", 
+            "association": 2, 
+            "eleve": 422
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 19, 
+            "role": "Pr\u00e9sident", 
+            "association": 1, 
+            "eleve": 410
+        }
+    }, 
+    {
+        "pk": 138, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 18, 
+            "role": "Pwez", 
+            "association": 3, 
+            "eleve": 384
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 18, 
+            "role": "Pr\u00e9sident", 
+            "association": 6, 
+            "eleve": 406
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 18, 
+            "role": "Tr\u00e9sori\u00e8re", 
+            "association": 1, 
+            "eleve": 369
+        }
+    }, 
+    {
+        "pk": 97, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 17, 
+            "role": "Respo D\u00e9marchage", 
+            "association": 6, 
+            "eleve": 378
+        }
+    }, 
+    {
+        "pk": 81, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 17, 
+            "role": "Tr\u00e9sori\u00e8re", 
+            "association": 6, 
+            "eleve": 435
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 17, 
+            "role": "Vice-Prez", 
+            "association": 1, 
+            "eleve": 370
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 17, 
+            "role": "Secr\u00e9taire", 
+            "association": 1, 
+            "eleve": 425
+        }
+    }, 
+    {
+        "pk": 183, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 17, 
+            "role": "Vice Pwez", 
+            "association": 3, 
+            "eleve": 392
+        }
+    }, 
+    {
+        "pk": 82, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 17, 
+            "role": "V-Prez", 
+            "association": 6, 
+            "eleve": 405
+        }
+    }, 
+    {
+        "pk": 184, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 16, 
+            "role": "Twesorier", 
+            "association": 3, 
+            "eleve": 413
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 16, 
+            "role": "Respo Entreprise", 
+            "association": 1, 
+            "eleve": 371
+        }
+    }, 
+    {
+        "pk": 223, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 16, 
+            "role": "Respo Trium", 
+            "association": 5, 
+            "eleve": 406
+        }
+    }, 
+    {
+        "pk": 185, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 15, 
+            "role": "Secwetaire", 
+            "association": 3, 
+            "eleve": 426
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 15, 
+            "role": "P\u00f4le Entreprise, VP Geek", 
+            "association": 1, 
+            "eleve": 397
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 15, 
+            "role": "P\u00f4le Entreprise", 
+            "association": 1, 
+            "eleve": 393
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 15, 
+            "role": "P\u00f4le Entreprise", 
+            "association": 1, 
+            "eleve": 347
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 15, 
+            "role": "P\u00f4le Entreprise", 
+            "association": 1, 
+            "eleve": 256
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 15, 
+            "role": "P\u00f4le Entreprise", 
+            "association": 1, 
+            "eleve": 376
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 15, 
+            "role": "P\u00f4le Entreprise", 
+            "association": 1, 
+            "eleve": 427
+        }
+    }, 
+    {
+        "pk": 232, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 15, 
+            "role": "Prez Saute", 
+            "association": 5, 
+            "eleve": 405
+        }
+    }, 
+    {
+        "pk": 83, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 14, 
+            "role": "VP Restauration", 
+            "association": 6, 
+            "eleve": 363
+        }
+    }, 
+    {
+        "pk": 25, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 14, 
+            "role": "Respo Externe", 
+            "association": 1, 
+            "eleve": 364
+        }
+    }, 
+    {
+        "pk": 84, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 14, 
+            "role": "VP Restauration", 
+            "association": 6, 
+            "eleve": 437
+        }
+    }, 
+    {
+        "pk": 228, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 14, 
+            "role": "Respo Corporating Process and Optimizing Supply Chain", 
+            "association": 5, 
+            "eleve": 27
+        }
+    }, 
+    {
+        "pk": 186, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 14, 
+            "role": "Respo Entreprise", 
+            "association": 3, 
+            "eleve": 409
+        }
+    }, 
+    {
+        "pk": 23, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 13, 
+            "role": "VP Externe", 
+            "association": 1, 
+            "eleve": 379
+        }
+    }, 
+    {
+        "pk": 22, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 13, 
+            "role": "VP Externe", 
+            "association": 1, 
+            "eleve": 391
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 13, 
+            "role": "VP Externe", 
+            "association": 1, 
+            "eleve": 394
+        }
+    }, 
+    {
+        "pk": 229, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 13, 
+            "role": "Dieu de la Mine", 
+            "association": 5, 
+            "eleve": 421
+        }
+    }, 
+    {
+        "pk": 24, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 13, 
+            "role": "VP Externe", 
+            "association": 1, 
+            "eleve": 383
+        }
+    }, 
+    {
+        "pk": 187, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 13, 
+            "role": "VP Filles - VP Entreprises", 
+            "association": 3, 
+            "eleve": 412
+        }
+    }, 
+    {
+        "pk": 164, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 12, 
+            "role": "P\u00f4le Cin\u00e9", 
+            "association": 2, 
+            "eleve": 347
+        }
+    }, 
+    {
+        "pk": 26, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 12, 
+            "role": "Respo Interne", 
+            "association": 1, 
+            "eleve": 357
+        }
+    }, 
+    {
+        "pk": 225, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 12, 
+            "role": "Respo Ponctualit\u00e9", 
+            "association": 5, 
+            "eleve": 436
+        }
+    }, 
+    {
+        "pk": 224, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 12, 
+            "role": "Respo Piche", 
+            "association": 5, 
+            "eleve": 346
+        }
+    }, 
+    {
+        "pk": 188, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 12, 
+            "role": "Respo Entreprises", 
+            "association": 3, 
+            "eleve": 390
+        }
+    }, 
+    {
+        "pk": 166, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 12, 
+            "role": "P\u00f4le Cin\u00e9", 
+            "association": 2, 
+            "eleve": 433
+        }
+    }, 
+    {
+        "pk": 30, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 12, 
+            "role": "Respo Com", 
+            "association": 6, 
+            "eleve": 397
+        }
+    }, 
+    {
+        "pk": 165, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 12, 
+            "role": "P\u00f4le Cin\u00e9", 
+            "association": 2, 
+            "eleve": 404
+        }
+    }, 
+    {
+        "pk": 38, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 11, 
+            "role": "Respo Atrium", 
+            "association": 6, 
+            "eleve": 347
+        }
+    }, 
+    {
+        "pk": 47, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 11, 
+            "role": "Respo Quali", 
+            "association": 5, 
+            "eleve": 415
+        }
+    }, 
+    {
+        "pk": 191, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 11, 
+            "role": "VP ParisTech", 
+            "association": 3, 
+            "eleve": 434
+        }
+    }, 
+    {
+        "pk": 149, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 11, 
+            "role": "P\u00f4le Jazz", 
+            "association": 2, 
+            "eleve": 371
+        }
+    }, 
+    {
+        "pk": 27, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 11, 
+            "role": "VP Interne", 
+            "association": 1, 
+            "eleve": 208
+        }
+    }, 
+    {
+        "pk": 231, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 11, 
+            "role": "Stagiaire charg\u00e9 du caf\u00e9 et des photocopies", 
+            "association": 5, 
+            "eleve": 401
+        }
+    }, 
+    {
+        "pk": 148, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 11, 
+            "role": "P\u00f4le Jazz", 
+            "association": 2, 
+            "eleve": 356
+        }
+    }, 
+    {
+        "pk": 45, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 11, 
+            "role": "Respo RH", 
+            "association": 5, 
+            "eleve": 426
+        }
+    }, 
+    {
+        "pk": 28, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 11, 
+            "role": "VP Interne", 
+            "association": 1, 
+            "eleve": 408
+        }
+    }, 
+    {
+        "pk": 29, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 11, 
+            "role": "VP Interne", 
+            "association": 1, 
+            "eleve": 402
+        }
+    }, 
+    {
+        "pk": 61, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 10, 
+            "role": "Pr\u00e9sident", 
+            "association": 11, 
+            "eleve": 351
+        }
+    }, 
+    {
+        "pk": 192, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 10, 
+            "role": "VP ParisTech", 
+            "association": 3, 
+            "eleve": 367
+        }
+    }, 
+    {
+        "pk": 86, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 10, 
+            "role": "VP PME", 
+            "association": 6, 
+            "eleve": 358
+        }
+    }, 
+    {
+        "pk": 85, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 10, 
+            "role": "VP PME", 
+            "association": 6, 
+            "eleve": 374
+        }
+    }, 
+    {
+        "pk": 52, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 10, 
+            "role": "P\u00f4le Quali", 
+            "association": 5, 
+            "eleve": 392
+        }
+    }, 
+    {
+        "pk": 44, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 10, 
+            "role": "Respo Etudes", 
+            "association": 5, 
+            "eleve": 372
+        }
+    }, 
+    {
+        "pk": 145, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 10, 
+            "role": "P\u00f4le Classique", 
+            "association": 2, 
+            "eleve": 411
+        }
+    }, 
+    {
+        "pk": 49, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 10, 
+            "role": "Vice-Tr\u00e9sori\u00e8re", 
+            "association": 5, 
+            "eleve": 362
+        }
+    }, 
+    {
+        "pk": 144, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 10, 
+            "role": "P\u00f4le Classique", 
+            "association": 2, 
+            "eleve": 399
+        }
+    }, 
+    {
+        "pk": 146, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 9, 
+            "role": "P\u00f4le Op\u00e9ra", 
+            "association": 2, 
+            "eleve": 354
+        }
+    }, 
+    {
+        "pk": 147, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 9, 
+            "role": "P\u00f4le Op\u00e9ra", 
+            "association": 2, 
+            "eleve": 398
+        }
+    }, 
+    {
+        "pk": 53, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 9, 
+            "role": "P\u00f4le Quali", 
+            "association": 5, 
+            "eleve": 366
+        }
+    }, 
+    {
+        "pk": 190, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 9, 
+            "role": "VP Billetterie", 
+            "association": 3, 
+            "eleve": 362
+        }
+    }, 
+    {
+        "pk": 120, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 9, 
+            "role": "Tr\u00e9sorier & Respo' Tutorat Terminale", 
+            "association": 11, 
+            "eleve": 424
+        }
+    }, 
+    {
+        "pk": 96, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 8, 
+            "role": "VP Petits-D\u00e8j", 
+            "association": 6, 
+            "eleve": 393
+        }
+    }, 
+    {
+        "pk": 95, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 8, 
+            "role": "VP Tables Rondes", 
+            "association": 6, 
+            "eleve": 396
+        }
+    }, 
+    {
+        "pk": 157, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 8, 
+            "role": "P\u00f4le Philo", 
+            "association": 2, 
+            "eleve": 419
+        }
+    }, 
+    {
+        "pk": 87, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 8, 
+            "role": "VP Conf\u00e9rences", 
+            "association": 6, 
+            "eleve": 425
+        }
+    }, 
+    {
+        "pk": 111, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 8, 
+            "role": "Secr\u00e9taire", 
+            "association": 11, 
+            "eleve": 416
+        }
+    }, 
+    {
+        "pk": 46, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 8, 
+            "role": "Respo Com'", 
+            "association": 5, 
+            "eleve": 414
+        }
+    }, 
+    {
+        "pk": 189, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 8, 
+            "role": "VP Billetterie", 
+            "association": 3, 
+            "eleve": 415
+        }
+    }, 
+    {
+        "pk": 156, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 8, 
+            "role": "P\u00f4le Philo", 
+            "association": 2, 
+            "eleve": 395
+        }
+    }, 
+    {
+        "pk": 153, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 7, 
+            "role": "P\u00f4le Non Classique", 
+            "association": 2, 
+            "eleve": 394
+        }
+    }, 
+    {
+        "pk": 152, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 7, 
+            "role": "P\u00f4le Non Classique", 
+            "association": 2, 
+            "eleve": 417
+        }
+    }, 
+    {
+        "pk": 51, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 7, 
+            "role": "P\u00f4le Com'", 
+            "association": 5, 
+            "eleve": 359
+        }
+    }, 
+    {
+        "pk": 112, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 7, 
+            "role": "Respo' Soutien scolaire", 
+            "association": 11, 
+            "eleve": 353
+        }
+    }, 
+    {
+        "pk": 195, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 7, 
+            "role": "VP Communication", 
+            "association": 3, 
+            "eleve": 438
+        }
+    }, 
+    {
+        "pk": 113, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 6, 
+            "role": "Respo' Parrainage Saint-Louis", 
+            "association": 11, 
+            "eleve": 345
+        }
+    }, 
+    {
+        "pk": 50, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 6, 
+            "role": "P\u00f4le Com'", 
+            "association": 5, 
+            "eleve": 351
+        }
+    }, 
+    {
+        "pk": 58, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 6, 
+            "role": "Prez", 
+            "association": 9, 
+            "eleve": 437
+        }
+    }, 
+    {
+        "pk": 162, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 6, 
+            "role": "P\u00f4le Voyage", 
+            "association": 2, 
+            "eleve": 418
+        }
+    }, 
+    {
+        "pk": 163, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 6, 
+            "role": "P\u00f4le Voyage", 
+            "association": 2, 
+            "eleve": 389
+        }
+    }, 
+    {
+        "pk": 139, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 6, 
+            "role": "VP Geek", 
+            "association": 3, 
+            "eleve": 372
+        }
+    }, 
+    {
+        "pk": 158, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 5, 
+            "role": "P\u00f4le Soir\u00e9e-Concert", 
+            "association": 2, 
+            "eleve": 344
+        }
+    }, 
+    {
+        "pk": 114, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 5, 
+            "role": "Respo' Parrainage Claude Bernard", 
+            "association": 11, 
+            "eleve": 361
+        }
+    }, 
+    {
+        "pk": 48, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 5, 
+            "role": "Respo Prosp\u00e9", 
+            "association": 5, 
+            "eleve": 409
+        }
+    }, 
+    {
+        "pk": 89, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 5, 
+            "role": "VP SM", 
+            "association": 6, 
+            "eleve": 413
+        }
+    }, 
+    {
+        "pk": 94, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 5, 
+            "role": "V-Trez", 
+            "association": 6, 
+            "eleve": 412
+        }
+    }, 
+    {
+        "pk": 93, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 5, 
+            "role": "VP H\u00f4tesses", 
+            "association": 6, 
+            "eleve": 381
+        }
+    }, 
+    {
+        "pk": 91, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 5, 
+            "role": "VP IPs", 
+            "association": 6, 
+            "eleve": 380
+        }
+    }, 
+    {
+        "pk": 88, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 5, 
+            "role": "VP Entretiens d'embauche", 
+            "association": 6, 
+            "eleve": 361
+        }
+    }, 
+    {
+        "pk": 92, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 5, 
+            "role": "VP IPs", 
+            "association": 6, 
+            "eleve": 354
+        }
+    }, 
+    {
+        "pk": 196, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 5, 
+            "role": "VP M\u00e9dias", 
+            "association": 3, 
+            "eleve": 430
+        }
+    }, 
+    {
+        "pk": 159, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 5, 
+            "role": "P\u00f4le Soir\u00e9e-Concert", 
+            "association": 2, 
+            "eleve": 387
+        }
+    }, 
+    {
+        "pk": 136, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 4, 
+            "role": "Prezette, Piccolo", 
+            "association": 18, 
+            "eleve": 186
+        }
+    }, 
+    {
+        "pk": 65, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 4, 
+            "role": "Pr\u00e9sident", 
+            "association": 17, 
+            "eleve": 232
+        }
+    }, 
+    {
+        "pk": 117, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 4, 
+            "role": "Respo' Tutorat Seconde", 
+            "association": 11, 
+            "eleve": 395
+        }
+    }, 
+    {
+        "pk": 41, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 4, 
+            "role": "Pr\u00e9sident", 
+            "association": 4, 
+            "eleve": 405
+        }
+    }, 
+    {
+        "pk": 54, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 4, 
+            "role": "P\u00f4le Prosp\u00e9", 
+            "association": 5, 
+            "eleve": 373
+        }
+    }, 
+    {
+        "pk": 160, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 4, 
+            "role": "P\u00f4le Cr\u00e9ation Artistique", 
+            "association": 2, 
+            "eleve": 386
+        }
+    }, 
+    {
+        "pk": 161, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 4, 
+            "role": "P\u00f4le Cr\u00e9ation Artistique", 
+            "association": 2, 
+            "eleve": 408
+        }
+    }, 
+    {
+        "pk": 201, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 4, 
+            "role": "Prez, Saxophone, Batterie", 
+            "association": 18, 
+            "eleve": 232
+        }
+    }, 
+    {
+        "pk": 194, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 4, 
+            "role": "VP Cartel des Mines", 
+            "association": 3, 
+            "eleve": 349
+        }
+    }, 
+    {
+        "pk": 170, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 3, 
+            "role": "", 
+            "association": 19, 
+            "eleve": 411
+        }
+    }, 
+    {
+        "pk": 66, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 3, 
+            "role": "Tr\u00e9sorier", 
+            "association": 17, 
+            "eleve": 315
+        }
+    }, 
+    {
+        "pk": 198, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 3, 
+            "role": "VP Raid", 
+            "association": 3, 
+            "eleve": 419
+        }
+    }, 
+    {
+        "pk": 155, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 3, 
+            "role": "P\u00f4le Th\u00e9\u00e2tre", 
+            "association": 2, 
+            "eleve": 345
+        }
+    }, 
+    {
+        "pk": 154, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 3, 
+            "role": "P\u00f4le Th\u00e9\u00e2tre", 
+            "association": 2, 
+            "eleve": 407
+        }
+    }, 
+    {
+        "pk": 79, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 3, 
+            "role": "Vice Pr\u00e9sident, Respo vid\u00e9o", 
+            "association": 4, 
+            "eleve": 376
+        }
+    }, 
+    {
+        "pk": 63, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 3, 
+            "role": "Pr\u00e9sident", 
+            "association": 16, 
+            "eleve": 385
+        }
+    }, 
+    {
+        "pk": 116, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 3, 
+            "role": "Respo' Tutorat Seconde", 
+            "association": 11, 
+            "eleve": 428
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 2, 
+            "role": "Secr\u00e9taire G\u00e9n\u00e9ral", 
+            "association": 5, 
+            "eleve": 423
+        }
+    }, 
+    {
+        "pk": 168, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 2, 
+            "role": "P\u00f4le Expo", 
+            "association": 2, 
+            "eleve": 352
+        }
+    }, 
+    {
+        "pk": 70, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 2, 
+            "role": "Vice-Prez", 
+            "association": 16, 
+            "eleve": 402
+        }
+    }, 
+    {
+        "pk": 99, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 2, 
+            "role": "Trez'", 
+            "association": 9, 
+            "eleve": 400
+        }
+    }, 
+    {
+        "pk": 64, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 2, 
+            "role": "Secr\u00e9taire", 
+            "association": 17, 
+            "eleve": 207
+        }
+    }, 
+    {
+        "pk": 90, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 2, 
+            "role": "Tr\u00e9sorier, Respo Graphisme", 
+            "association": 4, 
+            "eleve": 357
+        }
+    }, 
+    {
+        "pk": 167, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 2, 
+            "role": "P\u00f4le Expo", 
+            "association": 2, 
+            "eleve": 434
+        }
+    }, 
+    {
+        "pk": 199, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 2, 
+            "role": "VP WE Sportifs", 
+            "association": 3, 
+            "eleve": 400
+        }
+    }, 
+    {
+        "pk": 121, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 2, 
+            "role": "", 
+            "association": 19, 
+            "eleve": 384
+        }
+    }, 
+    {
+        "pk": 119, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 2, 
+            "role": "Respo' Tutorat Premi\u00e8re", 
+            "association": 11, 
+            "eleve": 404
+        }
+    }, 
+    {
+        "pk": 109, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 1, 
+            "role": "", 
+            "association": 19, 
+            "eleve": 260
+        }
+    }, 
+    {
+        "pk": 150, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 1, 
+            "role": "P\u00f4le Alternatif", 
+            "association": 2, 
+            "eleve": 437
+        }
+    }, 
+    {
+        "pk": 106, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 1, 
+            "role": "Respo photo", 
+            "association": 4, 
+            "eleve": 421
+        }
+    }, 
+    {
+        "pk": 31, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 1, 
+            "role": "VP Geek", 
+            "association": 4, 
+            "eleve": 397
+        }
+    }, 
+    {
+        "pk": 71, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 1, 
+            "role": "Trez", 
+            "association": 16, 
+            "eleve": 414
+        }
+    }, 
+    {
+        "pk": 151, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 1, 
+            "role": "P\u00f4le Alternatif", 
+            "association": 2, 
+            "eleve": 436
+        }
+    }, 
+    {
+        "pk": 118, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 1, 
+            "role": "Respo' Tutorat Premi\u00e8re", 
+            "association": 11, 
+            "eleve": 392
+        }
+    }, 
+    {
+        "pk": 75, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Respo Com", 
+            "association": 16, 
+            "eleve": 368
+        }
+    }, 
+    {
+        "pk": 169, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Respo salle ins'", 
+            "association": 2, 
+            "eleve": 361
+        }
+    }, 
+    {
+        "pk": 74, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Respo R\u00e9gates", 
+            "association": 16, 
+            "eleve": 418
+        }
+    }, 
+    {
+        "pk": 171, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Respo Com", 
+            "association": 15, 
+            "eleve": 422
+        }
+    }, 
+    {
+        "pk": 172, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 20, 
+            "eleve": 244
+        }
+    }, 
+    {
+        "pk": 173, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Prez", 
+            "association": 15, 
+            "eleve": 389
+        }
+    }, 
+    {
+        "pk": 174, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Vice-Prez", 
+            "association": 15, 
+            "eleve": 387
+        }
+    }, 
+    {
+        "pk": 175, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Trez", 
+            "association": 15, 
+            "eleve": 431
+        }
+    }, 
+    {
+        "pk": 176, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Respo Ski Math", 
+            "association": 15, 
+            "eleve": 434
+        }
+    }, 
+    {
+        "pk": 177, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Respo Ski Math", 
+            "association": 15, 
+            "eleve": 382
+        }
+    }, 
+    {
+        "pk": 178, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Respo Ski Math", 
+            "association": 15, 
+            "eleve": 368
+        }
+    }, 
+    {
+        "pk": 179, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Trez", 
+            "association": 8, 
+            "eleve": 252
+        }
+    }, 
+    {
+        "pk": 180, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 8, 
+            "eleve": 397
+        }
+    }, 
+    {
+        "pk": 181, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 8, 
+            "eleve": 396
+        }
+    }, 
+    {
+        "pk": 182, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 8, 
+            "eleve": 421
+        }
+    }, 
+    {
+        "pk": 125, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 19, 
+            "eleve": 211
+        }
+    }, 
+    {
+        "pk": 122, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 19, 
+            "eleve": 376
+        }
+    }, 
+    {
+        "pk": 124, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 19, 
+            "eleve": 250
+        }
+    }, 
+    {
+        "pk": 123, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 19, 
+            "eleve": 422
+        }
+    }, 
+    {
+        "pk": 193, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "VP Challenge Centrale Lyon ", 
+            "association": 3, 
+            "eleve": 343
+        }
+    }, 
+    {
+        "pk": 200, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "VP Challenge Centrale Lyon ", 
+            "association": 3, 
+            "eleve": 432
+        }
+    }, 
+    {
+        "pk": 73, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Respo Week End Croisi\u00e8re", 
+            "association": 16, 
+            "eleve": 425
+        }
+    }, 
+    {
+        "pk": 202, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 8, 
+            "eleve": 230
+        }
+    }, 
+    {
+        "pk": 203, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 8, 
+            "eleve": 361
+        }
+    }, 
+    {
+        "pk": 204, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 8, 
+            "eleve": 433
+        }
+    }, 
+    {
+        "pk": 205, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Tr\u00e9sorier", 
+            "association": 14, 
+            "eleve": 427
+        }
+    }, 
+    {
+        "pk": 206, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Vice-Pr\u00e9sident", 
+            "association": 14, 
+            "eleve": 386
+        }
+    }, 
+    {
+        "pk": 207, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Secr\u00e9taire", 
+            "association": 14, 
+            "eleve": 364
+        }
+    }, 
+    {
+        "pk": 208, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Respo Accueil\/Tutorat", 
+            "association": 14, 
+            "eleve": 418
+        }
+    }, 
+    {
+        "pk": 209, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "VP Accueil\/Tutorat", 
+            "association": 14, 
+            "eleve": 422
+        }
+    }, 
+    {
+        "pk": 210, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "VP Accueil\/Tutorat", 
+            "association": 14, 
+            "eleve": 384
+        }
+    }, 
+    {
+        "pk": 211, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "VP D\u00e9marchage", 
+            "association": 14, 
+            "eleve": 392
+        }
+    }, 
+    {
+        "pk": 212, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "VP D\u00e9marchage", 
+            "association": 14, 
+            "eleve": 394
+        }
+    }, 
+    {
+        "pk": 214, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "VP Centre", 
+            "association": 14, 
+            "eleve": 435
+        }
+    }, 
+    {
+        "pk": 215, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "VP Centre", 
+            "association": 14, 
+            "eleve": 393
+        }
+    }, 
+    {
+        "pk": 216, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "VP Centre", 
+            "association": 14, 
+            "eleve": 357
+        }
+    }, 
+    {
+        "pk": 217, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Respo Centre", 
+            "association": 14, 
+            "eleve": 409
+        }
+    }, 
+    {
+        "pk": 218, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "VP Centre", 
+            "association": 14, 
+            "eleve": 378
+        }
+    }, 
+    {
+        "pk": 219, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "VP Centre", 
+            "association": 14, 
+            "eleve": 369
+        }
+    }, 
+    {
+        "pk": 220, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "VP Centre", 
+            "association": 14, 
+            "eleve": 354
+        }
+    }, 
+    {
+        "pk": 197, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "VP CDMGE", 
+            "association": 3, 
+            "eleve": 403
+        }
+    }, 
+    {
+        "pk": 72, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Respo Entreprises", 
+            "association": 16, 
+            "eleve": 370
+        }
+    }, 
+    {
+        "pk": 69, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 17, 
+            "eleve": 39
+        }
+    }, 
+    {
+        "pk": 68, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 17, 
+            "eleve": 195
+        }
+    }, 
+    {
+        "pk": 67, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 17, 
+            "eleve": 189
+        }
+    }, 
+    {
+        "pk": 62, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Pr\u00e9sident", 
+            "association": 8, 
+            "eleve": 184
+        }
+    }, 
+    {
+        "pk": 60, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Pr\u00e9sident", 
+            "association": 13, 
+            "eleve": 380
+        }
+    }, 
+    {
+        "pk": 59, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Pr\u00e9sident", 
+            "association": 14, 
+            "eleve": 421
+        }
+    }, 
+    {
+        "pk": 57, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Pr\u00e9sident", 
+            "association": 10, 
+            "eleve": 378
+        }
+    }, 
+    {
+        "pk": 37, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 12, 
+            "eleve": 417
+        }
+    }, 
+    {
+        "pk": 36, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 12, 
+            "eleve": 437
+        }
+    }, 
+    {
+        "pk": 35, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 12, 
+            "eleve": 413
+        }
+    }, 
+    {
+        "pk": 101, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 9, 
+            "eleve": 392
+        }
+    }, 
+    {
+        "pk": 103, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 9, 
+            "eleve": 415
+        }
+    }, 
+    {
+        "pk": 100, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 9, 
+            "eleve": 356
+        }
+    }, 
+    {
+        "pk": 104, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 9, 
+            "eleve": 420
+        }
+    }, 
+    {
+        "pk": 102, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 9, 
+            "eleve": 423
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 7, 
+            "eleve": 397
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 7, 
+            "eleve": 404
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 7, 
+            "eleve": 423
+        }
+    }, 
+    {
+        "pk": 39, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 7, 
+            "eleve": 406
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 7, 
+            "eleve": 405
+        }
+    }, 
+    {
+        "pk": 227, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 19, 
+            "eleve": 364
+        }
+    }, 
+    {
+        "pk": 43, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Tr\u00e9sorier", 
+            "association": 5, 
+            "eleve": 420
+        }
+    }, 
+    {
+        "pk": 127, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Batterie", 
+            "association": 18, 
+            "eleve": 291
+        }
+    }, 
+    {
+        "pk": 131, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Euphonium", 
+            "association": 18, 
+            "eleve": 267
+        }
+    }, 
+    {
+        "pk": 126, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Trombone", 
+            "association": 18, 
+            "eleve": 262
+        }
+    }, 
+    {
+        "pk": 128, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Trompette", 
+            "association": 18, 
+            "eleve": 121
+        }
+    }, 
+    {
+        "pk": 132, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Trompette", 
+            "association": 18, 
+            "eleve": 243
+        }
+    }, 
+    {
+        "pk": 133, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Piccolo, Souba", 
+            "association": 18, 
+            "eleve": 233
+        }
+    }, 
+    {
+        "pk": 129, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Saxophone", 
+            "association": 18, 
+            "eleve": 371
+        }
+    }, 
+    {
+        "pk": 78, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 18, 
+            "eleve": 207
+        }
+    }, 
+    {
+        "pk": 137, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Euphonium", 
+            "association": 18, 
+            "eleve": 196
+        }
+    }, 
+    {
+        "pk": 134, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Trombone", 
+            "association": 18, 
+            "eleve": 189
+        }
+    }, 
+    {
+        "pk": 34, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 12, 
+            "eleve": 349
+        }
+    }, 
+    {
+        "pk": 130, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Fl\u00fbte", 
+            "association": 18, 
+            "eleve": 354
+        }
+    }, 
+    {
+        "pk": 42, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 4, 
+            "eleve": 260
+        }
+    }, 
+    {
+        "pk": 32, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "", 
+            "association": 12, 
+            "eleve": 356
+        }
+    }, 
+    {
+        "pk": 115, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Respo' Tutorat Terminale", 
+            "association": 11, 
+            "eleve": 390
+        }
+    }, 
+    {
+        "pk": 107, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Extension internationale, responsable du d\u00e9veloppement", 
+            "association": 4, 
+            "eleve": 375
+        }
+    }, 
+    {
+        "pk": 105, 
+        "model": "association.adhesion", 
+        "fields": {
+            "ordre": 0, 
+            "role": "Vice Respo photo", 
+            "association": 4, 
+            "eleve": 369
+        }
+    }
+]

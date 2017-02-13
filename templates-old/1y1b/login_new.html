@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Le Portail des élèves</title>
+        <!-- for-mobile-apps -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+                function hideURLbar(){ window.scrollTo(0,1); } </script>
+            <!-- //for-mobile-apps -->
+            <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+            <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+            <!-- js -->
+            <script src="js/jquery-1.11.1.min.js"></script>
+            <!-- //js -->
+            <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+                <link href='//fonts.googleapis.com/css?family=Abril+Fatface' rel='stylesheet' type='text/css'>
+    </head>
+    
+    <body>
+{% block content %}
+<div class = "pagination-centered">
+	<h1>Identification au Portail des élèves</h1>
+	
+
+<form method="post" action="{{ request.path }}">
+{% csrf_token %}
+<table class = "edit">
+<tr>
+<td><label for="login">Login</label></td>
+<td><input type="text" id="login"  name="login"></td>
+</tr>
+<tr>
+<td><label for="mdp">Mot de passe</label></td>
+<td><input type="password" id="mdp" name="mdp"></td>
+</tr>
+</table>
+<input type="submit" />
+</form>
+    
+    </div>
+
+{% endblock %}

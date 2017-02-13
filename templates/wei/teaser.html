@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="{% static "association.css" %}" />
+{% endblock %}
+
+{% block onglets %}
+<div id="menu_onglets">
+<h1><img class="logo_assoce" src = "{% static "logo_wei.png" %}">WEI</h1>
+
+<ul>
+<li><a href="/associations/wei/messages/"><img src="{% static "mail.png" %}"><span>Messages</span></a></li>
+<li><a href="/associations/wei/equipe/"><img src="{% static "user.png" %}"><span>Équipe</span></a></li>
+<li><a href="/associations/wei/evenements/"><img src="{% static "date.png" %}"><span>Évenements</span></a></li>
+<li id="actif"><img src="{% static "page_teaser.png" %}"><span>Teaser</span></li>
+</ul>
+<br>
+<hr>
+</div>
+{% endblock %}
+
+{% block content %}
+<h2>Bonjour coucou !</h2>
+<iframe width="516" height="292" src="http://www.youtube.com/embed/Ahq1O2UtZTc" frameborder="0" allowfullscreen></iframe>
+{% endblock %}

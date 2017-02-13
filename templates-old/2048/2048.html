@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block content %} 
+<br/>
+<br/>
+
+
+<body>
+ 
+<link href="{{ STATIC_URL }}main.css" rel="stylesheet" type="text/css">
+
+  <div class="container">
+    <div class="heading">
+      <h1 class="title">2048</h1>
+      <div class="scores-container">
+        <div class="score-container">0</div>
+        <div class="best-container">0</div>
+      </div>
+    </div>
+
+    <div class="above-game">
+      <br/>
+      <a class="restart-button">New Game</a>
+    </div>
+
+    <div class="game-container">
+      <div class="game-message">
+        <p></p>
+        <div class="lower">
+          <a class="keep-playing-button">Keep going</a>
+          <a class="retry-button">Try again</a>
+          <div class="score-sharing"></div>
+        </div>
+      </div>
+
+      <div class="grid-container">
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+          <div class="grid-cell"></div>
+        </div>
+      </div>
+
+      <div class="tile-container">
+
+      </div>
+    </div>
+
+<div class="row">
+    <div class="span12 pagination-centered">
+    <h3>Meilleurs scores</h3>        
+  <table style="margin:0 auto;">
+  <caption>De tous les temps</caption>
+  <thead>
+    <tr>
+      <th>Élève</th>      
+      <th>Meilleur Score</th>
+    </tr>
+  </thead> <!--|floatformat:1-->
+  <tbody>
+  {% for eleve in liste_eleves_score %}
+  <tr>
+  <td><a href = "{{eleve.get_absolute_url }}">{{ eleve.first_name }} {{eleve.last_name }}</a></td>
+  <td>{{ eleve.meilleur_score_2048 }}</td>
+  </tr>
+  {% endfor %}
+  </tbody>
+  </table>
+  </div>
+</div>
+  </div>
+
+
+<!--<link href="{{ STATIC_URL }}bootstrap.css" rel="stylesheet">
+<link href="{{ STATIC_URL }}bootstrap-responsive.css" rel="stylesheet">
+<link href="{{ STATIC_URL }}base.css" rel="stylesheet">
+  
+ 
+<link href="{{ STATIC_URL }}sondages.css" rel="stylesheet">
+<link href="{{ STATIC_URL }}module_bar.css" rel="stylesheet">
+<link href="{{ STATIC_URL }}module_chat.css" rel="stylesheet">
+<link href="{{ STATIC_URL }}module_evenements.css" rel="stylesheet">-->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+  <script type="text/javascript" src="{{ STATIC_URL }}bind_polyfill.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}classlist_polyfill.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}animframe_polyfill.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}keyboard_input_manager.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}html_actuator.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}grid.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}tile.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}local_storage_manager.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}game_manager.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}application.js"></script>
+</body>
+
+
+{% endblock %}
