@@ -3,9 +3,10 @@ from django.conf.urls import include, url
 from django.views.generic import TemplateView
 from evenement import views as evenement_views
 from association import views as ass_views
+from message import views as message_views
 # Views d'autres modules
 urlpatterns = [
-    #url(r'^(?P<association_pseudo>\w+)/messages/poster_message/$', 'messages.views.nouveau'),
+    url(r'^(?P<association_pseudo>\w+)/messages/poster_message/$', message_views.nouveau),
     url(r'^(?P<association_pseudo>\w+)/evenements/nouveau/$', evenement_views.nouveau),
     url(r'^trium/informations/$', TemplateView.as_view(template_name='trium/informations.html')),
     url(r'^wei/teaser/$', TemplateView.as_view(template_name='wei/teaser.html')),
@@ -32,14 +33,14 @@ urlpatterns = [
 # Views du module association
 urlpatterns += [
     url(r'^$', ass_views.index, name='associations'),
-    #url(r'^(?P<association_pseudo>\w+)/$', ass_views.messages),
+    url(r'^(?P<association_pseudo>\w+)/$', ass_views.messages),
     url(r'^(?P<association_pseudo>\w+)/equipe/$', ass_views.equipe),
     url(r'^(?P<association_pseudo>\w+)/equipe/changer_ordre/$', ass_views.changer_ordre),    
     url(r'^(?P<association_pseudo>\w+)/equipe/changer_role/(?P<eleve_id>\d+)$', ass_views.changer_role),    
     url(r'^(?P<association_pseudo>\w+)/equipe/changer_role/$', ass_views.changer_role, {'eleve_id':None}),    
     url(r'^(?P<association_pseudo>\w+)/equipe/ajouter_membre/$', ass_views.ajouter_membre),
     url(r'^(?P<association_pseudo>\w+)/equipe/supprimer_membre/$', ass_views.supprimer_membre),
-    #url(r'^(?P<association_pseudo>\w+)/messages/$', 'messages'),
+    url(r'^(?P<association_pseudo>\w+)/messages/$', ass_views.messages),
     url(r'^(?P<association_pseudo>\w+)/evenements/$', ass_views.evenements),
     url(r'^(?P<association_pseudo>\w+)/medias/$', ass_views.medias, name='association_medias'),
     url(r'^(?P<association_pseudo>\w+)/medias/video/ajouter/$', ass_views.ajouter_video),

@@ -1,5 +1,5 @@
 from django.template import Library, Node
-from messages.models import Message
+from message.models import Message
 from django import template
 from django.db.models import Q
 from trombi.models import UserProfile

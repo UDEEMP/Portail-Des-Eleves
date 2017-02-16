@@ -34,7 +34,7 @@
 
 {% block content %}
 {% for adhesion in membres %}
-{% if request.user = adhesion.eleve.user %}
+{% if request.user == adhesion.eleve.user %}
 <p class="actions"><a href="/associations/{{association.pseudo}}/messages/poster_message/"><img src="{{ STATIC_URL }}nouveau_message.png" title="Poster un message"></a></p>
 {% endif %}
 {% endfor %}
@@ -57,7 +57,7 @@
 <span class = "pull-right message-icone">
 	
 	{% for adhesion in membres %}
-	{% if request.user = adhesion.eleve.user %}
+	{% if request.user == adhesion.eleve.user %}
 	<a href="/messages/{{ message.id }}/supprimer/"><img class='action_message' src="{{ STATIC_URL }}supprimer.png" /></a>
 	{% endif %}
 	{% endfor %}

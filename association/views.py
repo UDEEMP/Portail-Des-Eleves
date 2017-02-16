@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 from association.models import Association, Adhesion, Affiche, Video, AdhesionAjoutForm, AdhesionModificationForm, AdhesionSuppressionForm, AfficheForm, VideoForm
 from trombi.models import UserProfile
-#from messages.models import Message
+from message.models import Message
 from evenement.models import Evenement
 from django.shortcuts import render, get_object_or_404,redirect
 from django.contrib.auth.decorators import login_required
@@ -25,7 +25,7 @@ def equipe(request, association_pseudo):
         return redirect(index)
     membres = Adhesion.objects.filter(association__pseudo = association_pseudo).order_by('-ordre', 'eleve__last_name')
     return render(request, 'association/equipe.html', {'association' : association, 'membres': membres})
-"""
+
 @login_required
 # Les messages postés par une association
 def messages(request, association_pseudo):
@@ -34,7 +34,8 @@ def messages(request, association_pseudo):
         return redirect(index)
     membres = Adhesion.objects.filter(association__pseudo = association_pseudo).order_by('-ordre', 'eleve__last_name')
     list_messages = Message.accessibles_par(request.user.profile).filter(association__pseudo=association_pseudo).order_by('-date')
-    return render(request, 'association/messages.html', {'association' : association, 'list_messages': list_messages, 'membres': membres})"""
+    return render(request, 'association/messages.html', {'association' : association, 'list_messages': list_messages, 'membres': membres})
+
 @login_required
 # Les événements planifiés par une association
 def evenements(request, association_pseudo):

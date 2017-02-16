@@ -1,25 +1,24 @@
 # -*- coding: utf-8 -*-
-from messages.models import Message
+from message.models import Message
 from trombi.models import UserProfile
-from messages.models import MessageForm
+from message.models import MessageForm
 from association.models import Association, Adhesion
 from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponseForbidden, HttpResponse
-from django.utils import simplejson
+import json
 from django.template import RequestContext
 from django.db.models import Q
 from datetime import datetime
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from messages.utils import sanitizeHtml
+from message.utils import sanitizeHtml
 from django.views.decorators.http import require_POST
-from django.contrib import comments
 from django.db import models
-from django.contrib.comments import signals
+from django_comments import signals
 from django.contrib import messages
-import settings
+from django.conf import settings
 
 
 def index2(request):
@@ -27,7 +26,8 @@ def index2(request):
     if not request.user.is_authenticated():
         url='http://accueil.mines-paris.eu'
         print(url)
-        return render(request, '1y1b/redirect.html', {'url': url})    else:
+        return render(request, '1y1b/redirect.html', {'url': url})
+    else:
         eleve = request.user.profile
         list_messages = Message.accessibles_par(eleve).exclude(lu=eleve)
         paginator = Paginator(list_messages, 15)
@@ -46,7 +46,8 @@ def index(request):
     #On sélectionne les messages publics, et les messages dont l'utilisateur fait partie de l'assoce expeditrice, ou de l'assoce destinataires.
     if not request.user.is_authenticated():
         url='http://mines-paris.eu/'
-        return render(request, '1y1b/redirect.html', {'url': url})    else:
+        return render(request, '1y1b/redirect.html', {'url': url})
+    else:
         eleve = request.user.profile
         list_messages = Message.accessibles_par(eleve).exclude(lu=eleve)
         paginator = Paginator(list_messages, 15)
@@ -80,7 +81,8 @@ def index_json(request):
 #L'affichage des détails d'un message (de ses commentaires)
 def detail(request, message_id):
     m = get_object_or_404(Message, pk=message_id)
-    return render(request, 'messages/detail.html', {'message': m})    
+    return render(request, 'messages/detail.html', {'message': m})  
+
 @login_required
 #Permet de classer un message comme lu (UNSAFE via un GET --> A changer en POST)
 def lire(request, message_id):
@@ -274,5 +276,4 @@ def edit(request, message_id=None):
     else:
         form = MessageForm(instance=message)
 
-    return render(request, 'messages/nouveau.html', {})        'form': form,
-    }, context_instance=RequestContext(request))
+    return render(request, 'messages/nouveau.html', {'form': form})
