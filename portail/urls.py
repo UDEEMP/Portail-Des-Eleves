@@ -12,6 +12,7 @@ from recherche import views as recherche_views
 from notification import views as notification_views
 from intranetlink import views as intranetlink_views
 from availableClassrooms import views as availableClassrooms_views
+from message import views as message_views
 #oneY1B_views = __import__('1y1b.views')
 
 
@@ -31,11 +32,11 @@ urlpatterns = [
     #url(r'^sso/1y1b/logout$', oneY1B.views.logout_view),
     #url(r'^yearbook/$', '1y1b.views.yearbook'),
     url(r'^token/$', trombi_views.token),
-    #url(r'^comments/post/$', 'messages.views.post_comment' ),
-    #url(r'^comments/delete/$', 'messages.views.delete_own_comment' ),
-    #url(r'^comments/', include('django.contrib.comments.urls')),
+    url(r'^comments/post/$', message_views.post_comment ),
+    url(r'^comments/delete/$', message_views.delete_own_comment ),
+    url(r'^comments/', include('django_comments.urls')),
     url(r'^people/', include('trombi.urls')),
-    #url(r'^messages/', include('messages.urls')),
+    url(r'^messages/', include('message.urls')),
     url(r'^sondages/', include('sondages.urls')),
     url(r'^timetable/', include('timetable.urls')),
     url(r'^evenements/', include('evenement.urls')),

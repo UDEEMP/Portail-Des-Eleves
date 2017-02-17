@@ -16,7 +16,10 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from message.utils import sanitizeHtml
 from django.views.decorators.http import require_POST
 from django.db import models
+from django.apps import apps
 from django_comments import signals
+from django_comments.forms import CommentForm
+from django_comments.models import Comment
 from django.contrib import messages
 from django.conf import settings
 
@@ -64,7 +67,7 @@ def index(request):
 def index_json(request):
     eleve = request.user.profile
     list_messages = Message.accessibles_par(eleve).exclude(lu=eleve)
-    response = HttpResponse(mimetype='application/json')
+    response = HttpResponse(content_type='application/json')
     response.write(simplejson.dumps([{
             'id': m.id,
             'association': m.association.nom,
@@ -135,7 +138,7 @@ def tous(request):
 @login_required
 def tous_json(request):
     all_messages = Message.accessibles_par(request.user.profile)
-    response = HttpResponse(mimetype='application/json')
+    response = HttpResponse(content_type='application/json')
     response.write(simplejson.dumps([{
             'id': m.id,
             'association': m.association.nom,
@@ -204,12 +207,12 @@ def post_comment(request, next=None, using=None):
     # Look up the object we're trying to comment about
     ctype = data.get("content_type")
     object_pk = data.get("object_pk")
-    model = models.get_model(*ctype.split(".", 1))
+    model = apps.get_model(*ctype.split(".", 1))
     target = model._default_manager.using(using).get(pk=object_pk)
 
 
     # Construct the comment form
-    form = comments.get_form()(target, data=data)
+    form = CommentForm(target, data=data)
 
     # Check security information
     if form.security_errors():
@@ -243,9 +246,9 @@ def post_comment(request, next=None, using=None):
 @login_required
 @require_POST
 def delete_own_comment(request):
-    comment = get_object_or_404(comments.get_model(), pk=int(request.POST['comment_id']),
+    comment = get_object_or_404(Comment, pk=int(request.POST['comment_id']),
             site__pk=settings.SITE_ID)
-    response = HttpResponse(mimetype='text/html')
+    response = HttpResponse(content_type='text/html')
     if comment.user == request.user:
         comment.delete()
         response.write('deleted')

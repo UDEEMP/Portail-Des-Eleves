@@ -13,18 +13,18 @@
 
 {% block onglets %}
 <div id="menu_onglets">
-<h1><img class="logo_assoce" src = "{% static "logo_{{association.pseudo}}.png" %}">{{association.nom}}</h1>
+<h1><img class="logo_assoce" src = "{% static '' %}logo_{{association.pseudo}}.png">{{association.nom}}</h1>
 
 <ul class="nav nav-pills">
-<li class="active"><a href="/associations/{{association.pseudo}}/messages/"><img src="{{ STATIC_URL}}mail.png">Messages</a></li>
-<li><a href="/associations/{{association.pseudo}}/evenements/"><img src="{{ STATIC_URL}}date.png">Évenements</a></li>
-<li><a href="/associations/{{association.pseudo}}/equipe/"><img src="{{ STATIC_URL}}user.png">Équipe</a></li>
-<li><a href="/associations/{{association.pseudo}}/medias/"><img src="{{ STATIC_URL}}clapperboard.png">Médias</a></li>
+<li class="active"><a href="/associations/{{association.pseudo}}/messages/"><img src="{% static '' %}mail.png">Messages</a></li>
+<li><a href="/associations/{{association.pseudo}}/evenements/"><img src="{% static '' %}date.png">Évenements</a></li>
+<li><a href="/associations/{{association.pseudo}}/equipe/"><img src="{% static '' %}user.png">Équipe</a></li>
+<li><a href="/associations/{{association.pseudo}}/medias/"><img src="{% static '' %}clapperboard.png">Médias</a></li>
 
 
 {% if association.page_set.all %}
 {% for page in association.page_set.all %}
-<li><a href="{% if not page.is_externe %}/associations/{{association.pseudo}}/{% endif %}{{ page.lien }}"><img src="{{ STATIC_URL}}page_{% if not page.is_externe %}{{page.lien}}{% else %}site{% endif %}.png"><span>{{page.titre}}</span></a></li>
+<li><a href="{% if not page.is_externe %}/associations/{{association.pseudo}}/{% endif %}{{ page.lien }}"><img src="{% static '' %}page_{% if not page.is_externe %}{{page.lien}}{% else %}site{% endif %}.png"><span>{{page.titre}}</span></a></li>
 {% endfor %}
 {% endif %}
 </ul>
@@ -35,7 +35,7 @@
 {% block content %}
 {% for adhesion in membres %}
 {% if request.user == adhesion.eleve.user %}
-<p class="actions"><a href="/associations/{{association.pseudo}}/messages/poster_message/"><img src="{{ STATIC_URL }}nouveau_message.png" title="Poster un message"></a></p>
+<p class="actions"><a href="/associations/{{association.pseudo}}/messages/poster_message/"><img src="{% static '' %}nouveau_message.png" title="Poster un message"></a></p>
 {% endif %}
 {% endfor %}
 
@@ -58,25 +58,25 @@
 	
 	{% for adhesion in membres %}
 	{% if request.user == adhesion.eleve.user %}
-	<a href="/messages/{{ message.id }}/supprimer/"><img class='action_message' src="{{ STATIC_URL }}supprimer.png" /></a>
+	<a href="/messages/{{ message.id }}/supprimer/"><img class='action_message' src="{% static '' %}supprimer.png" /></a>
 	{% endif %}
 	{% endfor %}
 	
 	{% if request.user.get_profile in message.lu.all %}
-	<a href="/messages/{{ message.id }}/"><img class='action_message unread' src="{{ STATIC_URL }}unread.png" /></a>
+	<a href="/messages/{{ message.id }}/"><img class='action_message unread' src="{% static '' %}unread.png" /></a>
 	{% else %}
-	<a href="/messages/{{ message.id }}/"><img class='action_message read' src="{{ STATIC_URL }}read.png" /></a>
+	<a href="/messages/{{ message.id }}/"><img class='action_message read' src="{% static '' %}read.png" /></a>
 	{% endif %}
 	
 	{% if request.user.get_profile in message.important.all %}
-	<a href="/messages/{{ message.id }}/"><img class='action_message unfavourite' src="{{ STATIC_URL }}unfavourite.png" /></a>
+	<a href="/messages/{{ message.id }}/"><img class='action_message unfavourite' src="{% static '' %}unfavourite.png" /></a>
 	{% else %}
-	<a href="/messages/{{ message.id }}/"><img class='action_message favourite' src="{{ STATIC_URL }}favourite.png" /></a>
+	<a href="/messages/{{ message.id }}/"><img class='action_message favourite' src="{% static '' %}favourite.png" /></a>
 	{% endif %}
 	</span>
 				
 <a class="accordion-toggle" data-toggle="collapse" data-parent="#message_accordion" href="#message{{ forloop.counter }}">
-<img src = "{% static "logo_{{message.association.pseudo}}.png" %}" width="40"> 
+<img src = "{% static '' %}logo_{{message.association.pseudo}}.png" width="40"> 
 {{ message.objet }}
 </a>
 </div>
@@ -88,7 +88,7 @@
 	{% else %}
 	<span class="message-legende">le</span> {{ message.date|date:"d F Y" }}  <!-- a H:i -->
 	{% endif %}</p>
-<p>{{ message.contenu|removetags:"script"|safe}}</p>
+<p>{{ message.contenu|safe}}</p>
 <hr>
 	<p class="message-pied">Visible par
 	{% if message.destinataire %}

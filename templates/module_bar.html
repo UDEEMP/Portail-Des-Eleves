@@ -10,7 +10,7 @@
 
 
 
-	{% if request.user.get_profile.solde_octo < 0 %}
+	{% if request.user.profile.solde_octo < 0 %}
 	{%if bool %}
 	<img id="photo_vp_octo" class = "floatright" src="{% static "dettes_octo_verqui.jpg" %}">
 	{%else%}
@@ -18,7 +18,7 @@
 	{% endif%}
 	{%endif%}
 
-	{% if request.user.get_profile.solde_octo >= 0 %}
+	{% if request.user.profile.solde_octo >= 0 %}
 	{%if bool%}
 	<img id="photo_vp_octo" class = "floatright" src="{% static "dettes_ok_hubert.jpg" %}">
 	{%else%}
@@ -27,7 +27,7 @@
 	{% endif%}
 
 
-	{% if request.user.get_profile.solde_biero < 0 %}
+	{% if request.user.profile.solde_biero < 0 %}
 	{%if bool2 %}
 	<img id="photo_vp_octo" class = "floatright" src="{% static "dettes_biero_xuhl.jpg" %}">
 	{%else%}
@@ -35,7 +35,7 @@
 	{% endif%}
 	{%endif%}
 
-	{% if request.user.get_profile.solde_biero >= 0 and not request.user.get_profile.solde_biero|divisibleby:2 %}
+	{% if request.user.profile.solde_biero >= 0 and not request.user.profile.solde_biero|divisibleby:2 %}
 	{%if bool2%}
 	<img id="photo_vp_octo" class = "floatright" src="{% static "pos_biero_rippert.jpg" %}">
 	{%else%}
@@ -43,7 +43,7 @@
 	{% endif%}
 	{% endif%}
 
-	{% if request.user.get_profile.solde_biero >= 0 and request.user.get_profile.solde_biero|divisibleby:2 %}
+	{% if request.user.profile.solde_biero >= 0 and request.user.profile.solde_biero|divisibleby:2 %}
 	{%if bool2%}
 	<img id="photo_vp_octo" class = "floatright" src="{% static "pos_biero_rippert.jpg" %}">
 	{%else%}
@@ -51,11 +51,23 @@
 	{% endif%}
 	{% endif%}
 
-
-	<p {% if request.user.get_profile.solde_octo < 0 %} class = "text-error" {% else %} class = "text-success" {% endif %}><strong><br></br>Octo</strong> : {{ request.user.get_profile.solde_octo }} €<a href="http://tilt.tc/0Knb?s=wb&u=oudeemp" target=_blank class="btn btn-default" style="margin-top: -5px;float: right; padding: 2px 10px;">€</a></p>
-	<p {% if request.user.get_profile.solde_biero < 0 %} class = "text-error" {% else %} class = "text-success" {% endif %}><strong>Biéro</strong> : {{ request.user.get_profile.solde_biero }} €<a href="http://tilt.tc/S0Up?s=wb&u=xuhl" target=_blank class="btn btn-default" style="margin-top: -5px;float: right; padding: 2px 10px;">€</a></p>
-	<p class = "text-success" ><strong>Pain De Mine</strong> : {{ request.user.get_profile.solde_paindemine }} €<a href="http://tilt.tc/sxbfJ?s=wb&u=ajacquin" target=_blank class="btn btn-default" style="margin-top: -5px;float: right; padding: 2px 10px;">€</a></p>
-	<p class = "text-success" ><strong>Freshbox</strong> : {{ request.user.get_profile.solde_freshbox }} €</p>
+	<br></br>
+	<p {% if request.user.profile.solde_octo < 0 %} class = "text-error" 
+	{% else %} class = "text-success" {% endif %}>
+	    <strong>Octo</strong> : {{ request.user.profile.solde_octo }} €
+	    <a href="http://tilt.tc/0Knb?s=wb&u=oudeemp" target=_blank class="btn btn-default" style="margin-top: -5px;float: right; padding: 2px 10px;">€</a>
+	</p>
+	<p {% if request.user.profile.solde_biero < 0 %} class = "text-error"
+	{% else %} class = "text-success" {% endif %}>
+		<strong>Biéro</strong> : {{ request.user.profile.solde_biero }} €
+		<a href="http://tilt.tc/S0Up?s=wb&u=xuhl" target=_blank class="btn btn-default" style="margin-top: -5px;float: right; padding: 2px 10px;">€</a>
+	</p>
+	<p class = "text-success" >
+		<strong>Pain De Mine</strong> : {{ request.user.profile.solde_paindemine }} €<a href="http://tilt.tc/sxbfJ?s=wb&u=ajacquin" target=_blank class="btn btn-default" style="margin-top: -5px;float: right; padding: 2px 10px;">€</a>
+	</p>
+	<p class = "text-success" >
+		<strong>Freshbox</strong> : {{ request.user.profile.solde_freshbox }} €
+	</p>
 
 </div>
 {% endif %}

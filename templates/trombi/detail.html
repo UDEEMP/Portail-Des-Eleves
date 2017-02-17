@@ -56,7 +56,7 @@
 <ul>
 	{% for maitrise in mineur.profile.maitrise_set.all %}
 		<li>
-		{{ maitrise.instrument }} - <em>{{ maitrise.niveau }}</em>
+		{{ maitrise.instrument.nom }} - <em>{{ maitrise.niveau }}</em>
 		</li>
 	{% endfor %}
 </ul>
