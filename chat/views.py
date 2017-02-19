@@ -50,7 +50,7 @@ class Ajax(object):
     Any new messages are always returned (even if/when posting new data).
 
     Requests for new messages should be sent as a GET with as arguments:
-    - current UNIX system time on the server. This is used so that the server which messages have
+    - current UNIX system time on the server. This is used so that the server knows which messages have
     already been received by the client.
     On the first call, this should be set to 0, thereafter the server will supply a new system time
     on each call.
@@ -80,7 +80,13 @@ class Ajax(object):
         StatusCode = 0 # Default status code is 0 i.e. no new data.
         self.request = request
         try:
-            self.request_time = int(self.request.REQUEST['time'])
+            #self.request_time = int(self.request.REQUEST['time'])
+            if self.request.method == 'GET':
+                self.request_time = int(self.request.GET['time'])
+            elif self.request.method == 'POST':
+                self.request_time = int(self.request.POST['time'])
+            else:
+                return HttpResponseBadRequest("Unknown HTTP request method.")
         except:
             return HttpResponseBadRequest("What's the time?")
         self.ThisRoom = Room.objects.get(id = id)
@@ -122,16 +128,27 @@ class Ajax(object):
             StatusCode = 1
             NewMessages = reversed(NewMessages)
 
-        response =  render_to_response('chat/chat_payload.json',
-                                  {'current_unix_timestamp': int(time.time()),
-                                   'NewMessages': NewMessages,
-                                   'StatusCode': StatusCode,
-                                   'NewDescription': NewDescription,
-                                   'user_tz': user_tz,
-                                   'CustomPayload': CustomPayload,
-                                   'TimeDisplayFormat': DATE_FORMAT
-                                   },
-                                  context_instance=RequestContext(self.request))
+        # response_old =  render_to_response('chat/chat_payload.json',
+        #                           {'current_unix_timestamp': int(time.time()),
+        #                            'NewMessages': NewMessages,
+        #                            'StatusCode': StatusCode,
+        #                            'NewDescription': NewDescription,
+        #                            'user_tz': user_tz,
+        #                            'CustomPayload': CustomPayload,
+        #                            'TimeDisplayFormat': DATE_FORMAT
+        #                            },
+        #                           context_instance=RequestContext(self.request))
+        response = render(
+            self.request,
+            'chat/chat_payload.json',
+            {'current_unix_timestamp': int(time.time()),
+               'NewMessages': NewMessages,
+               'StatusCode': StatusCode,
+               'NewDescription': NewDescription,
+               'user_tz': user_tz,
+               'CustomPayload': CustomPayload,
+               'TimeDisplayFormat': DATE_FORMAT
+            })
         response['Content-Type'] = 'text/plain; charset=utf-8'
         response['Cache-Control'] = 'no-cache'
         return response
