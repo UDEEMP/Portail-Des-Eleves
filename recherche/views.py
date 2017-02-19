@@ -1,8 +1,8 @@
 import re
 from django.db.models import Q
-#from messages.models import Message
+from message.models import Message
 from trombi.models import UserProfile
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.template import RequestContext
 
 # Create your views here.
@@ -14,9 +14,9 @@ def search(request):
 	found_users = None
 	if ('q' in request.GET) and request.GET['q'].strip():
 		query_string = request.GET['q']
-		#message_query = get_query(query_string, ['objet', 'contenu'])
+		message_query = get_query(query_string, ['objet', 'contenu'])
 		user_query = get_query(query_string, ['first_name', 'last_name', 'phone', 'chambre', 'user__username'])
-		#found_messages = Message.accessibles_par(request.user.profile).filter(message_query).order_by('-date')
+		found_messages = Message.accessibles_par(request.user.profile).filter(message_query).order_by('-date')
 		found_users = UserProfile.objects.filter(user_query).order_by('user__username')
 
 		if query_string.lower() == 'dieu':
