@@ -1,5 +1,6 @@
 ﻿{% extends "base.html" %}
 {% load static %}
+{% load bleach_tags %}
 {% block header %}
 <link rel="stylesheet" href="{% static "association.css" %}" />
 <link rel="stylesheet" href="{% static "messages.css" %}" />
@@ -88,7 +89,7 @@
 	{% else %}
 	<span class="message-legende">le</span> {{ message.date|date:"d F Y" }}  <!-- a H:i -->
 	{% endif %}</p>
-<p>{{ message.contenu|removetags:"script"|safe}}</p>
+<p>{{ message.contenu|bleach|safe}}</p>
 <hr>
 	<p class="message-pied">Visible par
 	{% if message.destinataire %}
