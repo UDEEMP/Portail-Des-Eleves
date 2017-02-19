@@ -16,7 +16,7 @@ from collections import OrderedDict as SortedDict
 from django.utils.safestring import mark_safe
 from django.utils.translation import get_language, ugettext as _
 import tinymce.settings
-
+import json
 
 class TinyMCE(forms.Textarea):
     """

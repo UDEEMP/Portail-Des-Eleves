@@ -23,7 +23,7 @@
 <input type = "hidden" name="login-{{ forloop.counter }}" value ="{{ adhesion.eleve.user.username }}" >
 <select name="position-{{ forloop.counter }}">
  {% for i in indices_membres %}
-  <option {% if adhesion.ordre = i %}selected="selected"{% endif %}>{{i}}</option>
+  <option {% if adhesion.ordre == i %}selected="selected"{% endif %}>{{i}}</option>
  {% endfor %}
 </select>
 </td>

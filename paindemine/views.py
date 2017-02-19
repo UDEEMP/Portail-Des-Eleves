@@ -11,6 +11,7 @@ from django.db.models import Max
 import json
 from paindemine.models import UpdateSoldeForm
 from django.contrib import messages
+import paindemine
 
 @login_required
 def catalogue_pain(request):
@@ -38,9 +39,9 @@ def commande(request):
 def acheter(request):
 	if request.POST:
 		try:
-			commande = Commande.objects.get(eleve__user__username=request.user.username, fermee=False)
+			commande = Commande.objects.get(eleve__user__username=request.user.username, fermee=False, livree=False)
 		except Commande.DoesNotExist:
-			commande = Commande.objects.create(eleve = request.user.profile)
+			commande = Commande.objects.create(eleve = request.user.profile, fermee=False, livree=False)
 		produit = get_object_or_404(Produit, id = request.POST['id'])
 		if int(request.POST['quantite']) > 0:
 			lundi = 0
@@ -65,7 +66,7 @@ def acheter(request):
 			achat = Achat.objects.create(commande = commande, produit = produit, quantite = request.POST['quantite'], lundi = lundi, mercredi = mercredi, jeudi = jeudi, vendredi = vendredi)
 			debit = float(produit.prix_vente) * int(request.POST['quantite']) * nombre_jours
 			utilisateur.update_solde_paindemine(+debit)
-		return redirect('paindemine.views.commande')
+		return redirect(paindemine.views.commande)
 
 @login_required
 def commander(request):
@@ -73,12 +74,12 @@ def commander(request):
 	commande.fermee = True #On la ferme
 	commande.date_fermeture = datetime.today() #On enregistre la date de fermeture
 	commande.save() #On enregistre
-	return redirect('paindemine.views.catalogue_pain')
+	return redirect(catalogue_pain)
 
 @login_required
 def fermer_commandes(request):
 	Commande.objects.filter(fermee = False).update(fermee = True, date_fermeture = datetime.today())
-	return redirect('paindemine.views.catalogue_pain')
+	return redirect(catalogue_pain)
 
 @login_required
 def dernieres_commandes(request):
@@ -130,7 +131,7 @@ def supprimer_achat(request, id_achat):
 	if achat.commande.eleve.user == request.user and achat.commande.fermee == False:
 		achat.delete()
 	print("commande" + str(commande))
-	return redirect('paindemine.views.commande')
+	return redirect(commande)
 
 @login_required
 def supprimer_tous_achats(request):
@@ -143,7 +144,7 @@ def supprimer_tous_achats(request):
 	except Commande.DoesNotExist:
 		liste_achats = None
 		total = 0
-	return redirect('paindemine.views.commande')
+	return redirect(commande)
 
 @permission_required('paindemine.change_soldespaindemine')
 @login_required
@@ -158,7 +159,7 @@ def soldespaindemine(request):
             utilisateur.update_solde_paindemine(-credit)
             utilisateur.update_solde_paindemine(+debit)
             messages.add_message(request, messages.INFO, "Le compte a bien été modifié.")
-            return redirect('paindemine.views.soldespaindemine')
+            return redirect(soldespaindemine)
     else:
         form = UpdateSoldeForm() # formulaire vierge
     return render(request, 'paindemine/soldes.html', {'form': form,})

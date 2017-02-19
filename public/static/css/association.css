@@ -58,6 +58,7 @@ ul.liste_assoce li {
 	display:inline-block;
 	width:90px;
 	height:130px;
+	vertical-align: bottom;
 }
 
 ul.liste_assoce li img {

@@ -68,9 +68,3 @@ class Maitrise(models.Model):
 
     def __unicode__(self):
         return self.eleve.__unicode__() + ' --> ' + self.instrument.__unicode__()
-
-class UpdateSoldeFormBda(forms.Form):
-    eleve = forms.ModelChoiceField(queryset=UserProfile.objects.all())
-    credit = forms.FloatField()
-    debit = forms.FloatField()
-
