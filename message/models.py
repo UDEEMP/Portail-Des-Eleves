@@ -51,7 +51,6 @@ class Message(models.Model):
 
     class Meta:
         ordering = ['-date']
-        db_table = 'messages_message'
     
     def get_absolute_url(self):
         return self.association.get_absolute_url() + 'messages/'
