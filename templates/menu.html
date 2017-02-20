@@ -57,7 +57,7 @@
 		</ul>
 		<ul class="nav pull-right">
 				<li class = "dropdown {% active request "^/accounts/" %}">
-				<a class="navbar-link dropdown-toggle" data-hover="dropdown" data-delay="250" href="/accounts/profile/" >{% if request.user.get_profile.est_une_fille %}<img src="{% static "user_girl.png" %}">{% else %}<img src="{% static "user_guy.png" %}">{% endif %}{{ user.username }} <b class="caret"></b></a>
+				<a class="navbar-link dropdown-toggle" data-hover="dropdown" data-delay="250" href="/accounts/profile/" >{% if request.user.profile.est_une_fille %}<img src="{% static "user_girl.png" %}">{% else %}<img src="{% static "user_guy.png" %}">{% endif %}{{ user.username }} <b class="caret"></b></a>
 				<ul class="dropdown-menu">
 					<li><a href="/accounts/profile/">Ma page</a></li>
 					<li class="divider"></li>
