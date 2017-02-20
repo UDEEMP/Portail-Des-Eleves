@@ -2,19 +2,17 @@
 {% load comments %}
 {% load i18n %}
 
-
 <div class="comment">
-   
-"{% static "" %}" "{% static "" %}" "{% static "" %}" "{% static "" %}"<"{% static "" %}"i"{% static "" %}"m"{% static "" %}"g"{% static "" %}" "{% static "" %}"c"{% static "" %}"l"{% static "" %}"a"{% static "" %}"s"{% static "" %}"s"{% static "" %}" "{% static "" %}"="{% static "" %}" "{% static "" %}"""{% static "" %}"m"{% static "" %}"i"{% static "" %}"n"{% static "" %}"i"{% static "" %}"a"{% static "" %}"t"{% static "" %}"u"{% static "" %}"r"{% static "" %}"e"{% static "" %}"""{% static "" %}" "{% static "" %}"s"{% static "" %}"r"{% static "" %}"c"{% static "" %}"="{% static "" %}" "{% static "" %}"'"{% static "" %}"{"{% static "" %}"{"{% static "" %}" "{% static "" %}"S"{% static "" %}"T"{% static "" %}"A"{% static "" %}"T"{% static "" %}"I"{% static "" %}"C"{% static "" %}"_"{% static "" %}"U"{% static "" %}"R"{% static "" %}"L"{% static "" %}" "{% static "" %}"}"{% static "" %}"}"{% static "" %}"{"{% static "" %}"{"{% static "" %}" "{% static "" %}"r"{% static "" %}"e"{% static "" %}"q"{% static "" %}"u"{% static "" %}"e"{% static "" %}"s"{% static "" %}"t"{% static "" %}"."{% static "" %}"u"{% static "" %}"s"{% static "" %}"e"{% static "" %}"r"{% static "" %}"."{% static "" %}"u"{% static "" %}"s"{% static "" %}"e"{% static "" %}"r"{% static "" %}"n"{% static "" %}"a"{% static "" %}"m"{% static "" %}"e"{% static "" %}" "{% static "" %}"}"{% static "" %}"}"{% static "" %}"."{% static "" %}"j"{% static "" %}"p"{% static "" %}"g"{% static "" %}"'"{% static "" %}"/"{% static "" %}">"{% static "" %}"
-"{% static "" %}"   <form action="{% comment_form_target %}" method="POST">{% csrf_token %}
-   <p>   
-      {# form.comment #}<textarea name="comment" cols=50 placeholder="Poster un commentaire"></textarea>
-	  <!--<input type="submit" name="post" class="submit-post" value="Poster" />-->
-   </p>
-   <input type="hidden" name="next" value="{{ request.path }}" />
-  {{ form.content_type }}
-  {{ form.object_pk }}
-  {{ form.timestamp }}
-  {{ form.security_hash }}
-   </form>
+    <img class = "miniature" src = "{% static '' %}{{request.user.username}}.jpg"/>
+    <form action="{% comment_form_target %}" method="POST">{% csrf_token %}
+        <p>   
+            {# form.comment #}<textarea name="comment" cols=50 placeholder="Poster un commentaire"></textarea>
+            <!--<input type="submit" name="post" class="submit-post" value="Poster" />-->
+        </p>
+        <input type="hidden" name="next" value="{{ request.path }}" />
+        {{ form.content_type }}
+        {{ form.object_pk }}
+        {{ form.timestamp }}
+        {{ form.security_hash }}
+    </form>
 </div>

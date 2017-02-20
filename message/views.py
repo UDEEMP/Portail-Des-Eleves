@@ -19,6 +19,7 @@ from django.db import models
 from django_comments import signals
 from django.contrib import messages
 from django.conf import settings
+import django_comments as comments
 
 
 def index2(request):
@@ -204,7 +205,9 @@ def post_comment(request, next=None, using=None):
     # Look up the object we're trying to comment about
     ctype = data.get("content_type")
     object_pk = data.get("object_pk")
-    model = models.get_model(*ctype.split(".", 1))
+    #model = models.get_model(*ctype.split(".", 1))
+    from django.apps import apps as django_apps
+    model = django_apps.get_model(ctype)
     target = model._default_manager.using(using).get(pk=object_pk)
 
 
