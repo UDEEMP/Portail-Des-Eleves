@@ -37,10 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django_comments',
+    'django_bleach',
     'notification',
     'trombi',
     'association',
-    #'message',
+    'message',
     'recherche',
     'petitscours',
     'timetable',
@@ -93,6 +96,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'portail.urls'
+
+SITE_ID = 1
 
 TEMPLATES = [
     {
@@ -179,3 +184,6 @@ STATICFILES_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
+
+# Default tags allowed by bleach to be displayed
+BLEACH_ALLOWED_TAGS = bleach.ALLOWED_TAGS + ['p']

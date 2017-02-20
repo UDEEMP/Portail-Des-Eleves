@@ -2,6 +2,7 @@ appdirs==1.4.0
 beautifulsoup4==4.5.3
 configparser==3.5.0
 Django==1.10.5
+django_bleach==0.3.0
 django-contrib-comments==1.8.0
 django-photologue==3.6
 django-sortedm2m==1.3.3
