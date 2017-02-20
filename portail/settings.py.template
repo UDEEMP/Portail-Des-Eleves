@@ -186,4 +186,9 @@ STATICFILES_DIRS = (
 )
 
 # Default tags allowed by bleach to be displayed
-BLEACH_ALLOWED_TAGS = bleach.ALLOWED_TAGS + ['p']
+## bleach.ALLOWED_TAGS : a, abbr, acronym, b, blockquote, code, em, i, li, ol, strong, ul
+BLEACH_ALLOWED_TAGS = bleach.ALLOWED_TAGS + ['p', 'span']
+## bleach.ALLOWED_ATTRIBUTES : (acronym : title), (a : href, title), (abbr : title)
+BLEACH_ALLOWED_ATTRIBUTES = ['style']
+## bleach.ALLOWED_STYLES : none
+BLEACH_ALLOWED_STYLES = bleach.ALLOWED_STYLES + ['color', 'background-color', 'font-size']
