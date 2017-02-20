@@ -89,11 +89,7 @@
 	{% else %}
 	<span class="message-legende">le</span> {{ message.date|date:"d F Y" }}  <!-- a H:i -->
 	{% endif %}</p>
-<<<<<<< HEAD
-<p>{{ message.contenu|safe}}</p>
-=======
 <p>{{ message.contenu|bleach|safe}}</p>
->>>>>>> origin/master
 <hr>
 	<p class="message-pied">Visible par
 	{% if message.destinataire %}

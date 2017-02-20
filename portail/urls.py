@@ -32,15 +32,9 @@ urlpatterns = [
     #url(r'^sso/1y1b/logout$', oneY1B.views.logout_view),
     #url(r'^yearbook/$', '1y1b.views.yearbook'),
     url(r'^token/$', trombi_views.token),
-<<<<<<< HEAD
-    url(r'^comments/post/$', message_views.post_comment ),
     url(r'^comments/delete/$', message_views.delete_own_comment ),
     url(r'^comments/', include('django_comments.urls')),
-=======
     url(r'^comments/post/$', message_views.post_comment, name='comments-post-comment'),
-    #url(r'^comments/delete/$', 'messages.views.delete_own_comment' ),
-    #url(r'^comments/', include('django.contrib.comments.urls')),
->>>>>>> origin/master
     url(r'^people/', include('trombi.urls')),
     url(r'^messages/', include('message.urls')),
     url(r'^sondages/', include('sondages.urls')),
