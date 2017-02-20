@@ -13,10 +13,8 @@
 		  <ul class="nav">
 				{% load active %}
 
-		  		{% comment %}
 				{% load obtenir_nombre_messages %}{% if request.user.is_authenticated %}{% compter_messages request.user.username %}{% endif %}
 				<li class="{% active request "^/" %}"><a href="/messages"><img src="{% static "mail.png" %}"/><span id="compteur_messages">{{ nombre_de_messages }}</span> Message{{ nombre_de_messages|pluralize }}</a></li>
-				{% endcomment %}
 
 
 				<li class="dropdown {% active request "^/associations/" %}">

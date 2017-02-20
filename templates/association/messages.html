@@ -17,10 +17,10 @@
 <h1><img class="logo_assoce" src = "{% static '' %}logo_{{association.pseudo}}.png">{{association.nom}}</h1>
 
 <ul class="nav nav-pills">
-<li class="active"><a href="/associations/{{association.pseudo}}/messages/"><img src="{% static 'mail.png' %}">Messages</a></li>
-<li><a href="/associations/{{association.pseudo}}/evenements/"><img src="{% static 'date.png' %}">Évenements</a></li>
-<li><a href="/associations/{{association.pseudo}}/equipe/"><img src="{% static 'user.png' %}">Équipe</a></li>
-<li><a href="/associations/{{association.pseudo}}/medias/"><img src="{% static 'clapperboard.png' %}">Médias</a></li>
+<li class="active"><a href="/associations/{{association.pseudo}}/messages/"><img src="{% static '' %}mail.png">Messages</a></li>
+<li><a href="/associations/{{association.pseudo}}/evenements/"><img src="{% static '' %}date.png">Évenements</a></li>
+<li><a href="/associations/{{association.pseudo}}/equipe/"><img src="{% static '' %}user.png">Équipe</a></li>
+<li><a href="/associations/{{association.pseudo}}/medias/"><img src="{% static '' %}clapperboard.png">Médias</a></li>
 
 
 {% if association.page_set.all %}
@@ -36,7 +36,7 @@
 {% block content %}
 {% for adhesion in membres %}
 {% if request.user == adhesion.eleve.user %}
-<p class="actions"><a href="/associations/{{association.pseudo}}/messages/poster_message/"><img src="{% static 'nouveau_message.png' %}" title="Poster un message"></a></p>
+<p class="actions"><a href="/associations/{{association.pseudo}}/messages/poster_message/"><img src="{% static '' %}nouveau_message.png" title="Poster un message"></a></p>
 {% endif %}
 {% endfor %}
 
@@ -59,20 +59,20 @@
 	
 	{% for adhesion in membres %}
 	{% if request.user == adhesion.eleve.user %}
-	<a href="/messages/{{ message.id }}/supprimer/"><img class='action_message' src="{% static 'supprimer.png' %}" /></a>
+	<a href="/messages/{{ message.id }}/supprimer/"><img class='action_message' src="{% static '' %}supprimer.png" /></a>
 	{% endif %}
 	{% endfor %}
 	
 	{% if request.user.get_profile in message.lu.all %}
-	<a href="/messages/{{ message.id }}/"><img class='action_message unread' src="{% static 'unread.png' %}" /></a>
+	<a href="/messages/{{ message.id }}/"><img class='action_message unread' src="{% static '' %}unread.png" /></a>
 	{% else %}
-	<a href="/messages/{{ message.id }}/"><img class='action_message read' src="{% static 'read.png' %}" /></a>
+	<a href="/messages/{{ message.id }}/"><img class='action_message read' src="{% static '' %}read.png" /></a>
 	{% endif %}
 	
 	{% if request.user.get_profile in message.important.all %}
-	<a href="/messages/{{ message.id }}/"><img class='action_message unfavourite' src="{% static 'unfavourite.png' %}" /></a>
+	<a href="/messages/{{ message.id }}/"><img class='action_message unfavourite' src="{% static '' %}unfavourite.png" /></a>
 	{% else %}
-	<a href="/messages/{{ message.id }}/"><img class='action_message favourite' src="{% static 'favourite.png' %}" /></a>
+	<a href="/messages/{{ message.id }}/"><img class='action_message favourite' src="{% static '' %}favourite.png" /></a>
 	{% endif %}
 	</span>
 				

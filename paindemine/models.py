@@ -73,6 +73,9 @@ class Achat(models.Model):
   return jours
   
 class UpdateSoldeForm(forms.Form):
- eleve = forms.ModelChoiceField(queryset=UserProfile.objects.all())
- credit = forms.FloatField(initial=0.0)
- debit = forms.FloatField(initial=0.0)
+  eleve = forms.ModelChoiceField(queryset=UserProfile.objects.all().order_by('est_isupfere', '-promo', 'last_name'))
+  credit = forms.FloatField(initial=0.0)
+  debit = forms.FloatField(initial=0.0)
+  def __init__(self, *args, **kwargs):
+    super(UpdateSoldeForm, self).__init__(*args, **kwargs)
+    self.fields['eleve'].label_from_instance = lambda obj: obj.get_full_name()

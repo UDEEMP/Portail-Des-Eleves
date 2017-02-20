@@ -64,7 +64,7 @@ class Notification(models.Model):
 			self.envoyer(user)
 
 	def envoyer(self, user):
-		Envoi.objects.create(notification = self, user = user, lu = False)
+		Envoi.objects.create(notification = self, user = user, lu=False)
 
 	def supprimer_destinataire(self, user):
 		Envoi.objects.filter(notification = self, user = user).delete()

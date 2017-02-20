@@ -263,6 +263,12 @@ class UserProfile(models.Model):
         from petitscours.models import PetitCours
         return PetitCours.objects.filter(attribue_a = self.user).count()
 
+    def get_full_name(self):
+        if self.est_isupfere:
+            return "IS{} {} {}".format(self.promo, self.last_name, self.first_name)
+        else:
+            return "P{} {} {}".format(self.promo, self.last_name, self.first_name)
+
 
 
 def create_user_profile(sender, instance, created, **kwargs):

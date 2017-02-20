@@ -39,9 +39,23 @@
 <div id="equipe">
 	{% for adhesion in membres %}
 		<div class="portrait">
-		<img src="{% static '' %}{{adhesion.eleve.user.username}}.jpg" %}" />
-		<p><a href = "{{ adhesion.eleve.get_absolute_url }}">{{ adhesion.eleve.first_name }} {{ adhesion.eleve.last_name|upper }}</a> {% if adhesion.role != "" %}<br />({{adhesion.role}}){% endif %}
-            {% if changer_role %}<br /><br /><a href="/associations/{{ association.pseudo }}/equipe/changer_role/{{ adhesion.id }}">Modifier le rôle</a><br />{% endif %}</p>
+		{% if changer_role %}
+		<a href="/associations/{{ association.pseudo }}/equipe/changer_role/{{ adhesion.id }}">
+			<img src="{% static '' %}{{adhesion.eleve.user.username}}.jpg" />
+		</a>
+		{% else %}
+		<img src="{% static '' %}{{adhesion.eleve.user.username}}.jpg" />
+		{% endif %}
+
+		<p>
+			<a href = "{{ adhesion.eleve.get_absolute_url }}">{{ adhesion.eleve.first_name }} {{ adhesion.eleve.last_name|upper }}
+			</a>
+			{% if adhesion.role != "" %}<br />({{adhesion.role}}){% endif %}
+            {% if changer_role %}<br />
+            <a href="/associations/{{ association.pseudo }}/equipe/changer_role/{{ adhesion.id }}">Modifier le rôle</a>
+            <br />
+            {% endif %}
+        </p>
 		</div>
 	{% endfor %}
 </div>

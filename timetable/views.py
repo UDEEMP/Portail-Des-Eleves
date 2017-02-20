@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.http import HttpResponse, HttpResponseBadRequest
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from icalendar import Calendar, Event, FixedOffset

@@ -17,7 +17,7 @@
 				  <a class = "event"
 					   link = "<a href='/evenements/{{ item.id}}.ics'>Ajouter au calendrier</a>"
 				     titre = "Organisé par {{ item.auteur }}"
-				     contenu = "<div class='event_proprietes'><p class='event_auteur'><img src='{{ STATIC_URL }}logo_{{ item.auteur_slug }}.png'><br/>
+				     contenu = "<div class='event_proprietes'><p class='event_auteur'><img src='{% static '' %}logo_{{ item.auteur_slug }}.png'><br/>
 								Organisé par <strong><a href='/associations/{{ item.auteur_slug }}/'>{{ item.auteur }}</a></strong><br/>
 								Le <strong>{{ item.date_debut|date:'d F' }}</strong><br/>
 								De <strong>{{ item.date_debut|date:'H:i' }}</strong> à <strong>{{ item.date_fin|date:'H:i' }}</strong><br/>

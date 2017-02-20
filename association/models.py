@@ -162,7 +162,8 @@ class AdhesionAjoutForm(forms.Form):
     def __init__(self, association, *args, **kwargs):
         super(AdhesionAjoutForm, self).__init__(*args, **kwargs)
         ### On retire les membres actuels de la liste
-        self.fields['eleve'].queryset = UserProfile.objects.exclude(id__in = [m.id for m in association.membres.all()])
+        self.fields['eleve'].queryset = UserProfile.objects.exclude(id__in = [m.id for m in association.membres.all()]).order_by('est_isupfere', '-promo', 'last_name')
+        self.fields['eleve'].label_from_instance = lambda obj: obj.get_full_name()
 
 class AdhesionModificationForm(forms.Form):
     role = forms.CharField(max_length=100, required=False)
@@ -174,6 +175,7 @@ class AdhesionSuppressionForm(forms.Form):
     def __init__(self, association, *args, **kwargs):
         super(AdhesionSuppressionForm, self).__init__(*args, **kwargs)
         self.fields['eleve'].queryset = association.membres.all()
+        self.fields['eleve'].label_from_instance = lambda obj: obj.get_full_name()
 
 
 class AfficheForm(ModelForm):
