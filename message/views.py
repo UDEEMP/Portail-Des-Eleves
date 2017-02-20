@@ -19,7 +19,8 @@ from django.db import models
 from django_comments import signals
 from django.contrib import messages
 from django.conf import settings
-import django_comments as comments
+import django_comments as comments   # remplace from django.contrib import comments
+from django.apps import apps as django_apps
 
 
 def index2(request):
@@ -205,8 +206,7 @@ def post_comment(request, next=None, using=None):
     # Look up the object we're trying to comment about
     ctype = data.get("content_type")
     object_pk = data.get("object_pk")
-    #model = models.get_model(*ctype.split(".", 1))
-    from django.apps import apps as django_apps
+    #model = models.get_model(*ctype.split(".", 1))    # ancienne méthode
     model = django_apps.get_model(ctype)
     target = model._default_manager.using(using).get(pk=object_pk)
 
@@ -248,7 +248,7 @@ def post_comment(request, next=None, using=None):
 def delete_own_comment(request):
     comment = get_object_or_404(comments.get_model(), pk=int(request.POST['comment_id']),
             site__pk=settings.SITE_ID)
-    response = HttpResponse(mimetype='text/html')
+    response = HttpResponse(content_type='text/html')
     if comment.user == request.user:
         comment.delete()
         response.write('deleted')

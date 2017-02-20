@@ -33,7 +33,7 @@ urlpatterns = [
     #url(r'^yearbook/$', '1y1b.views.yearbook'),
     url(r'^token/$', trombi_views.token),
     url(r'^comments/post/$', message_views.post_comment, name='comments-post-comment'),
-    #url(r'^comments/delete/$', 'messages.views.delete_own_comment' ),
+    url(r'^comments/delete/$', message_views.delete_own_comment),
     #url(r'^comments/', include('django.contrib.comments.urls')),
     url(r'^people/', include('trombi.urls')),
     #url(r'^messages/', include('messages.urls')),
