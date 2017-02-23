@@ -68,7 +68,7 @@ urlpatterns = [
     #url(r'^trombiassos4/?$','trombiassos.views.trombi_assos4'),
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt')),
     #url(r'^/?$','messages.views.index'),
-    url(r'^/?$',trombi_views.profile),
+    url(r'^$',trombi_views.profile),
     url(r'^2048/',include('2048.urls')),
     url(r'^xml/evenements.xml',intranetlink_views.getEvents),
     url(r'^availableClassrooms/$', availableClassrooms_views.availableClassrooms),
