@@ -10,3 +10,5 @@ public/.htaccess
 public/django.fcgi
 
 public/django.fcgi.old
+
+public/media/*
