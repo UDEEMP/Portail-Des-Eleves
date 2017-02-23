@@ -2,174 +2,161 @@
 {% load static %}
 
 {% block header %}
-<link rel="stylesheet" href="{% static "association.css" %}" />
-<link rel="stylesheet" href="{% static "paindemine.css" %}" />
+	<link rel="stylesheet" href="{% static "association.css" %}" />
+	<link rel="stylesheet" href="{% static "paindemine.css" %}" />
 
-<script>
-$(document).ready(function(){
+	<script>
+		$(document).ready(function(){
+		    $(".lien_categorie").click(function () {
+		      $(this).parent().next().slideToggle();
+		    });
 
-    $(".lien_categorie").click(function () {
-      $(this).parent().next().slideToggle();
-    });
+			$(".quantite_plus").click(function () {
+				var input = $(this).parent().parent().find("input[name=quantite]");
+				input.val(parseInt(input.val())+1);
+			});
 
-	$(".quantite_plus").click(function () {
-		var input = $(this).parent().parent().find("input[name=quantite]");
-		input.val(parseInt(input.val())+1);
-	});
+			$(".quantite_moins").click(function () {
+				var input = $(this).parent().parent().find("input[name=quantite]");
+				if (parseInt(input.val()) > 0) input.val(parseInt(input.val())-1);
+			});
 
-	$(".quantite_moins").click(function () {
-		var input = $(this).parent().parent().find("input[name=quantite]");
-		if (parseInt(input.val()) > 0) input.val(parseInt(input.val())-1);
-	});
-
-
-	$(".actions").submit(function(){
-        $.ajax({type:"POST", data: $(this).serialize(), url:"/associations/paindemine/acheter/",
-            context: this,
-			success: function(data){
-				$(this).find('.callback').text('Achat validé').hide().fadeIn("slow").delay(1000).fadeOut("slow");
-            },
-            error: function(){
-                $(this).find('.callback').text('Erreur').hide().fadeIn("slow").delay(1000).fadeOut("slow");
-            }
-        });
-        return false;
-    });
-
-  });
-
-
-</script>
-
+			$(".actions").submit(function(){
+		        $.ajax({
+		        	type:"POST",
+		        	data: $(this).serialize(),
+		        	url:"/associations/paindemine/acheter/",
+		            context: this,
+					success: function(data){
+						$(this).find('.callback').text('Achat validé').hide().fadeIn("slow").delay(1000).fadeOut("slow");
+		            },
+		            error: function(){
+		                $(this).find('.callback').text('Erreur').hide().fadeIn("slow").delay(1000).fadeOut("slow");
+		            }
+		        });
+		        return false;
+		    });
+		});
+	</script>
 {% endblock %}
 
 {% block onglets %}
-<div id="menu_onglets">
-<h1><img class="logo_assoce" src = "{% static "logo_paindemine.png" %}">Pain de Mine</h1>
-<ul class="nav nav-pills">
-<li><a href="/associations/paindemine/messages/"><img src="{% static "mail.png" %}"/><span>Messages</span></a></li>
-<li><a href="/associations/paindemine/evenements/"><img src="{% static "date.png" %}"/><span>Évenements</span></a></li>
-<li><a href="/associations/paindemine/equipe/"><img src="{% static "user.png" %}"/><span>Équipe</span></a></li>
-<li><a href="/associations/paindemine/medias/"><img src="{% static "clapperboard.png" %}"/><span>Médias</span></a></li>
-<li class="active"><a href="/associations/paindemine/catalogue_pain/"><img src="{% static "page_catalogue_pain.png" %}"/><span>Catalogue</span></a></li>
-<li><a href="/associations/paindemine/soldespaindemine/"><img src="{% static "page_soldespaindemine.png" %}"/><span>Soldes</span></a></li>
-<li><a href="/associations/paindemine/affichagesoldes/"><img src="{% static "page_comptes.png" %}"/><span>Comptes</span></a></li>
-</ul>
-<hr />
-</div>
+	<div id="menu_onglets">
+		<h1><img class="logo_assoce" src = "{% static "logo_paindemine.png" %}">Pain de Mine</h1>
+		<ul class="nav nav-pills">
+			<li><a href="/associations/paindemine/messages/"><img src="{% static "mail.png" %}"/><span>Messages</span></a></li>
+			<li><a href="/associations/paindemine/evenements/"><img src="{% static "date.png" %}"/><span>Évenements</span></a></li>
+			<li><a href="/associations/paindemine/equipe/"><img src="{% static "user.png" %}"/><span>Équipe</span></a></li>
+			<li><a href="/associations/paindemine/medias/"><img src="{% static "clapperboard.png" %}"/><span>Médias</span></a></li>
+			<li class="active"><a href="/associations/paindemine/catalogue_pain/"><img src="{% static "page_catalogue_pain.png" %}"/><span>Catalogue</span></a></li>
+			<li><a href="/associations/paindemine/soldespaindemine/"><img src="{% static "page_soldespaindemine.png" %}"/><span>Soldes</span></a></li>
+			<li><a href="/associations/paindemine/affichagesoldes/"><img src="{% static "page_comptes.png" %}"/><span>Comptes</span></a></li>
+		</ul>
+		<hr />
+	</div>
 {% endblock %}
 
 {% block content %}
-<p style="text-align:center;"><a href="/associations/paindemine/commande/"><img src="{% static "market_panier.jpg" %}"></a></p>
-{% if perms.paindemine %}
-<p><strong>Administration</strong><br/>
-<a href="/associations/paindemine/fermer_commandes/">Fermer toutes les commandes</a><br/>
-<a href="/associations/paindemine/dernieres_commandes/">Voir les dernières commandes (non fermées)</a><br/>
-<a href="/associations/paindemine/toutes_commandes/">Voir toutes les commandes</a></p>
-{% endif %}
-
-<br>
-<h4 align="center">Les commandes se terminent à 22h !</h4>
-<h4 align="center">Passé cette heure, votre commande n'est plus garantie</h4>
-<br>
-{% regroup liste_produits by categorie as categorie_list %}
-{% for categorie in categorie_list %}
-	<h3 align="center">
-	<a class = "lien_categorie" style="cursor:pointer;">{{categorie.grouper}}</a>
-	</h3>
-<div class="produits">
-
-{% for produit in categorie.list %}
-
-	<div class="produit">
-		<div class="nom"><h3>{{produit.nom}}</h3></div>
-		<div class="volume"><h3>{{produit.volume}}</h3></div>
-		<div class="prix"><h3>{{produit.prix_vente}}€</h3></div>
-	</div>
-
-	<div class="boutons">
-		<form class="actions" method="post" action="/associations/paindemine/acheter/">
-			{% csrf_token %}
-			<input type="hidden" name="id" value="{{ produit.id }}"/>
-			<table>
-			<tr>
-			<td>
-			<img src="{{ STATIC_URL}}market_photo.png" alt="photo"
-				onmouseover="this.src='{{ MEDIA_URL }}{{ produit.image }}'"
-				onmouseout="this.src='{{ STATIC_URL}}market_photo.png';"
-				/>
-			</td>
-			<td class = "small">
-			<img class = "quantite_moins" src="{% static "market_moins.png" %}" style="cursor:pointer;" />
-			</td>
-			<td class = "small">
-			<input class = "quantite" type="text" value="1" name = "quantite" maxlength="4" style="font-size: 20px; height:45px; " onkeypress="return isNumberKey(event);">
-			</td>
-			<td class = "small">
-			<img class = "quantite_plus" src="{% static "market_plus.png" %}" style="cursor:pointer;" />
-			</td>
-			<td>
-			<input type="checkbox" name="jour" value="lundi">Lundi<br>
-			<input type="checkbox" name="jour" value="mercredi">Mercredi<br>
-			<input type="checkbox" name="jour" value="jeudi">Jeudi<br>
-      <input type="checkbox" name="jour" value="vendredi">Vendredi<br>
-			</td>
-			<td>
-			<input border=0 src="{% static "market_submit.jpg" %}" type=image Value=submit />
-			</td>
-			<td>
-			<p class = "callback"></p>
-			</td>
-			</tr>
-			</table>
-		</form>
-
-	</div>
-
-{% endfor %}
-</div>
-{% endfor %}
-<div class="actions"><h3 align="center" class = "lien_categorie">Vos commandes</h3>
-
-	<table>
-	<tr>
-	<td><h4>Produit</h4></td>
-	<td><h4>Quantité</h4></td>
-	<td><h4>Jours</h4></td>
-	<td></td>
-	<td></td>
-  <td></td>
-	</tr>
-	{%for achat in liste_achats %}
-
-
-		<tr>
-		<td><h4>{{ achat.produit.nom }}</h4></td>
-		<td><h4>{{ achat.quantite }}</h4></td>
-		<td>
-		{% if achat.lundi %}
-			<h4>Lundi</h4>
-		{% endif %}
-		</td>
-		<td>
-		{% if achat.mercredi %}
-			<h4>Mercredi</h4>
-		{% endif %}
-		</td>
-		<td>
-		{% if achat.jeudi %}
-			<h4>Jeudi</h4>
-		{% endif %}
-		</td>
-    <td>
-    {% if achat.vendredi %}
-      <h4>Vendredi</h4>
-    {% endif %}
-    </td>
-		</tr>
-
-
+	<p style="text-align:center;"><a href="/associations/paindemine/commande/"><img src="{% static "market_panier.jpg" %}"></a></p>
+	{% if perms.paindemine %}
+		<p><strong>Administration</strong><br/>
+			<a href="/associations/paindemine/fermer_commandes/">Fermer toutes les commandes</a><br/>
+			<a href="/associations/paindemine/dernieres_commandes/">Voir les dernières commandes (non fermées)</a><br/>
+			<a href="/associations/paindemine/toutes_commandes/">Voir toutes les commandes</a>
+		</p>
+	{% endif %}
+	<br>
+	<h4 align="center">Les commandes se terminent à 22h !</h4>
+	<h4 align="center">Passé cette heure, votre commande n'est plus garantie</h4>
+	<br>
+	{% regroup liste_produits by categorie as categorie_list %}
+	{% for categorie in categorie_list %}
+		<h3 align="center">
+			<a class = "lien_categorie" style="cursor:pointer;">{{categorie.grouper}}</a>
+		</h3>
+		<div class="produits">
+			{% for produit in categorie.list %}
+				<div class="produit">
+					<div class="nom"><h3>{{produit.nom}}</h3></div>
+					<div class="volume"><h3>{{produit.volume}}</h3></div>
+					<div class="prix"><h3>{{produit.prix_vente}}€</h3></div>
+				</div>
+				<div class="boutons">
+					<form class="actions" method="post" action="/associations/paindemine/acheter/">
+						{% csrf_token %}
+						<input type="hidden" name="id" value="{{ produit.id }}"/>
+						<table>
+							<tr>
+								<td>
+									<img src="{% static 'market_photo.png' %}" alt="photo"
+										onmouseover="this.src='{{ MEDIA_URL }}{{ produit.image }}'"
+										onmouseout="this.src={% static 'market_photo.png' %}"
+									/>
+								</td>
+								<td class = "small">
+									<img class = "quantite_moins" src="{% static "market_moins.png" %}" style="cursor:pointer;" />
+								</td>
+								<td class = "small">
+									<input class = "quantite" type="text" value="1" name = "quantite" maxlength="4" style="font-size: 20px; height:45px; " onkeypress="return isNumberKey(event);">
+								</td>
+								<td class = "small">
+									<img class = "quantite_plus" src="{% static "market_plus.png" %}" style="cursor:pointer;" />
+								</td>
+								<td>
+									<input type="checkbox" name="jour" value="lundi">Lundi<br>
+									<input type="checkbox" name="jour" value="mercredi">Mercredi<br>
+									<input type="checkbox" name="jour" value="jeudi">Jeudi<br>
+									<input type="checkbox" name="jour" value="vendredi">Vendredi<br>
+								</td>
+								<td>
+									<input border=0 src="{% static "market_submit.jpg" %}" type=image Value=submit />
+								</td>
+								<td>
+									<p class = "callback"></p>
+								</td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			{% endfor %}
+		</div>
 	{% endfor %}
-	</table>
-</div>
+	<div class="actions"><h3 align="center" class = "lien_categorie">Vos commandes</h3>
+		<table>
+			<tr>
+				<td><h4>Produit</h4></td>
+				<td><h4>Quantité</h4></td>
+				<td><h4>Jours</h4></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			{%for achat in liste_achats %}
+				<tr>
+					<td><h4>{{ achat.produit.nom }}</h4></td>
+					<td><h4>{{ achat.quantite }}</h4></td>
+					<td>
+						{% if achat.lundi %}
+							<h4>Lundi</h4>
+						{% endif %}
+					</td>
+					<td>
+						{% if achat.mercredi %}
+							<h4>Mercredi</h4>
+						{% endif %}
+					</td>
+					<td>
+						{% if achat.jeudi %}
+							<h4>Jeudi</h4>
+						{% endif %}
+					</td>
+					<td>
+						{% if achat.vendredi %}
+							<h4>Vendredi</h4>
+						{% endif %}
+					</td>
+				</tr>
+			{% endfor %}
+		</table>
+	</div>
 {% endblock %}

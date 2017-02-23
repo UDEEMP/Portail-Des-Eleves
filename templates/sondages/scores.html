@@ -7,9 +7,9 @@
 
 {% block content %}
 <h2>Statistiques sondages</h2>
-<h3>Vous avez fait {{request.user.get_profile.victoires_sondages}} victoires sur {{ request.user.get_profile.participations_sondages }} participations</h3>
-<p>Note consensus : {{request.user.get_profile.score_victoires_sondages|floatformat:1 }}<br>
-Note désaccord : {{ request.user.get_profile.score_defaites_sondages|floatformat:1  }}</p>
+<h3>Vous avez fait {{request.user.profile.victoires_sondages}} victoires sur {{ request.user.profile.participations_sondages }} participations</h3>
+<p>Note consensus : {{request.user.profile.score_victoires_sondages|floatformat:1 }}<br>
+Note désaccord : {{ request.user.profile.score_defaites_sondages|floatformat:1  }}</p>
 
 
 

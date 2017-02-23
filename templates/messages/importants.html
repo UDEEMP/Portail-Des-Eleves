@@ -33,13 +33,13 @@
 <div class="accordion-group message">
 <div class="accordion-heading">
 <span class = "pull-right message-icone">
-	{% if request.user.get_profile in message.lu.all %}
+	{% if request.user.profile in message.lu.all %}
 	<a href="/messages/{{ message.id }}/"><img class='action_message unread' src="{% static 'unread.png' %}" /></a>
 	{% else %}
 	<a href="/messages/{{ message.id }}/"><img class='action_message read' src="{% static 'read.png' %}" /></a>
 	{% endif %}
 	
-	{% if request.user.get_profile in message.important.all %}
+	{% if request.user.profile in message.important.all %}
 	<a href="/messages/{{ message.id }}/"><img class='action_message unfavourite disparait' src="{% static 'unfavourite.png' %}" /></a>
 	{% else %}
 	<a href="/messages/{{ message.id }}/"><img class='action_message favourite' src="{% static 'favourite.png' %}" /></a>

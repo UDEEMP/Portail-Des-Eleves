@@ -1,10 +1,12 @@
 function createObject() {
-var request_type;
-var browser = navigator.appName;
-if(browser == "Microsoft Internet Explorer"){
-request_type = new ActiveXObject("Microsoft.XMLHTTP");
-}else{request_type = new XMLHttpRequest();}
-return request_type;
+	var request_type;
+	var browser = navigator.appName;
+	if(browser == "Microsoft Internet Explorer"){
+		request_type = new ActiveXObject("Microsoft.XMLHTTP");
+	} else {
+		request_type = new XMLHttpRequest();
+	}
+	return request_type;
 }
 
 var http = createObject();
@@ -21,7 +23,7 @@ jQuery.fn.fadeThenSlideToggle = function(speed, easing, callback) {
 $(function() {
 	//update_ratings();
 	
-	/**FAVOURITE**/
+	/** FAVOURITE HOVER **/
 	$('.unfavourite,.favourite').hover(function() {		
 		var favourite = $(this).hasClass('favourite') ? 'favourite' : 'unfavourite' ;
 		if (!$(this).hasClass('clicked'))
@@ -32,59 +34,45 @@ $(function() {
 			$(this).attr({'src':'/static/'+favourite+'.png'});
 	});
 	
-	
-	
-	
-	
-	/***  CLICK ***/
+	/***  FAVOURITE CLICK ***/
 	$('.favourite,.unfavourite').click(function(event) {
 	    event.preventDefault();
 		var kind = $(this).parent().parent().attr('id');
 		var csrf = $('input[name="csrfmiddlewaretoken"]').attr('value');
-		if ($(this).hasClass('favourite')) {
-		
-			var lien=$(this).parent().attr("href");				
-			http.open('get', lien+'classer_important/');
+		if ($(this).hasClass('favourite')) {		
+			var lien = $(this).parent().attr("href");				
+			http.open('get', lien + 'classer_important/');
 			//http.onreadystatechange = handleAJAXReturn1;
 			http.send(null);
-			
-			if ($(this).hasClass('disparait')) {
-			document.getElementById("compteur_messages").firstChild.nodeValue--;
-			divparent = $(event.target).closest(".message");
-			divparent.fadeThenSlideToggle();
-			}
 
-		
+			if ($(this).hasClass('disparait')) {
+				document.getElementById("compteur_messages").firstChild.nodeValue--;
+				divparent = $(event.target).closest(".message");
+				divparent.fadeThenSlideToggle();
+			}	
+
 			$(this).attr({'src':'/static/unfavourite.png'});
 			$(this).addClass('unfavourite');
 			$(this).removeClass('favourite');
 		}
-		else {
-		
-			var lien=$(this).parent().attr("href");				
-			http.open('get', lien+'classer_non_important/');
+		else {		
+			var lien = $(this).parent().attr("href");				
+			http.open('get', lien + 'classer_non_important/');
 			//http.onreadystatechange = handleAJAXReturn1;
 			http.send(null);
 						
 			if ($(this).hasClass('disparait')) {
-			divparent = $(event.target).closest(".message");
-			divparent.fadeThenSlideToggle();
+				divparent = $(event.target).closest(".message");
+				divparent.fadeThenSlideToggle();
 			}
 		
 			$(this).attr({'src':'/static/favourite.png'});
 			$(this).addClass('favourite');
 			$(this).removeClass('unfavourite');
 		}
-
-	});
+	});	
 	
-	
-	
-	
-	
-	
-	
-	/**READ**/
+	/** READ HOVER **/
 	$('.unread,.read').hover(function() {
 		var read = $(this).hasClass('read') ? 'read' : 'unread' ;
 		if (!$(this).hasClass('clicked'))
@@ -93,13 +81,9 @@ $(function() {
 		var read = $(this).hasClass('read') ? 'read' : 'unread' ;
 		if (!$(this).hasClass('clicked'))
 			$(this).attr({'src':'/static/'+read+'.png'});
-	});
+	});	
 	
-	
-	
-	
-	
-	/***  CLICK ***/
+	/*** READ CLICK ***/
 	$('.read,.unread').click(function(event) {
 	    event.preventDefault();
 		var kind = $(this).parent().parent().attr('id');		
@@ -111,12 +95,10 @@ $(function() {
 			http.send(null);
 			
 			document.getElementById("compteur_messages").firstChild.nodeValue--;
-			if ($(this).hasClass('disparait')) {			
-			
-			divparent = $(event.target).closest(".message");
-			divparent.fadeThenSlideToggle();
+			if ($(this).hasClass('disparait')) {
+				divparent = $(event.target).closest(".message");
+				divparent.fadeThenSlideToggle();
 			}
-
 		
 			$(this).attr({'src':'/static/unread.png'});
 			$(this).addClass('unread');

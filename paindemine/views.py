@@ -97,7 +97,7 @@ def dernieres_commandes_csv(request):
 	debut_total = derniere_ligne_commandes + 4 #début du tableau de total
 	fin_total = debut_total + len(liste_produits) - 1
 	#date_fermeture = Commande.objects.aggregate(Max('date_fermeture'))['date_fermeture__max']
-	response = HttpResponse(mimetype='text/csv')
+	response = HttpResponse(content_type='text/csv')#mimetype='text/csv')
 	response['Content-Disposition'] = 'attachment; filename=dernieres_commandes.csv'
 	t = loader.get_template('paindemine/dernieres_commandes.txt')
 	c = Context({'liste_commandes': liste_commandes, 'liste_produits': liste_produits, 'derniere_ligne_commandes': derniere_ligne_commandes,
@@ -115,7 +115,7 @@ def toutes_commandes_csv(request):
 	debut_total = derniere_ligne_commandes + 4 #début du tableau de total
 	fin_total = debut_total + len(liste_produits) - 1
 	#date_fermeture = Commande.objects.aggregate(Max('date_fermeture'))['date_fermeture__max']
-	response = HttpResponse(mimetype='text/csv')
+	response = HttpResponse(content_type='text/csv')
 	response['Content-Disposition'] = 'attachment; filename=toutes_commandes.csv'
 	t = loader.get_template('paindemine/dernieres_commandes.txt')
 	c = Context({'liste_commandes': liste_commandes, 'liste_produits': liste_produits, 'derniere_ligne_commandes': derniere_ligne_commandes,
