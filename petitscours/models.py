@@ -21,7 +21,7 @@ class PetitCours(models.Model):
     age = models.CharField(max_length=256)
     matiere = models.CharField(max_length=256)
     description = models.CharField(max_length=512)
-    requests = models.ManyToManyField(User,related_name='+', blank=True, null=True) #Les demandes
+    requests = models.ManyToManyField(User,related_name='+', blank=True) #Les demandes
     attribue_a = models.ForeignKey(User, related_name='petits_cours_attribues', blank=True, null=True) #L'eleve a qui le pc est attribu�
 
     address = models.CharField(max_length=500, null=True) #Adresse � Paris (via l'API Google Maps)

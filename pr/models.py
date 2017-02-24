@@ -22,7 +22,7 @@ class Clip(models.Model):
 
 class Candidat(models.Model):    #C'est la petite zoe qui veut faire de la balancoire mais elle n'y arrive pas. 
     nom = models.CharField(max_length=32)   #Pourquoi 
-    nbVotes = models.IntegerField(max_length=7) #Parce qu'elle n'a pas de bras ... merci 13Jougla
+    nbVotes = models.IntegerField() #Parce qu'elle n'a pas de bras ... merci 13Jougla
     debut_vote = models.DateTimeField()
     fin_vote = models.DateTimeField()
     

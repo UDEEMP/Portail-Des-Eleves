@@ -11,10 +11,10 @@ from notification.models import Notification, Envoi
 class Association(models.Model):
     nom = models.CharField(max_length=200)
     pseudo = models.SlugField(help_text="Nom dans les urls")
-    membres = models.ManyToManyField(UserProfile, through='Adhesion', blank=True, null=True)
+    membres = models.ManyToManyField(UserProfile, through='Adhesion', blank=True)
     is_hidden_1A = models.BooleanField(default=False, verbose_name="Cachée aux 1A")
     ordre = models.IntegerField(default=0, help_text="Ordre d'apparition dans la liste des associations (ordre alphabétique pour les valeurs égales)")
-    suivi_par = models.ManyToManyField(User, related_name='associations_suivies', blank=True, null=True, help_text= "Les élèves recevant les notifications de l'association")
+    suivi_par = models.ManyToManyField(User, related_name='associations_suivies', blank=True, help_text= "Les élèves recevant les notifications de l'association")
     groupe_permissions = models.OneToOneField(Group, blank=True, null=True, help_text="Groupe de permissions correspondant à l'association")
 
     class Meta:

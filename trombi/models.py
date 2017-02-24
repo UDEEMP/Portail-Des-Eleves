@@ -68,8 +68,8 @@ class UserProfile(models.Model):
 
     # Vie aux Mines
     sports = models.CharField(max_length=512, blank=True)
-    co = models.ManyToManyField('self', symmetrical = True, blank=True, null=True)
-    parrains = models.ManyToManyField('self', related_name='fillots', symmetrical = False, blank=True, null=True)
+    co = models.ManyToManyField('self', symmetrical = True, blank=True)
+    parrains = models.ManyToManyField('self', related_name='fillots', symmetrical = False, blank=True)
     reponses = models.ManyToManyField(Reponse, editable=False, blank=True, verbose_name="réponses", help_text="Ses réponses aux questionnaire du trombi")
     solde_octo = models.FloatField(default=0)
     solde_biero = models.FloatField(default=0, verbose_name="solde biéro")
