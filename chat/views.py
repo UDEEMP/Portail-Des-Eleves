@@ -9,7 +9,7 @@ from django.utils.html import escape
 from chat.models import Room, Message
 
 import time
-
+import json
 # The format of the date displayed in the chat window can be customised.
 try:
     DATE_FORMAT = settings.JQCHAT_DATE_FORMAT
@@ -19,7 +19,13 @@ except:
 
 # How many messages to retrieve at most.
 JQCHAT_DISPLAY_COUNT = getattr(settings, 'JQCHAT_DISPLAY_COUNT', 100)
+emojis = json.load(open('public/static/emoji.json', 'r'))
 
+def replaceShortcodes(string):
+    for emoji in emojis:
+        for alias in emoji['aliases']:
+            string = string.replace(":{}:".format(alias), emoji['emoji'])
+    return string
 #------------------------------------------------------------------------------
 @login_required
 def window(request):
@@ -102,6 +108,7 @@ class Ajax(object):
                 f = ProfanitiesFilter(['piche'])
                 f.inside_words = True
                 msg_text = f.clean(msg_text)
+                msg_text = replaceShortcodes(msg_text)
                 if len(msg_text.strip()) > 0: # Ignore empty strings.
                     Message.objects.create_message(self.request.user, self.ThisRoom, msg_text)
         else:
