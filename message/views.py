@@ -13,7 +13,6 @@ from django.template import RequestContext
 from django.db.models import Q
 from datetime import datetime
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from message.utils import sanitizeHtml
 from django.views.decorators.http import require_POST
 from django.db import models
 from django.apps import apps
@@ -23,6 +22,7 @@ from django_comments.models import Comment
 from django.contrib import messages
 from django.conf import settings
 import django_comments as comments   # remplace from django.contrib import comments
+from bleach import clean
 
 
 def index2(request):
@@ -168,8 +168,8 @@ def nouveau(request, association_pseudo):
         eleve = request.user.profile
         association = get_object_or_404(Association,pseudo=association_pseudo)    
         if Adhesion.existe(eleve, association):
-            #On cree le message SANS OUBLIER de passer par le SANITIZER, pour escaper le js et les tags html non autorisés
-            message = Message.objects.create(expediteur=eleve,association=association,objet=sanitizeHtml(request.POST['objet']),contenu=sanitizeHtml(request.POST['contenu']),date=datetime.now())
+            #On cree le message SANS OUBLIER de passer par bleach, pour escaper le js et les tags html non autorisés
+            message = Message.objects.create(expediteur=eleve,association=association,objet=clean(request.POST['objet']),contenu=clean(request.POST['contenu']),date=datetime.now())
         return redirect(message)
     else:
         liste_assoces = Association.objects.all()

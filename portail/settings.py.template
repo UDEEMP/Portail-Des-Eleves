@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
-
+import bleach
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -188,10 +188,7 @@ STATICFILES_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
-# Default tags allowed by bleach to be displayed
-## bleach.ALLOWED_TAGS : a, abbr, acronym, b, blockquote, code, em, i, li, ol, strong, ul
-BLEACH_ALLOWED_TAGS = bleach.ALLOWED_TAGS + ['p', 'span']
-## bleach.ALLOWED_ATTRIBUTES : (acronym : title), (a : href, title), (abbr : title)
-BLEACH_ALLOWED_ATTRIBUTES = ['style']
-## bleach.ALLOWED_STYLES : none
-BLEACH_ALLOWED_STYLES = bleach.ALLOWED_STYLES + ['color', 'background-color', 'font-size']
+
+bleach.ALLOWED_STYLES += ['color', 'background-color', 'font-size', text-decoration']
+bleach.ALLOWED_TAGS += ['p', 'span']
+bleach.ALLOWED_ATTRIBUTES.update({'*': ['style']})
