@@ -124,13 +124,14 @@ WSGI_APPLICATION = 'portail.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '{%%NAME%%}',                      # portail Or path to database file if using sqlite3.
-        'USER': '{%%USER%%}',                      # root Not used with sqlite3.
-        'PASSWORD': '{%%PASSWORD%%}',                  # password Not used with sqlite3.
-        'HOST': '{%%HOST%%}',                      # /Applications/MAMP/tmp/mysql/mysql.sock Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '{%%PORT%%}',                      # Set to empty string for default. Not used with sqlite3.
-        }
+        'ENGINE': 'django.db.backends.mysql',              # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': '{%%NAME%%}',                                 # Or path to database file if using sqlite3.
+        'USER': '{%%USER%%}',                                    # Not used with sqlite3.
+        'PASSWORD': '{%%PASSWORD%%}',                            # Not used with sqlite3.
+        'HOST': '{%%HOST%%}', # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '{%%PORT%%}',                                    # Set to empty string for default. Not used with sqlite3.
+        'OPTIONS': {'charset': 'utf8mb4'}                      
+    }
 }
 
 
