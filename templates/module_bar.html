@@ -10,6 +10,8 @@
 
 
 
+	<div id="photos_soldes" style="text-align: center;">
+    
 	{% if request.user.profile.solde_octo < 0 %}
 	{%if bool %}
 	<img id="photo_vp_octo" class = "floatright" src="{% static "dettes_octo_verqui.jpg" %}">
@@ -50,8 +52,8 @@
 	<img id="photo_vp_octo" class = "floatright" src="{% static "pos_biero_uhl2.jpg" %}">
 	{% endif%}
 	{% endif%}
-
-	<br></br>
+	</div>
+	</br>
 	<p {% if request.user.profile.solde_octo < 0 %} class = "text-error" 
 	{% else %} class = "text-success" {% endif %}>
 	    <strong>Octo</strong> : {{ request.user.profile.solde_octo }} €
