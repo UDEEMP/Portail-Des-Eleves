@@ -66,7 +66,7 @@ class Avatar(models.Model):
     avatar = models.ImageField(max_length=1024, upload_to=avatar_file_path, blank=True)
     date_uploaded = models.DateTimeField(default=datetime.datetime.now)
 
-    def __unicode__(self):
+    def __str__(self):
         return _(u'Avatar for %s') % self.user
 
     def save(self, *args, **kwargs):

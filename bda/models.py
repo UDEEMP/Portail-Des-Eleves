@@ -22,7 +22,7 @@ class Revue(models.Model):
         ordering = ['-date']
         verbose_name = "revue"
     
-    def __unicode__(self):
+    def __str__(self):
         return self.titre
 	
     def save(self, *args, **kwargs):
@@ -52,7 +52,7 @@ class Instrument(models.Model):
     nom = models.CharField(max_length=30)
     musiciens = models.ManyToManyField(UserProfile, through='Maitrise')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.nom
 
     class Meta:
@@ -66,5 +66,5 @@ class Maitrise(models.Model):
     eleve = models.ForeignKey(UserProfile)
     niveau = models.CharField(max_length=50)
 
-    def __unicode__(self):
-        return self.eleve.__unicode__() + ' --> ' + self.instrument.__unicode__()
+    def __str__(self):
+        return self.eleve.__str__() + ' --> ' + self.instrument.__str__()

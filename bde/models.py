@@ -16,14 +16,14 @@ class Liste(models.Model):
     debut_vote = models.DateTimeField(default=datetime.now)
     fin_vote = models.DateTimeField(default=datetime.now)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.nom
 
 class Vote(models.Model):
     liste = models.ForeignKey(Liste)
     eleve = models.ForeignKey(UserProfile, related_name="votes_liste")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.eleve.user.username
 
 class Palum(models.Model):
@@ -40,7 +40,7 @@ class Palum(models.Model):
     class Meta:
         ordering = ['annee','-date']
 
-    def __unicode__(self):
+    def __str__(self):
         return str(self.annee) + ' - ' + str(self.date)
 
     def save(self, *args, **kwargs):
@@ -72,7 +72,7 @@ class ParrainageVoeux(models.Model):
     fillot_n7 = models.ForeignKey(UserProfile, related_name="Voeu7")
     fillot_n8 = models.ForeignKey(UserProfile, related_name="Voeu8")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.parrain.user.username
 
     def save(self, *args, **kwargs):

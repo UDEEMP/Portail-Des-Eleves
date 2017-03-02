@@ -44,7 +44,7 @@ class Room(models.Model):
     object_id = models.PositiveIntegerField(blank=True, null=True)
     content_object = fields.GenericForeignKey()
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s' % (self.name)
 
     class Meta:
@@ -145,7 +145,7 @@ class Message(models.Model):
     unix_timestamp = models.FloatField(editable=False, help_text='Unix timestamp when this message was inserted into the database.')
     created = models.DateTimeField(editable=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return u'%s, %s' % (self.user, self.unix_timestamp)
 
     def save(self, **kw):

@@ -11,7 +11,7 @@ class Morceau(models.Model):
         ordering = ['-date']
         verbose_name_plural = "morceaux"
     
-    def __unicode__(self):
+    def __str__(self):
         return self.titre    
 
 

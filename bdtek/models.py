@@ -16,7 +16,7 @@ class BD(models.Model):
     date = models.DateTimeField()
 
     
-    def __unicode__(self):
+    def __str__(self):
         return self.nom
 
     class Meta:

@@ -16,7 +16,7 @@ class Clip(models.Model):
 	class Meta:
 		ordering = ["-promo", "titre"]
 		
-	def __unicode__(self):
+	def __str__(self):
 		return self.titre
 	
 
@@ -26,12 +26,12 @@ class Candidat(models.Model):    #C'est la petite zoe qui veut faire de la balan
     debut_vote = models.DateTimeField()
     fin_vote = models.DateTimeField()
     
-    def __unicode__(self):
+    def __str__(self):
         return self.nom  
 
 class Vote(models.Model):
     liste = models.ForeignKey(Candidat)
     eleve = models.ForeignKey(UserProfile, related_name="votes")
     
-    def __unicode__(self):
+    def __str__(self):
         return 'vote de ' + self.eleve.user.username + ' pour ' + self.liste.nom

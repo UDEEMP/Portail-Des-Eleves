@@ -37,7 +37,7 @@ class Sondage(models.Model):
             mois = '0' + mois
         return jour + '/' + mois + '/' + str(self.date_parution.year)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.question
 
     # renvoie le resultat du sondage (1 ou 2 selon la reponse ayant le plus de votes)
@@ -71,5 +71,5 @@ class Vote(models.Model):
     eleve = models.ForeignKey(UserProfile)
     choix = models.IntegerField()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.eleve.user.username + ' -> ' + self.sondage.question

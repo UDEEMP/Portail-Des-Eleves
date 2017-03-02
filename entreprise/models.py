@@ -18,7 +18,7 @@ class Entreprise(models.Model):
     class Meta:
         ordering = ['ordre','nom']
  
-    def __unicode__(self):
+    def __str__(self):
         return self.nom
     
     def save(self, *args, **kwargs):
@@ -33,7 +33,7 @@ class EvenementEntreprise(models.Model):
     presence_3A = models.BooleanField()
     lien = models.URLField(max_length=200, blank=True,help_text= "Lien visible une fois l'evenement passé")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.evenement.titre
 
     @property

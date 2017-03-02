@@ -22,7 +22,7 @@ class Revue(models.Model):
         ordering = ['-date']
         verbose_name = "revue"
     
-    def __unicode__(self):
+    def __str__(self):
         return self.titre
 	
     def save(self, *args, **kwargs):

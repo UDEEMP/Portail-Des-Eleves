@@ -13,7 +13,7 @@ class Question(models.Model):
 	class Meta:
 		ordering = ['-date']
 	
-	def __unicode__(self):
+	def __str__(self):
 		return self.objet
 	
 
@@ -26,7 +26,7 @@ class Reponse(models.Model):
 	class Meta:
 		ordering = ['-date']
 	
-	def __unicode__(self):
+	def __str__(self):
 		return str(self.eleve.username) + ' -> ' + str(self.question.id)
 
 class QuestionForm(ModelForm):

@@ -16,7 +16,7 @@ class Produit(models.Model):
  ref = models.CharField(max_length=20)
  prix_vente = models.DecimalField(max_digits=4, decimal_places=2)
    
- def __unicode__(self):
+ def __str__(self):
   return self.nom
    
 class Commande(models.Model):
@@ -25,7 +25,7 @@ class Commande(models.Model):
  livree = models.BooleanField()
  date_fermeture = models.DateField(blank=True, null=True)
  
- def __unicode__(self):
+ def __str__(self):
   if self.fermee:
    return 'commande de ' + self.eleve.user.username + ' (fermee)'
   else:
@@ -42,7 +42,7 @@ class Achat(models.Model):
  vendredi = models.BooleanField(default=False,blank=True)
  date = models.DateTimeField(auto_now_add=True, auto_now=False, verbose_name="Date de commande")
  
- def __unicode__(self):
+ def __str__(self):
   if self.commande.fermee:
    return self.commande.eleve.user.username + ' -> ' + str(self.quantite) + ' ' + self.produit.nom + ' (fermee)'
   else:

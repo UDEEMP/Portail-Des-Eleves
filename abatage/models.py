@@ -23,5 +23,5 @@ class Abatage(models.Model):
     class Meta:
         ordering = ['-date']
 
-    def __unicode__(self):
+    def __str__(self):
         return str(self.date.year)

@@ -55,7 +55,7 @@ class Message(models.Model):
     def get_absolute_url(self):
         return self.association.get_absolute_url() + 'messages/'
   
-    def __unicode__(self):
+    def __str__(self):
         return self.objet
 
     @property

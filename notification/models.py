@@ -17,7 +17,7 @@ class Notification(models.Model):
 	date = models.DateTimeField(auto_now_add=True)
 
 
-	def __unicode__(self):
+	def __str__(self):
 		str_objet=''
 		if self.content_object:
 			str_objet = smart_str(self.content_object)

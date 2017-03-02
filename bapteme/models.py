@@ -11,5 +11,5 @@ class VPKatas(models.Model):
     class Meta:
         ordering = ['-promo']
 
-    def __unicode__(self):
-        return str(self.promo)
+    def __str__(self):
+        return "{} - VP Katas {}".format(self.eleve, self.promo)

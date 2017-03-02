@@ -10,7 +10,7 @@ class Question(models.Model):
         Une question pour le questionnaire du trombi
     """
     enonce = models.CharField(max_length=512, verbose_name="énoncé")
-    def __unicode__(self):
+    def __str__(self):
         return self.enonce
 
 class Reponse(models.Model):
@@ -23,7 +23,7 @@ class Reponse(models.Model):
     class Meta:
         verbose_name="réponse"
 
-    def __unicode__(self):
+    def __str__(self):
         return str(self.question.id) + ' -> ' + self.contenu
 
 class UserProfileManager(models.Manager):
@@ -97,7 +97,7 @@ class UserProfile(models.Model):
         ordering = ['-promo','last_name']
         verbose_name="profil"
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s %s' % (self.first_name.title(), self.last_name.title())
 
     def get_absolute_url(self):

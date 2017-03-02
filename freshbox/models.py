@@ -10,7 +10,7 @@ class Commande(models.Model):
  fermee = models.BooleanField()
  date_fermeture = models.DateField(blank=True, null=True)
  
- def __unicode__(self):
+ def __str__(self):
   if self.fermee:
    return 'commande de ' + self.eleve.user.username + ' (fermee)'
   else:

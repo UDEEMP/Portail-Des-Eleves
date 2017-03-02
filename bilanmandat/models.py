@@ -13,7 +13,7 @@ class QuestionBilan(models.Model):
     vu = models.BooleanField()
 
 
-    def __unicode__(self):
+    def __str__(self):
         return self.question
 
     def trouve(self):
@@ -30,5 +30,5 @@ class VoteBilan(models.Model):
     eleve = models.ForeignKey(UserProfile)
     reponse = models.IntegerField(blank=False)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.eleve.user.username + ' -> ' + self.questionBilan.question

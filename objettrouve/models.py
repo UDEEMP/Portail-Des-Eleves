@@ -12,7 +12,7 @@ class ObjetTrouve(models.Model):
 	lieu = models.CharField(max_length=200)
 	date = models.DateTimeField(default=datetime.now, blank=True)
 
-	def __unicode__(self):
+	def __str__(self):
 		return self.description
 
 #Formulaire d'ajout d'objet trouve/perdu

@@ -20,7 +20,7 @@ class Association(models.Model):
     class Meta:
         ordering = ['ordre','nom']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.nom
 
     def est_cachee_a(self, eleve):
@@ -48,7 +48,7 @@ class Adhesion(models.Model):
     class Meta:
         ordering = ['-ordre']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.eleve.user.username + ' -> ' + self.association.nom
 
     def save(self, *args, **kwargs):
@@ -79,7 +79,7 @@ class Video(models.Model):
     class Meta:
         ordering = ['-date', '-id']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.association.nom + ' - ' + self.titre
 
     def get_absolute_url(self):
@@ -119,7 +119,7 @@ class Affiche(models.Model):
     class Meta:
         ordering = ['-date', '-id']
 
-    def __unicode__(self):
+    def __str__(self):
         return self.association.nom + ' - ' + self.titre
 
     def get_absolute_url(self):
@@ -147,7 +147,7 @@ class Page(models.Model):
     lien = models.SlugField(max_length=200, help_text="URL de la page. Ne donner que le nom de l'association si la page est interne.")
     is_externe = models.BooleanField(help_text="Vrai si la page est un site externe au portail", verbose_name = "est externe")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.association.nom + ' - ' + self.titre
 
 ###################

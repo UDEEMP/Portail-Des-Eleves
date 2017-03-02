@@ -21,7 +21,7 @@ class Evenement(models.Model):
 		ordering = ['-date_debut']
 		verbose_name = "événement"
 	
-	def __unicode__(self):
+	def __str__(self):
 		return self.titre
 	
 	def get_absolute_url(self):
