@@ -52,9 +52,9 @@ except ImportError:
             return 'CharField'
     tagfield_help_text = _('Django-tagging introuvable, les tags seront textuels.')
 
-from utils import EXIF
-from utils.reflection import add_reflection
-from utils.watermark import apply_watermark
+from mediamines.utils import EXIF
+from mediamines.utils.reflection import add_reflection
+from mediamines.utils.watermark import apply_watermark
 
 # Path to sample image
 SAMPLE_IMAGE_PATH = getattr(settings, 'SAMPLE_IMAGE_PATH', os.path.join(os.path.dirname(__file__), 'res', 'sample.jpg')) # os.path.join(settings.PROJECT_PATH, 'photologue', 'res', 'sample.jpg'

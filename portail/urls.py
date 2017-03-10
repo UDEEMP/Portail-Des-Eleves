@@ -13,7 +13,7 @@ from notification import views as notification_views
 from intranetlink import views as intranetlink_views
 from availableClassrooms import views as availableClassrooms_views
 from message import views as message_views
-#oneY1B_views = __import__('1y1b.views')
+oneY1B_views = __import__('1y1b.views').views
 
 
 admin.autodiscover()
@@ -26,11 +26,11 @@ urlpatterns = [
     url(r'^admin/?', include(admin.site.urls)),
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^accounts/profile/$', trombi_views.profile),
-    #url(r'^sso/1y1b/authentication$', oneY1B_views.connection),
-    #url(r'^sso/1y1b/authentication_accueil$', oneY1B_views.connection_accueil),
-    #url(r'^sso/1y1b/authentication_accueil/', oneY1B_views.connection_accueil),
-    #url(r'^sso/1y1b/logout$', oneY1B.views.logout_view),
-    #url(r'^yearbook/$', '1y1b.views.yearbook'),
+    url(r'^sso/1y1b/authentication$', oneY1B_views.connection),
+    url(r'^sso/1y1b/authentication_accueil$', oneY1B_views.connection_accueil),
+    url(r'^sso/1y1b/authentication_accueil/', oneY1B_views.connection_accueil),
+    url(r'^sso/1y1b/logout$', oneY1B_views.logout_view),
+    #url(r'^yearbook/$', oneY1B_views.yearbook),
     url(r'^token/$', trombi_views.token),
     url(r'^comments/delete/$', message_views.delete_own_comment ),
     url(r'^comments/', include('django_comments.urls')),

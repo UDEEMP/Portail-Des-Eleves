@@ -7,11 +7,10 @@ from django.contrib.auth import authenticate , login, logout
 from django.template import RequestContext
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.core.paginator import Paginator, InvalidPage
-from django.utils import simplejson
 from django.conf import settings
 from datetime import datetime
 import json
-import urllib
+import urllib.request, urllib.parse, urllib.error
 from base64 import standard_b64encode
 from Crypto.Cipher import AES
 
@@ -25,12 +24,13 @@ def connection(request):
             login(request, user)
             return redirect('/sso/1y1b/authentication')
         else:
-            return render(request, '1y1b/login.html', {})    else:
+            return render(request, '1y1b/login.html', {})
+    else:
         user = request.user
         if user.is_authenticated():
-            profil = user.get_profile();
-            response = HttpResponse(mimetype='application/json')
-            user_infos = simplejson.dumps({
+            profil = user.profile;
+            response = HttpResponse(content_type='application/json')
+            user_infos = json.dumps({
                 'login': profil.user.username,
                 'email':profil.user.email,
                 'first_name': profil.first_name.title(),
@@ -47,16 +47,16 @@ def connection(request):
             en = AES.new(key=key, mode=AES.MODE_CFB, IV="0" * 16, segment_size=128)
             cipher = en.encrypt(pad(string_to_encode))
             cipher64 = standard_b64encode(cipher)
-            print cipher64
-            user_infos=urllib.quote_plus(cipher64)
+            user_infos=urllib.parse.quote_plus(cipher64)
             if 'desired_page' in request.GET:
                 desired_page= request.GET['desired_page']
-                desired_page= urllib.quote_plus(desired_page)
+                desired_page= urllib.parse.quote_plus(desired_page)
                 url='http://mines-paristech.1year1book.com/sso/callback?token='+user_infos+'&desired_page='+desired_page
             else:
                 url='http://mines-paristech.1year1book.com/sso/callback?token='+user_infos
             print(url)
-            return render(request, '1y1b/redirect.html', {'url': url})        else: 
+            return render(request, '1y1b/redirect.html', {'url': url})        
+        else: 
             return render(request, '1y1b/login.html', {})            
 def connection_accueil(request):
     
@@ -68,12 +68,14 @@ def connection_accueil(request):
             login(request, user)
             return redirect('/sso/1y1b/authentication_accueil')
         else:
-            return render(request, '1y1b/login.html', {})    else:
+            return render(request, '1y1b/login.html', {})    
+    else:
         user = request.user
         if user.is_authenticated():
             url='http://www.eleves.mines-paris.eu'
             print(url)
-            return render(request, '1y1b/redirect.html', {'url': url})        else: 
+            return render(request, '1y1b/redirect.html', {'url': url})
+        else: 
             return render(request, '1y1b/login.html', {}) 
         
 
