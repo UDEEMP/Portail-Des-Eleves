@@ -18,12 +18,12 @@ def getData(request):
     slot = request.GET.get('slot', '')
     if slot in slots:
         url = 'http://marjolaine.minesdeparis.fr/tools/available.php?slot='+slot
-        content = urllib.request.urlopen(url).read().split("\n")[0:-1]
+        content = urllib.request.urlopen(url).read().decode("utf-8").split("\n")[0:-1]
         slot = slot
         return render(request, 'availableClassrooms/data.html', {'content':content, 'slot': slot})
     else:
         url = 'http://marjolaine.minesdeparis.fr/tools/available.php'
-        content = urllib.request.urlopen(url).read()
+        content = urllib.request.urlopen(url).read().decode("utf-8")
         pairs = [i.split(";") for i in content.split("\n")[0:-1]]
         returnedValue = OrderedDict()
         for p in pairs:
