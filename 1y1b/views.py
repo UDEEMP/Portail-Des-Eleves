@@ -72,8 +72,7 @@ def connection_accueil(request):
     else:
         user = request.user
         if user.is_authenticated():
-            url='http://www.eleves.mines-paris.eu'
-            print(url)
+            url=request.get_host()
             return render(request, '1y1b/redirect.html', {'url': url})
         else: 
             return render(request, '1y1b/login.html', {}) 
