@@ -11,7 +11,7 @@
     <dd{% if not cours.visible %} class="given"{% endif %}> <b>Matiere :</b> {{ cours.matiere }}   <b>Niveau :</b> {{ cours.niveau }}  <b>Contact :</b> {{ cours.contact }}  <b>Prénom :</b> {{ cours.prenom }} <br />{{ cours.description }} à {{ cours.address }}<br />{{ cours.requests.count }} demandes<br />
 <ul>
 {% for requete in cours.requests.all %}
-<li>{{ requete.username }} ({{ requete.get_profile.nb_petits_cours_attribues }} cours déjà attribué{{ requete.get_profile.nb_petits_cours_attribues|pluralize }}) <a href="/petitscours/admin/give/{{ cours.id }}/{{ requete.username }}">attribuer</a></li>
+<li>{{ requete.username }} ({{ requete.profile.nb_petits_cours_attribues }} cours déjà attribué{{ requete.profile.nb_petits_cours_attribues|pluralize }}) <a href="/petitscours/admin/give/{{ cours.id }}/{{ requete.username }}">attribuer</a></li>
 {% endfor %}
 </ul>
 </dd>
