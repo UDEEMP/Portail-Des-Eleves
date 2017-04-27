@@ -19,8 +19,8 @@ def voter(request):
         sondage = get_object_or_404(Sondage, deja_paru = False, date_parution = datetime.date.today()) #On le récupère
         if Vote.objects.filter(sondage = sondage, eleve__user__username=request.user.username).exists(): #L'élève a déjà voté
             messages.add_message(request, messages.ERROR, "Vous avez déjà voté pour ce sondage")
-        elif request.user.username == '15thuillier':
-            messages.add_message(request, messages.ERROR, "Vous n'avez pas le droit de voter")
+        #elif request.user.username == '15thuillier':
+        #    messages.add_message(request, messages.ERROR, "Vous n'avez pas le droit de voter")
         else:
             if request.POST['choix']:
                 Vote.objects.create(sondage = sondage, eleve=request.user.profile, choix = int(request.POST['choix']))

@@ -76,6 +76,7 @@ if __name__ == '__main__':
 		print("Veuillez relancer le script avec Python 3.5")
 		exit(-1)
 	editSettings()
+        env = createEnv()
 	print("Terminé")
 	print("Vous pouvez ajouter l'alias @django='source " + env + "bin/activate'")
 	print("Une fois dans l'environnement virtuel et dans le dossier du portail")
