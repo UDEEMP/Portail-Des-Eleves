@@ -19,6 +19,8 @@ def voter(request):
         sondage = get_object_or_404(Sondage, deja_paru = False, date_parution = datetime.date.today()) #On le récupère
         if Vote.objects.filter(sondage = sondage, eleve__user__username=request.user.username).exists(): #L'élève a déjà voté
             messages.add_message(request, messages.ERROR, "Vous avez déjà voté pour ce sondage")
+        elif request.user.username == '15thuillier':
+            messages.add_message(request, messages.ERROR, "Vous n'avez pas le droit de voter")
         else:
             if request.POST['choix']:
                 Vote.objects.create(sondage = sondage, eleve=request.user.profile, choix = int(request.POST['choix']))
@@ -35,7 +37,7 @@ def voter(request):
 def proposer(request):
     if request.POST:
         if request.POST['question'] and request.POST['reponse1'] and request.POST['reponse2']:
-            sondage = Sondage(auteur = request.user.profile, question = request.POST['question'], reponse1 = request.POST['reponse1'], reponse2 = request.POST['reponse2'])
+            sondage = Sondage(auteur = request.user.profile, question = request.POST['question'], reponse1 = request.POST['reponse1'], reponse2 = request.POST['reponse2'], deja_paru=False, autorise=False)
             sondage.save()
             sondage.envoyer_notification()
             messages.add_message(request, messages.INFO, "Votre sondage a bien été enregistré, il est maintenant en attente de validation.")
@@ -80,7 +82,7 @@ def detail_json(request, indice_sondage):
     nombre_reponse_2 = Vote.objects.filter(sondage = sondage, choix = 2).count()
     is_dernier = (int(indice_sondage) >= Sondage.objects.filter(date_parution__isnull = False).filter(date_parution__lte = datetime.date.today()).count() - 1)
     is_premier = (int(indice_sondage) <= 0)
-    response = HttpResponse(mimetype='application/json')
+    response = HttpResponse(content_type='application/json')
     if sondage.id == 1693:
         nombre_reponse_1=nombre_reponse_1+1000
         nombre_reponse=nombre_reponse+1000

@@ -107,10 +107,12 @@
 {% endfor %}
 
 <hr>
+{% comment %}
 <p><strong>Photos <a href='/associations/mediamines/'>MediaMines</a></strong> :</p>
 {% for photo in mineur.profile.photo_set.all %}
 	<a href="{{ photo.get_absolute_url }}"><img src="{{ photo.get_display_url }}" alt="{{ photo.title }}" width=120/></a>
 {% endfor %}
+{% endcomment %}
 <hr>
 {% if mineur.username == user.username %}
 <p><a href="/people/edit/">Modifier</a><br/>

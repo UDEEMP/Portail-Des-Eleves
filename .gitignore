@@ -12,3 +12,6 @@ public/django.fcgi
 public/django.fcgi.old
 
 public/media/*
+media/*
+static/*
+pip-log.txt

@@ -28,26 +28,26 @@
 <table class = "edit">
 <tr>
 <td><label for="surnom">Surnom</label></td>
-<td><input type="text" id="surnom" value="{{ mineur.get_profile.surnom }}" name="surnom"></td>
+<td><input type="text" id="surnom" value="{{ mineur.profile.surnom }}" name="surnom"></td>
 </tr>
 <tr>
 <td><label for="phone">Téléphone</label></td>
-<td><input type="text" id="phone" value="{{ mineur.get_profile.phone }}" name="phone"></td>
+<td><input type="text" id="phone" value="{{ mineur.profile.phone }}" name="phone"></td>
 </tr>
 <tr>
 <td><label for="chambre">Chambre</label></td>
-<td><input type="text" value="{{ mineur.get_profile.chambre }}" name="chambre"></td>
+<td><input type="text" value="{{ mineur.profile.chambre }}" name="chambre"></td>
 </tr>
 <tr>
 <td><label for="option">Option</label></td>
-<td><input type="text" value="{{ mineur.get_profile.option }}" name="option"></td>
+<td><input type="text" value="{{ mineur.profile.option }}" name="option"></td>
 </tr>
 <tr>
 <td><label for="co">Co</label></td>
 <td>
 <select name = "co" multiple="multiple">
 {% for eleve in autres_eleves %}
-<option {% if eleve in mineur.get_profile.co.all %} selected="selected" {% endif %} value="{{ eleve.user.username }}">{{ eleve.first_name }} {{ eleve.last_name|upper }}</option>
+<option {% if eleve in mineur.profile.co.all %} selected="selected" {% endif %} value="{{ eleve.user.username }}">{{ eleve.first_name }} {{ eleve.last_name|upper }}</option>
 {% endfor %}
 </select>
 </td>
@@ -57,7 +57,7 @@
 <td>
 <select name = "parrains" multiple="multiple">
 {% for eleve in promo_superieure %}
-<option {% if eleve in mineur.get_profile.parrains.all %} selected="selected" {% endif %} value="{{ eleve.user.username }}">{{ eleve.first_name }} {{ eleve.last_name|upper }}</option>
+<option {% if eleve in mineur.profile.parrains.all %} selected="selected" {% endif %} value="{{ eleve.user.username }}">{{ eleve.first_name }} {{ eleve.last_name|upper }}</option>
 {% endfor %}
 </select>
 </td>
@@ -67,14 +67,14 @@
 <td>
 <select name = "fillots" multiple="multiple">
 {% for eleve in promo_inferieure %}
-<option {% if eleve in mineur.get_profile.fillots.all %} selected="selected" {% endif %} value="{{ eleve.user.username }}">{{ eleve.first_name }} {{ eleve.last_name|upper }}</option>
+<option {% if eleve in mineur.profile.fillots.all %} selected="selected" {% endif %} value="{{ eleve.user.username }}">{{ eleve.first_name }} {{ eleve.last_name|upper }}</option>
 {% endfor %}
 </select>
 </td>
 </tr>
 <tr>
 <td><label for="ville_origine">Ville d'origine</label></td>
-<td><input type="text" value="{{ mineur.get_profile.ville_origine }}" name="ville_origine"></td>
+<td><input type="text" value="{{ mineur.profile.ville_origine }}" name="ville_origine"></td>
 </tr>
 </table>
 <hr>
@@ -83,7 +83,7 @@
 <tr>
 
 	<td><label for="question_{{question.id}}">{{question.enonce}}</label></td>
-	<td><input type="text" value="{% for reponse in liste_reponses %}{% if question = reponse.question %}{{reponse.contenu}}{% endif %}{% endfor %}" name="question_{{question.id}}"></td>
+	<td><input type="text" value="{% for reponse in liste_reponses %}{% if question == reponse.question %}{{reponse.contenu}}{% endif %}{% endfor %}" name="question_{{question.id}}"></td>
 </tr>
 {% endfor %}
 </table>

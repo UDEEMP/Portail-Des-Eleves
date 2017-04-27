@@ -35,7 +35,7 @@
 	{% else %}
 		<p class="text-error">Fin des votes en ligne</p>
 		{% if request.user.is_superuser %}
-		<a href = "/associations/bde/resultats/">Voir les résultats</a>
+		<p>Voir les résultats</p>
 		{% endif %}
 	{% endif %}
 {% else %}

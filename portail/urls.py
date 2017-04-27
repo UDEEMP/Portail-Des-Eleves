@@ -13,6 +13,7 @@ from notification import views as notification_views
 from intranetlink import views as intranetlink_views
 from availableClassrooms import views as availableClassrooms_views
 from message import views as message_views
+from boulagnon import views as boulagnon_views
 oneY1B_views = __import__('1y1b.views').views
 
 
@@ -72,5 +73,6 @@ urlpatterns = [
     url(r'^2048/',include('2048.urls')),
     url(r'^xml/evenements.xml',intranetlink_views.getEvents),
     url(r'^availableClassrooms/$', availableClassrooms_views.availableClassrooms),
-    url(r'^availableClassrooms/classrooms.dat$', availableClassrooms_views.getData)
+    url(r'^availableClassrooms/classrooms.dat$', availableClassrooms_views.getData),
+    url(r'^boulagnon$', boulagnon_views.getJson)
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

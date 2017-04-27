@@ -75,7 +75,6 @@ if __name__ == '__main__':
 	except Exception :
 		print("Veuillez relancer le script avec Python 3.5")
 		exit(-1)
-	env = createEnv()
 	editSettings()
 	print("Terminé")
 	print("Vous pouvez ajouter l'alias @django='source " + env + "bin/activate'")

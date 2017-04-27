@@ -16,6 +16,7 @@ def index(request):
     assoces = Association.objects.order_by('ordre');
     if request.user.profile.en_premiere_annee():
         assoces = assoces.exclude(is_hidden_1A = True)
+    assoces = assoces.exclude(ordre__lt = 0)
     return render(request, 'association/index.html', {'assoces' : assoces})
 @login_required
 # La liste des membres d'une association

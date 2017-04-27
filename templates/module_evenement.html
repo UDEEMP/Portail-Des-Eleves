@@ -13,20 +13,91 @@
 		{% for date in date_list %}
 			<li class="nav-header">{{ date.grouper|date:"l d b"|title }}</li>
 				{% for item in date.list %}
-				  <li>
-				  <a class = "event"
-					   link = "<a href='/evenements/{{ item.id}}.ics'>Ajouter au calendrier</a>"
-				     titre = "Organisé par {{ item.auteur }}"
-				     contenu = "<div class='event_proprietes'><p class='event_auteur'><img src='{% static '' %}logo_{{ item.auteur_slug }}.png'><br/>
-								Organisé par <strong><a href='/associations/{{ item.auteur_slug }}/'>{{ item.auteur }}</a></strong><br/>
-								Le <strong>{{ item.date_debut|date:'d F' }}</strong><br/>
-								De <strong>{{ item.date_debut|date:'H:i' }}</strong> à <strong>{{ item.date_fin|date:'H:i' }}</strong><br/>
-								Lieu : <strong>{{ item.lieu }}</strong></p></div>"
-					 description = "<p>{{ item.description }}</p>"
-				  >
-				  {{ item.titre }}
-				  </a>
-				  </li>
+				    <li>
+                    <div>
+                        {% if item.titre == "BALM Commune" %}
+                            <img src="http://www.eleves.mines-paris.eu/static/logo_minsanity.png" width="32px">
+                            <a class = "event"
+                               link = "<a href='/evenements/{{ item.id}}.ics'>Ajouter au calendrier</a>"
+                               titre = "Organisé par {{ item.auteur }}"
+                               contenu = "<div class='event_proprietes'><p class='event_auteur'><img src='{% static '' %}logo_{{ item.auteur_slug }}.png'><br/>
+                                        Organisé par <strong><a href='/associations/{{ item.auteur_slug }}/'>{{ item.auteur }}</a></strong><br/>
+                                        Le <strong>{{ item.date_debut|date:'d F' }}</strong><br/>
+                                        Lieu : <strong>{{ item.lieu }}</strong></p></div>"
+                               description = "<p>{{ item.description }}</p>"
+                               style = "color: black"
+                            >
+                            <span style="color: #eb1d79">BALM</span><span style="color: black"> Commune</span></a>
+                            <img src="http://www.eleves.mines-paris.eu/static/logo_cosminautes.png" width="32px">
+                        {% elif item.auteur == "Min'sanity" %}
+                            <img src="http://www.eleves.mines-paris.eu/static/logo_minsanity.png" width="32px">
+                            <a class = "event"
+                               link = "<a href='/evenements/{{ item.id}}.ics'>Ajouter au calendrier</a>"
+                               titre = "Organisé par {{ item.auteur }}"
+                               contenu = "<div class='event_proprietes'><p class='event_auteur'><img src='{% static '' %}logo_{{ item.auteur_slug }}.png'><br/>
+                                        Organisé par <strong><a href='/associations/{{ item.auteur_slug }}/'>{{ item.auteur }}</a></strong><br/>
+                                        Le <strong>{{ item.date_debut|date:'d F' }}</strong><br/>
+                                        Lieu : <strong>{{ item.lieu }}</strong></p></div>"
+                               description = "<p>{{ item.description }}</p>"
+                               style = "color: #eb1d79"
+                            >
+                            {{ item.titre }}</a>
+                        {% elif item.auteur == "CosMin'autes" %}
+                            <img src="http://www.eleves.mines-paris.eu/static/logo_cosminautes.png" width="32px">
+                            <a class = "event"
+                               link = "<a href='/evenements/{{ item.id}}.ics'>Ajouter au calendrier</a>"
+                               titre = "Organisé par {{ item.auteur }}"
+                               contenu = "<div class='event_proprietes'><p class='event_auteur'><img src='{% static '' %}logo_{{ item.auteur_slug }}.png'><br/>
+                                        Organisé par <strong><a href='/associations/{{ item.auteur_slug }}/'>{{ item.auteur }}</a></strong><br/>
+                                        Le <strong>{{ item.date_debut|date:'d F' }}</strong><br/>
+                                        Lieu : <strong>{{ item.lieu }}</strong></p></div>"
+                               description = "<p>{{ item.description }}</p>"
+                               style = "color: black"
+                            >
+                            {{ item.titre }}</a>
+                        {% elif item.auteur == "BDE" %}
+                            <img src="http://www.eleves.mines-paris.eu/static/logo_bde.png" width="32px">
+                            <a class = "event"
+                               link = "<a href='/evenements/{{ item.id}}.ics'>Ajouter au calendrier</a>"
+                               titre = "Organisé par {{ item.auteur }}"
+                               contenu = "<div class='event_proprietes'><p class='event_auteur'><img src='{% static '' %}logo_{{ item.auteur_slug }}.png'><br/>
+                                        Organisé par <strong><a href='/associations/{{ item.auteur_slug }}/'>{{ item.auteur }}</a></strong><br/>
+                                        Le <strong>{{ item.date_debut|date:'d F' }}</strong><br/>
+                                        De <strong>{{ item.date_debut|date:'H:i' }}</strong> à <strong>{{ item.date_fin|date:'H:i' }}</strong><br/>
+                                        Lieu : <strong>{{ item.lieu }}</strong></p></div>"
+                               description = "<p>{{ item.description }}</p>"
+                               style = "color: #edc60d"
+                            >
+                            {{ item.titre }}</a>
+                        {% elif item.auteur == "Pain de Mine" %}
+                            <img src="http://www.eleves.mines-paris.eu/static/logo_paindemine.png" width="32px">
+                            <a class = "event"
+                               link = "<a href='/evenements/{{ item.id}}.ics'>Ajouter au calendrier</a>"
+                               titre = "Organisé par {{ item.auteur }}"
+                               contenu = "<div class='event_proprietes'><p class='event_auteur'><img src='{% static '' %}logo_{{ item.auteur_slug }}.png'><br/>
+                                        Organisé par <strong><a href='/associations/{{ item.auteur_slug }}/'>{{ item.auteur }}</a></strong><br/>
+                                        Le <strong>{{ item.date_debut|date:'d F' }}</strong><br/>
+                                        De <strong>{{ item.date_debut|date:'H:i' }}</strong> à <strong>{{ item.date_fin|date:'H:i' }}</strong><br/>
+                                        Lieu : <strong>{{ item.lieu }}</strong></p></div>"
+                               description = "<p>{{ item.description }}</p>"
+                               style = "color: #c97735"
+                            >
+                            {{ item.titre }}</a>
+                        {% else %}
+                            <a class = "event"
+                               link = "<a href='/evenements/{{ item.id}}.ics'>Ajouter au calendrier</a>"
+                               titre = "Organisé par {{ item.auteur }}"
+                               contenu = "<div class='event_proprietes'><p class='event_auteur'><img src='{% static '' %}logo_{{ item.auteur_slug }}.png'><br/>
+                                        Organisé par <strong><a href='/associations/{{ item.auteur_slug }}/'>{{ item.auteur }}</a></strong><br/>
+                                        Le <strong>{{ item.date_debut|date:'d F' }}</strong><br/>
+                                        De <strong>{{ item.date_debut|date:'H:i' }}</strong> à <strong>{{ item.date_fin|date:'H:i' }}</strong><br/>
+                                        Lieu : <strong>{{ item.lieu }}</strong></p></div>"
+                               description = "<p>{{ item.description }}</p>"
+                            >
+                            {{ item.titre }}</a>
+                        {% endif %}
+                    </div>
+				    </li>
 				{% endfor %}
 		{% endfor %}
 		</ul>
