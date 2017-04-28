@@ -74,7 +74,7 @@ INSTALLED_APPS = [
     #Avatar, pour les avatars de trombi
     'avatar',
     #Photologue pour les photos Mediamine
-    #'mediamines',
+    'mediamines',
     #TinyMCE pour les messages
     #'tinymce',
     'bapteme',
@@ -190,6 +190,6 @@ STATICFILES_DIRS = (
 )
 
 
-bleach.ALLOWED_STYLES += ['color', 'background-color', 'font-size', text-decoration']
+bleach.ALLOWED_STYLES += ['color', 'background-color', 'font-size', 'text-decoration']
 bleach.ALLOWED_TAGS += ['p', 'span']
 bleach.ALLOWED_ATTRIBUTES.update({'*': ['style']})
