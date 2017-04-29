@@ -129,8 +129,12 @@ class Ajax(object):
 
         # Get new messages - do this last in case the ExtraHandling has itself generated
         # new messages.
+        if self.request.GET.get('message', None)=='extra':
+            numberofmessages=1000
+        else:
+            numberofmessages=JQCHAT_DISPLAY_COUNT
 
-        NewMessages = Message.objects.filter(unix_timestamp__gt=self.request_time).order_by('-id')[:JQCHAT_DISPLAY_COUNT]
+        NewMessages = Message.objects.filter(unix_timestamp__gt=self.request_time).order_by('-id')[:numberofmessages]
         if NewMessages:
             StatusCode = 1
             NewMessages = reversed(NewMessages)

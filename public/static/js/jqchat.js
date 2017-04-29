@@ -29,15 +29,21 @@ var popineauWords = []
 
 
 function callServer(){
+    var messagesparam;
+    if(window.location.pathname == '/chat/room/')
+        messagesparam='extra';
+    else
+        messagesparam='';
 	// At each call to the server we pass data.
 	/**$.get(url, // the url to call.
-			{time: timestamp}, // the data to send in the GET request.
+			{time: timestamp,
+                message:messagesparam}, // the data to send in the GET request.
 			function(payload) { // callback function to be called after the GET is completed.
 							alert('get ');
 							processResponse(payload);
 							},
 			'json');*/
-	$.getJSON(url, {time: timestamp}, function(data) {processResponse(data);});
+	$.getJSON(url, {time: timestamp,message:messagesparam}, function(data) {processResponse(data);});
 	};
 
 function processResponse(payload) {
