@@ -53,6 +53,9 @@ function processResponse(payload) {
 	// Get the timestamp, store it in global variable to be passed to the server on next call.
 	timestamp = payload.time;
 
+	var objDiv = document.getElementById("chatwindow");
+//	objDiv.scrollTop = objDiv.scrollHeight;
+    var isScrolledToBottom = objDiv.scrollHeight - objDiv.clientHeight <= objDiv.scrollTop + 50;
 
 
 	for(message in payload.messages) {
@@ -82,9 +85,11 @@ function processResponse(payload) {
 	}
 	loadedOnce = true;
 	// Scroll down if messages fill up the div.
-	var objDiv = document.getElementById("chatwindow");
-	objDiv.scrollTop = objDiv.scrollHeight;
-
+    // http://stackoverflow.com/a/21067431/7800356
+    if(isScrolledToBottom)
+    {
+        objDiv.scrollTop = objDiv.scrollHeight;// - objDiv.clientHeight;
+    }
 	// Handle custom data (data other than messages).
 	// This is only called if a callback function has been specified.
 	if(prCallback != null) prCallback(payload);
