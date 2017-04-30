@@ -1,0 +1,22 @@
+{% extends 'simple_forums/base.html' %}
+
+{% block page_title %}Retour{% endblock %}
+
+{% block content2 %}
+
+    <h1>Sections</h1>
+
+    {% for topic in topic_list %}
+
+        <div class="topic">
+            <h3><a href="{% url 'simple-forums:thread-list' topic.pk topic.slug %}">{{ topic.title }}</a></h3>
+            <p>{{ topic.description }}</p>
+        </div>
+
+    {% empty %}
+
+        <p>Pas de sections trouvées</p>
+
+    {% endfor %}
+
+{% endblock %}

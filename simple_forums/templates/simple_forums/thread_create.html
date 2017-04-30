@@ -1,0 +1,19 @@
+{% extends 'simple_forums/base.html' %}
+
+{% block page_title %}Create New Thread{% endblock %}
+
+{% block content2 %}
+
+    <h1>Nouveau Sujet</h1>
+
+    <form action="" method="post">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">Envoyer</button>
+
+    </form>
+
+{% endblock %}

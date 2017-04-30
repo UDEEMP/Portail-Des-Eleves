@@ -1,0 +1,33 @@
+{% extends 'simple_forums/base.html' %}
+
+{% block page_title %}Search{% endblock %}
+
+{% block content2 %}
+
+    <form id="search-form" action="" method="get">
+        <input type="text" name="q"{% if query %} value="{{ query }}"{% endif %} />
+        <button type="submit">Rechercher</button>
+    </form>
+
+    {% if query %}
+
+        <h3>Résulats pour: {{ query }}</h3>
+
+        {% for result in results %}
+
+            <div class="search-result">
+                <a href="{{ result.get_absolute_url }}">{{ result.get_title }}</a>
+                <p class="search-description">
+                    {{ result.get_search_description }}
+                </p>
+            </div>
+
+        {% empty %}
+
+            <p>Il n'y a pas de résultats</p>
+
+        {% endfor %}
+
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load simple_forum_tags %}
+{% load static %}
+
+{% block header %}
+<style>
+table {
+    table-layout: fixed;
+    word-wrap: break-word;
+    }
+.table-nonfluid {
+   width: auto !important;
+}
+</style>
+{% endblock %}
+{% block page_title %}Forums{% endblock %} 
+{% block content %}
+    <div class="container">
+        <!--<div class="span8 span6-tablet">-->
+    <header>
+        <nav>
+            <ul>
+                <h3><li><a href="{% url 'simple-forums:topic-list' %}">Retour</a></li></h3>
+                <h3><li><a href="{% url 'simple-forums:search' %}">Recherche</a></li></h3>
+
+                {% if request.user.is_authenticated %}
+
+                <h3><li><a href="{% url 'simple-forums:thread-create' %}">Nouveau Sujet</a></li></h3>
+                     {% comment %} 
+                    <!--<li><a href="{% logout_url %}">Log Out</a></li>-->
+                     {% endcomment %}
+                {% else %}
+                     {% comment %} 
+                    <!--<li><a href="{% login_url %}">Log In</a></li>-->
+                    {% endcomment %} 
+                {% endif %}
+
+            </ul>
+        </nav>
+
+    </header>
+
+    <main>
+    {% if messages %}
+            <h3>Messages:</h3>
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+
+        {% block content2 %}{% endblock %}
+    </main>
+        </div>
+{% endblock %}

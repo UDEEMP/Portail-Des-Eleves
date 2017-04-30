@@ -1,0 +1,56 @@
+{% extends 'simple_forums/base.html' %}
+
+{% block page_title %}{{ topic.title }}{% endblock %}
+
+{% block content2 %}
+    <!--<h1>Actions</h1>-->
+        <!--<h3><a href="{% url 'simple-forums:thread-create' %}"> Nouveau Sujet </a></h3>-->
+        <!--<h3><a href="{% url 'simple-forums:search' %}"> Recherche</a></h3>-->
+	{% if thread_list or sticky_thread_list %}
+
+		<div class="sorting">
+			<h3>Trier par:</h3>
+
+			<ul>
+
+				{% for option in sort_options %}
+
+					<li><a href="{{ request.url }}?sort={{ option }}{% if sort_current == option and not sort_reversed %}&rev=true{% endif %}">{% if sort_current == option %}<i class="fa {% if sort_reversed %}fa-caret-down{% else %}fa-caret-up{% endif %}"></i> {% endif %}{{ option|title }}</a></li>
+
+				{% endfor %}
+
+			</ul>
+		</div>
+    <div class="container">
+        <hr />
+        <table class="table table-nonfluid">
+            <thead>
+             <tr>
+                 <th ><span>Titre</span></th>
+                <th>Reponses</th>
+                <th>Dernière activité</th>
+              </tr>
+            </thead>
+            <tbody>
+				{% for thread in sticky_thread_list %}
+
+					{% include 'simple_forums/snippets/render_thread_listing.html' %}
+
+				{% endfor %}
+
+				{% for thread in thread_list %}
+
+					{% include 'simple_forums/snippets/render_thread_listing.html' %}
+
+				{% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+	{% else %}
+
+		<p>Pas de sujets trouvés.</p>
+		
+	{% endif %}
+
+{% endblock %}

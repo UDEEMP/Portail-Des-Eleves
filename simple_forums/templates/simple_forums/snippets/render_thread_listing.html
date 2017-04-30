@@ -1,0 +1,7 @@
+<tr>
+    <td>
+                    <a href="{% url 'simple-forums:thread-detail' thread.topic.pk thread.topic.slug thread.pk thread.slug %}">{% if thread.sticky %}&#128204; {% endif %}{{ thread.title }}</a>
+    </td>
+    <td>{{ thread.num_replies }}</td>
+    <td> {{ thread.time_last_activity }}</td>
+  </tr>
