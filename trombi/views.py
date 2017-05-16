@@ -20,7 +20,7 @@ from PIL import Image
 import json
 import os
 from django.forms import ModelForm
-
+from trombi import settings
 
 @login_required
 def trombi(request):
