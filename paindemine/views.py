@@ -146,7 +146,7 @@ def supprimer_tous_achats(request):
 		total = 0
 	return redirect(commande)
 
-@permission_required('paindemine.change_soldespaindemine')
+@permission_required('paindemine.change_produit')
 @login_required
 # Crediter le compte d'un élève
 def soldespaindemine(request):
@@ -163,7 +163,7 @@ def soldespaindemine(request):
     else:
         form = UpdateSoldeForm() # formulaire vierge
     return render(request, 'paindemine/soldes.html', {'form': form,})
-@permission_required('paindemine.change_soldespaindemine')
+@permission_required('paindemine.change_produit')
 @login_required
 def affichagesoldes(request):
 
