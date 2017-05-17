@@ -71,6 +71,7 @@ urlpatterns = [
     #url(r'^/?$','messages.views.index'),
     url(r'^$',trombi_views.profile),
     url(r'^2048/',include('2048.urls')),
+    url(r'^forums/',include('simple_forums.urls')),
     url(r'^xml/evenements.xml',intranetlink_views.getEvents),
     url(r'^availableClassrooms/$', availableClassrooms_views.availableClassrooms),
     url(r'^availableClassrooms/classrooms.dat$', availableClassrooms_views.getData),
