@@ -14,6 +14,7 @@ from intranetlink import views as intranetlink_views
 from availableClassrooms import views as availableClassrooms_views
 from message import views as message_views
 from boulagnon import views as boulagnon_views
+from pr import views as pr_views
 oneY1B_views = __import__('1y1b.views').views
 
 
@@ -39,6 +40,7 @@ urlpatterns = [
     url(r'^people/', include('trombi.urls')),
     url(r'^messages/', include('message.urls')),
     url(r'^sondages/', include('sondages.urls')),
+    url(r'^pr/', include('pr.urls')),
     url(r'^timetable/', include('timetable.urls')),
     url(r'^evenements/', include('evenement.urls')),
     url(r'^entreprises/', include('entreprise.urls')),
@@ -75,4 +77,5 @@ urlpatterns = [
     url(r'^availableClassrooms/$', availableClassrooms_views.availableClassrooms),
     url(r'^availableClassrooms/classrooms.dat$', availableClassrooms_views.getData),
     url(r'^boulagnon$', boulagnon_views.getJson)
+    
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
