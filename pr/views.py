@@ -82,7 +82,7 @@ def voter(request):
                 candidatDejaVote = Vote.objects.get(eleve = request.user.profile).liste.id
                 listes= listes.exclude(id=candidatDejaVote)
 
-    if request.user.profile.promo != 13 and request.user.profile.promo != 14 :
+    if request.user.profile.promo != 14 and request.user.profile.promo != 15 :
     	peut_voter = False
 
     return render(request, 'pr/voter.html', {'peut_voter':peut_voter, 'deja_vote':deja_vote, 'listes':listes, 'debut_vote':debut_vote, 'fin_vote':fin_vote})    
@@ -100,7 +100,7 @@ def voir_votes(request):
 def voir_votes_csv(request):
     from django.template import loader, Context
     liste_votes = voir_votes(request)
-    response = HttpResponse(mimetype='text/csv; charset=utf-8')
+    response = HttpResponse(mimetype='text/csv; charset=utf-8') #OBSOLETE
     response['Content-Disposition'] = 'attachment; filename=voir_votes.csv'
 
     t = loader.get_template('pr/voir_votes.txt')
