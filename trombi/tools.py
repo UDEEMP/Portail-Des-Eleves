@@ -3,7 +3,7 @@
 from trombi.models import UserProfile
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-
+from datetime import date
 @login_required
 def update_profile(profile,surnom,phone,chambre,option,co,parrains,fillots,ville_origine):
 	profile.phone = phone
@@ -32,3 +32,21 @@ def update_profile(profile,surnom,phone,chambre,option,co,parrains,fillots,ville
 		except UserProfile.DoesNotExist:
 			pass
 	profile.save()
+
+@login_required
+def update_stage(profile,ville,centre,latitude,longitude,date_debut_stage,date_fin_stage):
+	profile.ville = ville
+	profile.centre = centre
+	profile.latitude = latitude
+	profile.longitude = longitude
+
+	print(date_debut_stage, date_fin_stage)
+	dd = int(date_debut_stage.split("/")[0])
+	mm = int(date_debut_stage.split("/")[1])
+	yy = int(date_debut_stage.split("/")[2])
+	profile.date_debut_stage = date(yy,mm,dd)
+
+	dd = int(date_fin_stage.split("/")[0])
+	mm = int(date_fin_stage.split("/")[1])
+	yy = int(date_fin_stage.split("/")[2])
+	profile.date_fin_stage = date(yy,mm,dd)

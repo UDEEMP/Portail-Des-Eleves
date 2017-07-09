@@ -66,6 +66,7 @@ class UserProfile(models.Model):
     adresse_ailleurs = models.CharField(max_length=512, blank=True, help_text="Adresse en dehors de la Meuh")
     ville_origine = models.CharField(max_length=128, blank=True, help_text="Ville d'origine")
 
+
     # Vie aux Mines
     sports = models.CharField(max_length=512, blank=True)
     co = models.ManyToManyField('self', symmetrical = True, blank=True)
@@ -88,6 +89,17 @@ class UserProfile(models.Model):
     # Statistiques jeux
 
     meilleur_score_2048 = models.IntegerField(default=0, blank=True, null=True, editable=False, help_text="Meilleur score à 2048")
+
+
+    # Stage/S3
+
+    ville = models.CharField(max_length=500, default="")
+    latitude = models.FloatField(null=True)
+    longitude = models.FloatField(null=True)
+
+    centre = models.CharField(max_length=100, default="") #Université pour les S3, Entreprise pour les stages
+    date_debut_stage = models.DateField(default=datetime.datetime.now)
+    date_fin_stage = models.DateField(default=datetime.datetime.now)
 
     ################
     ### Méthodes ###

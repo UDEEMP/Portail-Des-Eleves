@@ -15,3 +15,6 @@ public/media/*
 media/*
 static/*
 pip-log.txt
+.DS_Store
+
+trombi/migrations/*
