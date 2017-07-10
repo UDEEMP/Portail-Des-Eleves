@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.template import RequestContext
 from trombi.tools import update_profile
+from trombi.tools import update_stage
 from association.models import Adhesion
 from bapteme.models import VPKatas
 from association.models import Association
@@ -128,6 +129,8 @@ def edit(request):
     mineur = request.user.profile
     if request.method == 'POST':
         update_profile(mineur, surnom=request.POST['surnom'], phone=request.POST['phone'], chambre=request.POST['chambre'], option=request.POST['option'], co=request.POST.getlist('co'), parrains=request.POST.getlist('parrains'), fillots=request.POST.getlist('fillots'), ville_origine=request.POST['ville_origine'])
+        update_stage(mineur, ville=request.POST['ville'], centre=request.POST['centre'], latitude=request.POST['latitude'], longitude=request.POST['longitude'], date_debut_stage=request.POST['date_debut_stage'], date_fin_stage=request.POST['date_fin_stage'])
+
         # Le profil a été mis a jour, on update les questions
         for question in Question.objects.all():
             try:

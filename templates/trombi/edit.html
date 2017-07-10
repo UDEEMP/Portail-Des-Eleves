@@ -13,6 +13,13 @@
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="{% static "jquery.multiselect.js" %}"></script>
 	<script type="text/javascript" src="{% static "jquery.multiselect.filter.js" %}"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>
+	<script type="text/javascript" src="{% static "addplace_trombi.js" %}"></script>
+	<script type="text/javascript" src="{% static "enterkey.js" %}"></script>
+	<link rel="stylesheet" href="{% static "bootstrap-timepicker.min.css" %}" />
+	<link rel="stylesheet" href="{% static "datepicker.css" %}" />
+	<script type="text/javascript" src="{% static "bootstrap-timepicker.min.js" %}"></script>
+	<script type="text/javascript" src="{% static "bootstrap-datepicker.js" %}"></script>
 	<script type="text/javascript">
 	jQuery(function($){
    $("#phone").mask("99 99 99 99 99");
@@ -23,7 +30,7 @@
 
 {% block content %}
 
-<form method="post" action="{{ request.path }}">
+<form method="post" action="{{ request.path }}" id="editform">
 {% csrf_token %}
 <table class = "edit">
 <tr>
@@ -78,6 +85,42 @@
 </tr>
 </table>
 <hr>
+<center><h2>Lieu du stage/S3</h2></center>
+<table>
+<tr>
+	<td><label for="ville">Ville du stage/S3</label></td>
+	<td>
+		<input id='addressinput' value="{{ mineur.profile.ville }}" type='text' name='ville' />
+		<input type='hidden' name='latitude' />
+		<input type='hidden' name='longitude' />
+	</td>
+</tr>
+<tr>
+	<td><label for="centre">Centre</label></td>
+	<td>
+		<input type='text' value="{{ mineur.profile.centre }}" name='centre' />
+	</td>
+</tr>
+<tr>
+	<td><label for="centre">Date de début</label></td>
+	<td>
+		<div class="input-append date datepicker" data-date="{{ mineur.profile.date_debut_stage|date:'d/m/Y' }}" data-date-format="dd/mm/yyyy">
+			<input class="input-small" type="text" name="date_debut_stage" value="{{ mineur.profile.date_debut_stage|date:'d/m/Y'}}">
+			<span class="add-on"><i class="icon-th"></i></span>
+		</div>
+	</td>
+</tr>
+<tr>
+	<td><label for="centre">Date de fin</label></td>
+	<td>
+		<div class="input-append date datepicker" data-date="{{ mineur.profile.date_fin_stage|date:'d/m/Y' }}" data-date-format="dd/mm/yyyy">
+			<input class="input-small" type="text" name="date_fin_stage" value="{{ mineur.profile.date_fin_stage|date:'d/m/Y'}}">
+			<span class="add-on"><i class="icon-th"></i></span>
+		</div>
+	</td>
+</tr>
+</table>
+<hr>
 <table class = "edit">
 {% for question in liste_questions %}
 <tr>
@@ -89,6 +132,15 @@
 </table>
 <input type="submit" />
 </form>
+<script type="text/javascript">
+$('#timedebutpicker').timepicker({
+showMeridian: false
+});
+$('#timefinpicker').timepicker({
+showMeridian: false
+});
+$('.datepicker').datepicker();
+</script>
 
 <script type="text/javascript">
 $("select").multiselect().multiselectfilter();
