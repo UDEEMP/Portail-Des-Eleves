@@ -39,10 +39,10 @@
 	<div class = " span5 text-center offset1" >
 	<form method="post" action="">
 	{% csrf_token %}
-	<img src = "{% static "{{liste1.nom|lower}}.png" %}" style="width:300px"/>
-	<p>
+	<img src = "{% static '' %}{{liste1.nom|lower}}.png" style="height:150px"/>
+	<!--<p>
 		<a href="{% static "{{liste1.nom|lower}}.pdf" %}" target=_blank>Programme</a>
-	</p>
+	</p>-->
 	<input type = "hidden" name = "choix" value="{{ liste1.nom }}"></input>
 	<input type = "submit" value = "Je vote {{ liste1.nom }}"></input>
 	</form>
@@ -51,10 +51,10 @@
 	<div class = "span5 text-center" >
 	<form method="post" action="">
 	{% csrf_token %}
-	<img src = "{% static "{{liste2.nom|lower}}.png" %}" style="width:300px"/>
-	<p>
+	<img src = "{% static '' %}{{liste2.nom|lower}}.png" style="height:150px"/>
+	<!--<p>
 		<a href="{% static "{{liste2.nom|lower}}.pdf" %}" target=_blank>Programme</a>
-	</p>
+	</p>-->
 	<input type = "hidden" name = "choix" value="{{ liste2.nom }}"></input>
 	<input type = "submit" value = "Je vote {{ liste2.nom }}"></input>
 	</form>
