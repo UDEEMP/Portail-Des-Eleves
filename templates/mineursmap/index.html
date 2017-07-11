@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-
+{% load bleach_tags %}
 {% block header %}
     <link rel="stylesheet" href="{% static "petitscours.css" %}" />
     <link rel="stylesheet" href="{% static "list.css" %}" />
@@ -54,7 +54,7 @@ var infowins = [];
 
 
 		{% for mineur in mineurs_list %}
-      addMarker("{{mineur.centre|escapejs}}","{{mineur.first_name|escapejs}}" + " {{mineur.last_name|escapejs}}",
+      addMarker("{{mineur.centre|bleach|escapejs}}","{{mineur.first_name|bleach|escapejs}}" + " {{mineur.last_name|bleach|escapejs}}",
         "{{mineur.latitude|escapejs}}", "{{mineur.longitude|escapejs}}", "{{mineur.date_debut_stage|date:'d N Y'|escapejs}}","{{mineur.date_fin_stage|date:'d N Y'|escapejs}}")
 		{% endfor %}
 	}
