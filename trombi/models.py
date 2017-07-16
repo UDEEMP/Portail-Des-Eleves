@@ -98,6 +98,7 @@ class UserProfile(models.Model):
     longitude = models.FloatField(null=True)
 
     centre = models.CharField(max_length=100, default="") #Université pour les S3, Entreprise pour les stages
+    image_url = models.CharField(max_length=1000, default="")
     date_debut_stage = models.DateField(default=datetime.datetime.now)
     date_fin_stage = models.DateField(default=datetime.datetime.now)
 

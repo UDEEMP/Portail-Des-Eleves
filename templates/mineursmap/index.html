@@ -54,7 +54,7 @@ var infowins = [];
 
 
 		{% for mineur in mineurs_list %}
-      addMarker("{{mineur.centre|bleach|escapejs}}","{{mineur.first_name|bleach|escapejs}}" + " {{mineur.last_name|bleach|escapejs}}",
+      addMarker("{{mineur.centre|bleach|escapejs}}{% if mineur.image_url != '' %} </br></br><img src=\"{{mineur.image_url|bleach|escapejs}}\" style=\"max-width: 100px; max-height: 100px\"></br>{% endif %}","{{mineur.first_name|bleach|escapejs}}" + " {{mineur.last_name|bleach|escapejs}}",
         "{{mineur.latitude|bleach|escapejs}}", "{{mineur.longitude|escapejs}}", "{{mineur.date_debut_stage|date:'d N Y'|escapejs}}","{{mineur.date_fin_stage|date:'d N Y'|escapejs}}")
 		{% endfor %}
 	}
@@ -63,28 +63,6 @@ var infowins = [];
 
 
 
-	function addMarker(title, descr, lat, lng, matiere, niveau,age,disponibilite,frequence,nombre, id) {
-  var marker = new google.maps.Marker({
-    position: new google.maps.LatLng(lat, lng),
-    map: map,
-    title: title,
-  })
-  markers.push(marker);
-  var infowin = new google.maps.InfoWindow({
-    content: '<p><b>' + title + '</b></p>' +
-	  '<p><b>Matiere</b> : '+matiere+' - <b>Classe</b> : '+niveau+'<br>'+
-      '<b>Age</b> : ' + age + '<b>Disponibilité</b> : ' + disponibilite + '<b>Fréquence</b> : ' + frequence +'<br>'+
-      descr + '<br>'+
-	  nombre+' demandes - <a href="/petitscours/request/'+id+'">Demander ce petit cours</a></p>'
-  });
-  infowins.push(infowin);
-  google.maps.event.addListener(marker, 'click', function() {
-    for (var i=0; i<infowins.length; i++) {
-      infowins[i].close();
-    }
-    infowin.open(map,marker);
-  });
-}
   function addMarker(centre, nom, lat, lng, date_debut, date_fin) {
   var marker = new google.maps.Marker({
     position: new google.maps.LatLng(lat, lng),
