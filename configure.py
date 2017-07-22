@@ -79,6 +79,6 @@ if __name__ == '__main__':
     env = createEnv()
     print("Terminé")
     print("Vous pouvez ajouter l'alias @django='source " + env + "bin/activate'")
-    print("Une fois dans l'environnement virtuel et dans le dossier du portail")
+    print("Une fois dans l'environnement virtuel et dans le dossier du portail")	
     print("  python manage.py runserver  ")
     print("Pour démarrer le serveur")
