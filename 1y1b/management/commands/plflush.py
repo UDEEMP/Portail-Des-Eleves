@@ -26,10 +26,10 @@ def create_cache(sizes, options):
     if not len(sizes):
         raise CommandError('No photo sizes were found.')
 
-    print 'Flushing cache...'
+    print('Flushing cache...')
 
     for cls in ImageModel.__subclasses__():
         for photosize in sizes:
-            print 'Flushing %s size images' % photosize.name
+            print('Flushing %s size images' % photosize.name)
             for obj in cls.objects.all():
                 obj.remove_size(photosize)

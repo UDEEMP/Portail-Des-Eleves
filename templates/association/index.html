@@ -11,7 +11,7 @@
 	{% for association in assoces %}
 		<li>
 		<p>
-		<a href = "/associations/{{ association.pseudo }}"><img src="{% static '' %}logo_{{ association.pseudo }}.png"/>
+		<a href = "/associations/{{ association.pseudo }}"><img src="{% if association.icone %}{{ association.icone.url }}{% endif %}"/>
 		<br/>
 		{{ association.nom }}</a>
 		</p>

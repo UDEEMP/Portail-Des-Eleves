@@ -13,4 +13,4 @@ if __name__ == '__main__':
 		i = l.find(':')
 		out.append({'code': l[:i], 'description': l[(i+2):], 'year': 3})
 
-	print json.dumps(out)
+	print(json.dumps(out))

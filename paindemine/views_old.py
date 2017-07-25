@@ -300,11 +300,11 @@ def toutes_commandes_csv(request):
 @login_required
 def supprimer_achat(request, id_achat):
     achat = get_object_or_404(Achat, id = id_achat)
-        print "achat" + str(achat)
+        print("achat" + str(achat))
         commande = achat.commande
         if achat.commande.eleve.user == request.user and achat.commande.fermee == False:
             achat.delete()
-        print "commande" + str(commande)
+        print("commande" + str(commande))
         return redirect('paindemine.views.commande')
 
 @login_required

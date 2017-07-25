@@ -36,7 +36,7 @@
 {% endif %}
 
 {% if assoces %}
-<p><strong>Associations</strong> : </p>
+<p><strong>Associations actuelles</strong> : </p>
 <ul>
   {% if estVpkatas %}
     <li>
@@ -50,6 +50,20 @@
 	{% endfor %}
 </ul>
 {% endif %}
+
+
+
+{% if mineur.profile.historique_assoc_set.all %}
+<p><strong>Historique d'associations</strong> : </p>
+<ul>
+	{% for histo_asso in mineur.profile.historique_assoc_set.all %}
+		<li>
+		 <a href="/associations/{{histo_asso.association.pseudo}}">{{histo_asso.association.nom}}</a> (<em>{{ histo_asso.role }}</em>), {{ histo_asso.date_debut |date:"m/y" }}-{{ histo_asso.date_fin |date:"m/y" }}
+		</li>
+	{% endfor %}
+</ul>
+{% endif %}
+
 
 {% if mineur.profile.maitrise_set.all %}
 <p><strong>Instruments</strong> : </p>
@@ -108,7 +122,7 @@
 
 <hr>
 {% comment %}
-<p><strong>Photos <a href='/associations/mediamines/'>MediaMines</a></strong> :</p>
+<p><strong>Photos <a href='/associations/mediamines_old/'>MediaMines</a></strong> :</p>
 {% for photo in mineur.profile.photo_set.all %}
 	<a href="{{ photo.get_absolute_url }}"><img src="{{ photo.get_display_url }}" alt="{{ photo.title }}" width=120/></a>
 {% endfor %}
@@ -117,6 +131,7 @@
 {% if mineur.username == user.username %}
 <p><a href="/people/edit/">Modifier</a><br/>
 <a href="/people/instruments/modifier/">Modifier les instruments</a><br/>
+<a href="/people/historique_assoc/modifier/">Modifier l'historique d'associations</a><br/>
 <a href="{% url 'avatar_change' %}">Ajouter une photo</a><br/>
 <a href="{% url 'avatar_delete' %}">Supprimer une photo</a></p>
 

@@ -17,4 +17,5 @@ static/*
 pip-log.txt
 .DS_Store
 
-trombi/migrations/*
+.idea/*
+

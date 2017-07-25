@@ -378,7 +378,7 @@ class ContentLine(VBase):
             lineKeys= self.params.keys()
             print(pre, "params for ", self.name +':')
             for aKey in lineKeys:
-                print (pre + ' ' * tabwidth, aKey, ascii(self.params[aKey]))
+                print((pre + ' ' * tabwidth, aKey, ascii(self.params[aKey])))
 
 class Component(VBase):
     """A complex property that can contain multiple ContentLines.

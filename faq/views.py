@@ -37,11 +37,11 @@ def questions(request):
 def poser_question(request):
     if request.method == 'POST':
         form = QuestionForm(request.POST)
-        print "form cree"
+        print("form cree")
         if form.is_valid():
-            print "form valide"
+            print("form valide")
             model = form.save()
-            print "form saved " + str(model)
+            print("form saved " + str(model))
             try :
                  objet=form.cleaned_data['objet']
                  message=form.cleaned_data['contenu']

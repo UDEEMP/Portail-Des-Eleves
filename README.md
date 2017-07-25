@@ -12,5 +12,3 @@ Pas mal de choses sont faites pour simplifier la vie sur Linux/OSX, pour Windows
 * Lancer le fichier `configure.py` avec Python 3.5
 À partir de là, un environnement virtuel avec toutes les dépendances nécessaires va s'installer, et vous pourrez lancer le portail en local avec la commande
 `python manage.py runserver`
-
-ET TA SOEUR?

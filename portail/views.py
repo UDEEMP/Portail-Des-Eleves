@@ -46,7 +46,7 @@ def connection(request):
             en = AES.new(key=key, mode=AES.MODE_CFB, IV="0" * 16, segment_size=128)
             cipher = en.encrypt(pad(string_to_encode))
             cipher64 = standard_b64encode(cipher)
-            print cipher64
+            print(cipher64)
             user_infos=urllib.quote_plus(cipher64)
             if 'desired_page' in request.GET:
                 desired_page= request.GET['desired_page']

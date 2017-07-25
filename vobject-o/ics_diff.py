@@ -165,13 +165,13 @@ def diff(left, right):
 
 def prettyDiff(leftObj, rightObj):
     for left, right in diff(leftObj, rightObj):
-        print "<<<<<<<<<<<<<<<"
+        print("<<<<<<<<<<<<<<<")
         if left is not None:
             left.prettyPrint()
-        print "==============="
+        print("===============")
         if right is not None:
             right.prettyPrint()
-        print ">>>>>>>>>>>>>>>"
+        print(">>>>>>>>>>>>>>>")
         print
         
         
@@ -205,9 +205,9 @@ def getOptions():
 
     (cmdline_options, args) = parser.parse_args()
     if len(args) < 2:
-        print "error: too few arguments given"
+        print("error: too few arguments given")
         print
-        print parser.format_help()
+        print(parser.format_help())
         return False, False
 
     return cmdline_options, args
@@ -216,4 +216,4 @@ if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        print "Aborted"
+        print("Aborted")

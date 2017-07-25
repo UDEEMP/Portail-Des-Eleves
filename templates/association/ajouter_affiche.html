@@ -1,32 +1,4 @@
-﻿{% extends "base.html" %}
-{% load static %}
-{% block header %}
-<link rel="stylesheet" href="{% static "association.css" %}" />
-<link rel="stylesheet" href="{% static "medias.css" %}" />
-{% endblock %}
-{% block title %}{{association.nom}}{% endblock %}
-
-
-
-
-{% block onglets %}
-<div id="menu_onglets">
-<h1><img class="logo_assoce" src = "{% static "logo_" %}{{association.pseudo}}.png">{{association.nom}}</h1>
-
-<ul class="nav nav-pills">
-<li><a href="/associations/{{association.pseudo}}/messages/"><img src="{% static "mail.png" %}">Messages</a></li>
-<li><a href="/associations/{{association.pseudo}}/evenements/"><img src="{% static "date.png" %}">Évenements</a></li>
-<li><a href="/associations/{{association.pseudo}}/equipe/"><img src="{% static "user.png" %}">Équipe</a></li>
-<li><a href="/associations/{{association.pseudo}}/medias/"><img src="{% static "clapperboard.png" %}">Médias</a></li>
-{% if association.page_set.all %}
-{% for page in association.page_set.all %}
-<li><a href="{% if not page.is_externe %}/associations/{{association.pseudo}}/{% endif %}{{ page.lien }}"><img src="{% static '' %}page_{% if not page.is_externe %}{{page.lien}}{% else %}site{% endif %}.png"><span>{{page.titre}}</span></a></li>
-{% endfor %}
-{% endif %}
-</ul>
-<hr />
-</div>
-{% endblock %}
+﻿{% extends "association/base_assoc.html" %}
 {% block content %}
 
 <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}

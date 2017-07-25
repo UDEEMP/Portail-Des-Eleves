@@ -18,17 +18,17 @@ class Command(BaseCommand):
 				if eleve['fields']['parrain'] is not None:
 					parrain = User.objects.get(pk = eleve['fields']['parrain'])
 					profile.parrains.add(parrain.get_profile())
-					print parrain.username + ' est le parrain de ' + profile.user.username
+					print(parrain.username + ' est le parrain de ' + profile.user.username)
 				
 				if eleve['fields']['fillot'] is not None:
 					fillot = User.objects.get(pk = eleve['fields']['fillot'])
 					profile.fillots.add(fillot.get_profile())
-					print fillot.username + ' est le fillot de ' + profile.user.username
+					print(fillot.username + ' est le fillot de ' + profile.user.username)
 				
 				if eleve['fields']['co'] is not None:
 					co = User.objects.get(pk = eleve['fields']['co'])
 					profile.co.add(co.get_profile())
-					print co.username + ' est le co de ' + profile.user.username	
+					print(co.username + ' est le co de ' + profile.user.username)
 			except UserProfile.DoesNotExist:
 				pass
 			except User.DoesNotExist:

@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 {% load static %}
 
+
 {% block content %}
-<form action="" method="post">
+
+    {% if errors %}<h1> {{ errors }} </h1>{% endif %}
+<form action="" method="post" enctype="multipart/form-data">
 {% csrf_token %}
 {{ form.as_p }}
 <input type="submit" value="Confirmer !" />
 </form>
+
+    {{ form.media }}
 {% endblock %}
