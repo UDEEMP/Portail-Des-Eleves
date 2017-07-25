@@ -15,6 +15,7 @@ from availableClassrooms import views as availableClassrooms_views
 from message import views as message_views
 from boulagnon import views as boulagnon_views
 from mineursmap import views as mineursmap_views
+import mediamines.views as mediamines_views
 from pr import views as pr_views
 #oneY1B_views = __import__('1y1b.views').views
 
@@ -26,14 +27,25 @@ urlpatterns = [
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
-    url(r'^admin/?', include(admin.site.urls)),
+    url(r'^test2/?', mediamines_views.test2),
+    url(r'^test/?', mediamines_views.test),
+
+    url(r'^mediamines/', include('mediamines.urls')), #  Sera probablement dans assoc.urls, temporaire
+
+    url(r'^people/', include('trombi.urls')),
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^accounts/profile/$', trombi_views.profile),
+    url(
+      r'^trombi-autocomplete/$',
+      trombi_views.TrombiAutocomplete.as_view(),
+      name='trombi-autocomplete'
+    ),
+
+    url(r'^admin/?', include(admin.site.urls)),
     url(r'^token/$', trombi_views.token),
     url(r'^comments/delete/$', message_views.delete_own_comment ),
     url(r'^comments/', include('django_comments.urls')),
     url(r'^comments/post/$', message_views.post_comment, name='comments-post-comment'),
-    url(r'^people/', include('trombi.urls')),
     url(r'^messages/', include('message.urls')),
     url(r'^sondages/', include('sondages.urls')),
     url(r'^pr/', include('pr.urls')),

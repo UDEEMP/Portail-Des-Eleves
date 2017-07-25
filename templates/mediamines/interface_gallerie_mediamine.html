@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block header %}
+
+{% endblock %}
+
+{% block content %}
+
+    <h2><a href="{% url "interface_mediamines" %}">Revenir à l'accueil de l'interface Médiamines</a></h2>
+    <h1>Interface Médiamines - Photos</h1>
+    <h1>Gallerie {{ gallerie.nom }} :</h1>
+    <p>Nombre de photos : {{ gallerie.photo_set.all.count }}<br />
+        <a href="{% url "ajouter_photo_single" gallerie.id %}"> Ajouter une photo</a><br />
+        Ajouter plusieurs photos
+    </p>
+
+    <h2>Liste des photos :</h2>
+
+    {% if gallerie.photo_set.all %}
+         {% for photo in gallerie.photo_set.all %}
+        <a href="{% url "modifier_photo" photo.id %}"><img src="{{ photo.image_thumbnail_1.url }}" /></a>
+        {% endfor %}
+    {% else %}
+        <h3>Aucune photo pour le moment. MédiaMines démission !</h3>
+    {% endif %}
+
+
+{% endblock %}

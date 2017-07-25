@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block header %}
+    <link rel="stylesheet" href="{% static "trombi.css" %}" />
+
+{% endblock %}
+
+{% block content %}
+{% load avatar_tags %}
+
+<div id="picture" class="pull-right">
+<!--<img src="{% static "{{mineur.username}}.jpg" %}" />-->
+<img src = {% avatar_url mineur %}>
+</div>
+
+<h2>{{ mineur.profile.first_name }} {% if mineur.profile.surnom %}"{{ mineur.profile.surnom}}"{% endif %} {{ mineur.profile.last_name|upper }}</h2>
+
+{% if mineur.profile.historique_assoc_set.all %}
+    <p><strong>Historique d'associations</strong> : <i><small>(basé sur la bonne foi)</small></i></p>
+<ul>
+    {% for histo_asso in mineur.profile.historique_assoc_set.all %}
+        <li>
+        {{ histo_asso.association.nom }} - Rôle : <em>{{ histo_asso.role }}</em>; {{ histo_asso.date_debut |date:"m/y" }}-{{ histo_asso.date_fin |date:"m/y" }} <a href="/people/historique_assoc/modifier/{{ histo_asso.id }}">Modifier</a>/<a href="/people/historique_assoc/supprimer/{{ histo_asso.id }}">Supprimer</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endif %}
+<p><a href="/people/historique_assoc/ajouter/">Ajouter une association dans votre historique</a></p>
+
+{% endblock %}

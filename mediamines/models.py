@@ -1,10 +1,13 @@
+import os
 from django.db import models
 
 from trombi.models import UserProfile
-from django.forms import ModelForm
+from portail import settings
+from django.core.files import File
+from django.forms import ModelForm, DateInput
 from imagekit.models import ImageSpecField
-from imagekit.processors import ResizeToFill
 
+from imagekit.processors import ResizeToFill
 from dal import autocomplete
 from datetime import datetime
 
@@ -21,12 +24,20 @@ class Gallerie(models.Model):
     dateDebutChrono = models.DateField(blank=True, null=True, default=None)
     dateFinChrono = models.DateField(blank=True, null=True, default=None)
 
+    def __str__(self):
+        return self.nom
 
 class Photo(models.Model):
 
 
     def getImagePath(self, filename):
         return 'mediamines/gallerie_{0}/{1}'.format(self.gallerie.nom_dossier, filename)
+    def delete(self):
+        os.remove(self.image_thumbnail_1.path)
+        self.image.delete()
+        # Attention, les thumbnails ne sont pas supprimées à l'issu de delete
+        # Il faut appeler imagekit.utils.get_cache().clear()
+        super(Photo, self).delete()
 
     description = models.CharField(max_length=528, verbose_name="Description de la photo", null=True, blank=True)
     identifications = models.ManyToManyField(UserProfile, null=True, blank=True)
@@ -56,6 +67,7 @@ class DemandeImpression(models.Model):
     deletedByMediamine = models.BooleanField(default=False)
     prix = models.FloatField(default=0) # Une autre sécurité
     wasEncaissee = models.BooleanField(default=False) # Juste une sécurité
+    taille = models.IntegerField(default=0) # A relier à un tableau des tailles
     # AJOUTER TAILLE
 
     def isDeleted(self):
@@ -67,12 +79,21 @@ class DemandeImpression(models.Model):
     BITE
     """
 
-class PhotoUploadForm(ModelForm):
+class PhotoUploadSingleForm(ModelForm):
     #identifications = ModelMultipleChoiceField(required=False,widget=autocomplete.ModelSelect2Multiple(url="trombi-autocomplete"), queryset=UserProfile.objects.all())
     class Meta:
         model = Photo
         #options = {'size': (300, 100), 'crop': True}
-        exclude = ('image_thumbnail_1',)
+        exclude = ('image_thumbnail_1','gallerie', 'dateUpload')
+        widgets = {
+            'identifications': autocomplete.ModelSelect2Multiple("trombi-autocomplete"),
+        }
+
+class PhotoModifForm(ModelForm):
+    class Meta:
+        model = Photo
+        #options = {'size': (300, 100), 'crop': True}
+        exclude = ('image_thumbnail_1','image', 'dateUpload', 'gallerie')
         widgets = {
             'identifications': autocomplete.ModelSelect2Multiple("trombi-autocomplete"),
         }
@@ -81,3 +102,7 @@ class GallerieForm(ModelForm):
     class Meta:
         model = Gallerie
         exclude = ('dateCreation',)
+        widgets = {
+            'dateDebutChrono': DateInput(attrs={'class': 'datepicker', 'data-date-format': 'dd/mm/yyyy'}),
+            'dateFinChrono': DateInput(attrs={'class': 'datepicker', 'data-date-format': 'dd/mm/yyyy'}),
+        }

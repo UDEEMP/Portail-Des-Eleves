@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block header %}
+
+{% endblock %}
+
+{% block content %}
+
+
+
+    <h1>Interface MédiaMines</h1>
+    <h2>Gestion des Galleries :</h2>
+    <p><a href="{%  url "ajouter_gallerie" %}">Créer une nouvelle gallerie</a></p>
+
+    {% if galleries.count > 0 %}
+        <h3>Liste des galleries :</h3>
+    <ul>
+        {% for gal in galleries %}
+            <li>
+            {{ gal.nom }} :  <a href="{% url 'interface_photo_gallerie' gal.id%}">Photos ({{ gal.photo_set.all.count }})</a> / <a href="{% url 'modifier_gallerie' gal.id%}">Modifier infos</a> / <a href="{%  url 'supprimer_gallerie' gal.id%}">Supprimer</a>
+            </li>
+
+
+        {% endfor %}
+    </ul>
+    {% else %}
+        <h3>Aucune gallerie pour le moment.</h3>
+    {% endif %}
+
+{% endblock %}
