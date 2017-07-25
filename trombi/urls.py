@@ -1,8 +1,9 @@
 from django.conf.urls import include, url
 from django.contrib.auth.decorators import login_required
-from trombi.views import AjouterMaitrise, ModifierMaitrise, SupprimerMaitrise
+from trombi.views import AjouterMaitrise, ModifierMaitrise, SupprimerMaitrise, AjouterHistoriqueAssoc, ModifierHistoriqueAssoc, SupprimerHistoriqueAssoc
 from trombi import views as trombi_views
 from avatar import urls as avatar_urls
+from trombi.views import TrombiAutocomplete
 urlpatterns = [
     url(r'^$', trombi_views.trombi),
     url(r'^json/$', trombi_views.trombi_json),
@@ -11,6 +12,12 @@ urlpatterns = [
     url(r'^instruments/ajouter/$', login_required(AjouterMaitrise.as_view()), name="ajouter_maitrise"),
     url(r'^instruments/modifier/(?P<pk>\d+)$', login_required(ModifierMaitrise.as_view()), name="modifier_maitrise"),
     url(r'^instruments/supprimer/(?P<pk>\d+)$', login_required(SupprimerMaitrise.as_view()), name="supprimer_maitrise"),
+
+    url(r'^historique_assoc/modifier/?$', trombi_views.edit_historique_assoc),
+    url(r'^historique_assoc/ajouter/$', login_required(AjouterHistoriqueAssoc.as_view()), name="ajouter_assoc"),
+    url(r'^historique_assoc/modifier/(?P<pk>\d+)$', login_required(ModifierHistoriqueAssoc.as_view()), name="modifier_assoc"),
+    url(r'^historique_assoc/supprimer/(?P<pk>\d+)$', login_required(SupprimerHistoriqueAssoc.as_view()), name="supprimer_assoc"),
+
     url(r'^avatar/', include(avatar_urls)),
     url(r'^octo_update/$', trombi_views.octo_update),
     url(r'^separation/graphe_chemin/$', trombi_views.graphe_chemin),
@@ -19,5 +26,6 @@ urlpatterns = [
     url(r'^isupfere/$', trombi_views.trombi_isup),
     url(r'^trombi.vcf$', trombi_views.get_vcf),
     url(r'^(?P<mineur_login>\w+)/?$', trombi_views.detail),
-    url(r'^(?P<mineur_login>\w+)/json/$', trombi_views.detail_json)
+    url(r'^(?P<mineur_login>\w+)/json/$', trombi_views.detail_json),
+
 ]

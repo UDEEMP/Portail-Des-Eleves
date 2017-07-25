@@ -1,8 +1,9 @@
 #-*- coding: utf-8 -*-
+
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import User
-from trombi.models import UserProfile, Question, Reponse
+from trombi.models import UserProfile, Question, Reponse, Historique_assoc
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.template import RequestContext
@@ -20,8 +21,10 @@ import vobject
 from PIL import Image
 import json
 import os
-from django.forms import ModelForm
+from django.forms import ModelForm, TextInput, DateInput
 from trombi import settings
+
+from dal import autocomplete
 
 @login_required
 def trombi(request):
@@ -155,12 +158,49 @@ def edit(request):
 
 
 
+class Historique_assoc_form(ModelForm):
+    class Meta:
+        model = Historique_assoc
+        exclude = ['user_profile']
+        widgets = {
+            'date_debut': DateInput(attrs={'class': 'datepicker', 'data-date-format': 'dd/mm/yyyy'}),
+            'date_fin': DateInput(attrs={'class': 'datepicker', 'data-date-format': 'dd/mm/yyyy'}),
+        }
+
+@login_required
+def edit_historique_assoc(request):
+    mineur = request.user.profile
+    return render(request, 'trombi/edit_historique_assoc.html', {'mineur': mineur.user})
+
+class AjouterHistoriqueAssoc(CreateView):
+    model = Historique_assoc
+    form_class = Historique_assoc_form
+    template_name = 'trombi/form_historique_assoc.html'
+    success_url = reverse_lazy(edit_historique_assoc)
+
+    def form_valid(self, form):
+        entree = form.save(commit=False)
+        entree.user_profile = self.request.user.profile
+        entree.save()
+        return render(self.request, 'trombi/edit_historique_assoc.html', {'mineur': self.request.user})
+
+class ModifierHistoriqueAssoc(UpdateView):
+    model = Historique_assoc
+    form_class = Historique_assoc_form
+    template_name = 'trombi/form_historique_assoc.html'
+    success_url = reverse_lazy(edit_historique_assoc)
+
+class SupprimerHistoriqueAssoc(DeleteView):
+    model = Historique_assoc
+    template_name = 'trombi/form_historique_assoc.html'
+    success_url = reverse_lazy(edit_historique_assoc)
+
 
 @login_required
 def edit_instruments(request):
     """Mise à jour des instruments maitrisés d'un profil"""
     mineur = request.user.profile
-    if request.method == 'POST':
+    """if request.method == 'POST':
         update_profile(mineur, surnom=request.POST['surnom'], phone=request.POST['phone'], chambre=request.POST['chambre'], option=request.POST['option'], co= request.POST.getlist('co'), parrains=request.POST.getlist('parrains'), fillots=request.POST.getlist('fillots'), ville_origine=request.POST['ville_origine'])
         # Le profil a été mis a jour, on update les questions
         for question in Question.objects.all():
@@ -174,8 +214,8 @@ def edit_instruments(request):
                 mineur.reponses.add(reponse_user)
         mineur.save()
         return redirect(profile)
-    else:
-        return render(request, 'trombi/edit_instruments.html', {'mineur': mineur.user})
+    else:"""
+    return render(request, 'trombi/edit_instruments.html', {'mineur': mineur.user})
 
 class ModifierMaitriseForm(ModelForm):
     class Meta:
@@ -187,7 +227,7 @@ class AjouterMaitrise(CreateView):
     model = Maitrise
     form_class = ModifierMaitriseForm
     template_name = 'trombi/form_instruments.html'
-    success_url = reverse_lazy('trombi.views.edit_instruments')
+    success_url = reverse_lazy(edit_instruments)
 
     def form_valid(self, form):
         maitrise = Maitrise()
@@ -195,18 +235,18 @@ class AjouterMaitrise(CreateView):
         maitrise.instrument = form.cleaned_data['instrument']
         maitrise.niveau = form.cleaned_data['niveau']
         maitrise.save()
-        return render(request, 'trombi/edit_instruments.html', {'mineur': self.request.user})
+        return render(self.request, 'trombi/edit_instruments.html', {'mineur': self.request.user})
 
 class ModifierMaitrise(UpdateView):
     model = Maitrise
     form_class = ModifierMaitriseForm
     template_name = 'trombi/form_instruments.html'
-    success_url = reverse_lazy('trombi.views.edit_instruments')
+    success_url = reverse_lazy(edit_instruments)
 
 class SupprimerMaitrise(DeleteView):
     model = Maitrise
     template_name = 'trombi/form_instruments.html'
-    success_url = reverse_lazy('trombi.views.edit_instruments')
+    success_url = reverse_lazy(edit_instruments)
 
 
 @login_required
@@ -361,3 +401,17 @@ def graphe_mine(request):
         subprocess.call(["neato","-Tpng",chemin_dot,"-Goverlap=false","-o",chemin_png])
     url  = os.path.join(settings.MEDIA_URL, "trombi/graphe_mine"+str(nombre_promos)+".png")
     return render(request, 'trombi/graphe-mine.html', {'url': url})
+
+
+class TrombiAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        # Don't forget to filter out results depending on the visitor !
+        #if not self.request.user.is_authenticated():
+        #    return UserProfile.objects.none()
+
+        qs = UserProfile.objects.all()
+
+        if self.q:
+            qs = qs.filter(user__username__icontains=self.q)
+
+        return qs

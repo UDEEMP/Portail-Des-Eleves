@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.db.models import F, Count
 from django.db.models.signals import post_save
@@ -25,6 +26,7 @@ class Reponse(models.Model):
 
     def __str__(self):
         return str(self.question.id) + ' -> ' + self.contenu
+
 
 class UserProfileManager(models.Manager):
     def promos_actuelles(self, nombre=4):
@@ -79,6 +81,7 @@ class UserProfile(models.Model):
     solde_mineshake = models.FloatField(default=0, verbose_name="solde mineshake")
     solde_bda = models.FloatField(default=0, verbose_name="solde bda")
     solde_paindemine = models.FloatField(default=0, verbose_name = "solde pain de mine")
+    solde_mediamines = models.FloatField(default=0, verbose_name="solde médiamine")
 
     # Statistiques des sondages
     victoires_sondages = models.IntegerField(editable=False, help_text="Le nombre de sondages auxquels l'élève a voté selon la majorité")
@@ -130,6 +133,10 @@ class UserProfile(models.Model):
 
     def update_solde_bda(self,prix):
         self.solde_bda = self.solde_bda - float(prix)
+        self.save()
+
+    def update_solde_mediamines(self, prix):
+        self.solde_mediamines = self.solde_mediamines - float(prix)
         self.save()
 
     def update_solde_mineshake(self,prix):
@@ -283,6 +290,13 @@ class UserProfile(models.Model):
             return "P{} {} {}".format(self.promo, self.last_name, self.first_name)
 
 
+class Historique_assoc(models.Model):
+    user_profile = models.ForeignKey(UserProfile)
+    association = models.ForeignKey("association.Association")
+    date_debut = models.DateField(null=False, default=datetime.datetime.now)
+    date_fin = models.DateField(null=False, default=datetime.datetime.now)
+    role = models.CharField(max_length=128, blank=True, default="")
+
 
 def create_user_profile(sender, instance, created, **kwargs):
     """Crée automatiquement un profil associé lorsqu'un utilisateur est créé"""
@@ -290,3 +304,5 @@ def create_user_profile(sender, instance, created, **kwargs):
         UserProfile.objects.create(user=instance)
 
 post_save.connect(create_user_profile, sender=User)
+
+

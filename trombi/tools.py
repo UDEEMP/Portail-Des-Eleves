@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from trombi.models import UserProfile
+from portail import settings
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from datetime import date
+from datetime import date, datetime
 @login_required
 def update_profile(profile,surnom,phone,chambre,option,co,parrains,fillots,ville_origine):
 	profile.phone = phone
@@ -50,3 +51,6 @@ def update_stage(profile,ville,centre,latitude,longitude,date_debut_stage,date_f
 	mm = int(date_fin_stage.split("/")[1])
 	yy = int(date_fin_stage.split("/")[2])
 	profile.date_fin_stage = date(yy,mm,dd)
+
+def hidden_from_1A(profile): # Sert pour cacher aux 1A avant la Sainte Barbe
+    return settings.WAS_KATA_REVEALED or not(profile.en_premiere_annee())
