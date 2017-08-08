@@ -1,0 +1,29 @@
+﻿{% extends "association/base_assoc.html" %}
+{% load static %}
+
+{% load bleach_tags %}
+
+{% block content %}
+    <h1>News :</h1>
+    {% if canEdit %}
+        <p><a href="{% url "add_news" association.pseudo %}">Ajouter une news</a></p>
+    {% endif %}
+
+    {% if news.count > 0 %}
+        <ul>
+
+        {% for publi in news %}
+            <li class="news">
+
+                <p>{{ publi.titre }}</p>
+            <p>{{ publi.texte | bleach }}</p>
+            <p><a href="{% url "change_news" association.pseudo publi.id %}">Modifier </a> / <a href="{% url "delete_news" association.pseudo publi.id %}">Supprimer </a></p>
+
+            </li>
+        {% endfor %}
+
+        </ul>
+    {% else %}
+        <p>Pas de news disponible !</p>
+    {% endif %}
+{% endblock %}

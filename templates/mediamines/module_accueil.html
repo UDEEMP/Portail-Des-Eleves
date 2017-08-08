@@ -1,0 +1,60 @@
+{% load static %}
+
+<style type="text/css">
+div.gallery {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 180px;
+}
+
+div.representant_gallery {
+    margin: 5px;
+    //border: 1px solid #ccc;
+    //float: left;
+    width:70%;
+    min-width:400px;
+    text-align: center;
+    margin-left:auto;
+    margin-right: auto;
+}
+
+div.gallery:hover {
+    border: 1px solid #777;
+}
+
+div.gallery img, div.representant_gallery img {
+    width: 100%;
+    height: auto;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+}
+</style>
+
+{% if gallerie_affichee %}{% if gallerie_affichee.get_photo_representative %}
+
+    <h3 align="center"><a href="{%  url "view_photo" gallerie_affichee.get_photo_representative.id %}">Dernière gallerie : {{ gallerie_affichee.nom }}</a></h3>
+    <p>{{ gallerie_affichee.description }}</p>
+
+        <div class="representant_gallery">
+          <a href="{%  url "view_photo" gallerie_affichee.get_photo_representative.id %}">
+            <img src="{{ gallerie_affichee.get_photo_representative.image_thumbnail_2.url }}" />
+          </a>
+            {% if gallerie_affichee.get_photo_representative.description  %}
+                <div class="desc">{{ gallerie_affichee.get_photo_representative.description }}</div>
+            {% endif %}
+        </div>
+    {% endif %}
+    <p>Quelques échantillons :</p>
+    {% for photo in gallerie_affichee.get_photos_miniatures %}
+        <div class="gallery">
+           <a href="{%  url "view_photo" photo.id %}">
+        <img src="{{ photo.image_thumbnail_1.url }}" />
+             </a>
+        </div>
+    {% endfor %}
+
+{% endif %}

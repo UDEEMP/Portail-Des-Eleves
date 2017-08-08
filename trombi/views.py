@@ -409,9 +409,10 @@ class TrombiAutocomplete(autocomplete.Select2QuerySetView):
         #if not self.request.user.is_authenticated():
         #    return UserProfile.objects.none()
 
-        qs = UserProfile.objects.all()
+        #qs = UserProfile.objects.all()
 
         if self.q:
-            qs = qs.filter(user__username__icontains=self.q)
-
-        return qs
+            qs = UserProfile.objects.filter(user__username__icontains=self.q) | UserProfile.objects.filter(first_name__icontains = self.q)
+            return qs
+        else:
+            return UserProfile.objects.all()

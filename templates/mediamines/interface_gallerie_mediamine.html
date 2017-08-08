@@ -13,13 +13,13 @@
     <h1>Gallerie {{ gallerie.nom }} :</h1>
     <p>Nombre de photos : {{ gallerie.photo_set.all.count }}<br />
         <a href="{% url "ajouter_photo_single" gallerie.id %}"> Ajouter une photo</a><br />
-        Ajouter plusieurs photos
+        <a href="{% url "ajouter_photo_multiple" gallerie.id %}"> Ajouter plusieurs photos</a><br />
     </p>
 
     <h2>Liste des photos :</h2>
 
-    {% if gallerie.photo_set.all %}
-         {% for photo in gallerie.photo_set.all %}
+    {% if gallerie.get_photos_in_order %}
+         {% for photo in gallerie.get_photos_in_order %}
         <a href="{% url "modifier_photo" photo.id %}"><img src="{{ photo.image_thumbnail_1.url }}" /></a>
         {% endfor %}
     {% else %}

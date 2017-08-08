@@ -1,13 +1,16 @@
 #-*- coding: utf-8 -*-
-from association.models import Association, Adhesion, Affiche, Video, AdhesionAjoutForm, AdhesionModificationForm, AdhesionSuppressionForm, AfficheForm, VideoForm
-from trombi.models import UserProfile
-from message.models import Message
-from evenement.models import Evenement
-from django.shortcuts import render, get_object_or_404,redirect
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse_lazy, reverse
+from django.http import Http404
 from django.http import HttpResponseRedirect
-from django.template import RequestContext
-from django.db.models import Q
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import CreateView, UpdateView, DeleteView
+
+from association.models import Association, Adhesion, Affiche, Video, AdhesionAjoutForm, AdhesionModificationForm, \
+    AdhesionSuppressionForm, AfficheForm, VideoForm, News
+from association.models import DescriptionForm, NewsForm
+from evenement.models import Evenement
+from message.models import Message
 
 
 @login_required
@@ -18,6 +21,7 @@ def index(request):
         assoces = assoces.exclude(is_hidden_1A = True)
     assoces = assoces.exclude(ordre__lt = 0)
     return render(request, 'association/index.html', {'assoces' : assoces})
+
 @login_required
 # La liste des membres d'une association
 def equipe(request, association_pseudo):
@@ -36,6 +40,9 @@ def messages(request, association_pseudo):
     membres = Adhesion.objects.filter(association__pseudo = association_pseudo).order_by('-ordre', 'eleve__last_name')
     list_messages = Message.accessibles_par(request.user.profile).filter(association__pseudo=association_pseudo).order_by('-date')
     return render(request, 'association/messages.html', {'association' : association, 'list_messages': list_messages, 'membres': membres})
+
+
+
 
 @login_required
 # Les événements planifiés par une association
@@ -186,3 +193,118 @@ def supprimer_video(request, association_pseudo, video_id):
     if Adhesion.objects.filter(association=association, eleve_id=request.user.profile.id).exists():# Si l'eleve est membre de l'assoce
         video.delete()
     return HttpResponseRedirect(association.get_absolute_url() + 'medias/')
+
+
+@login_required
+def description(request, association_pseudo):
+    association = get_object_or_404(Association,pseudo=association_pseudo)
+    if association.est_cachee_a(request.user.profile):
+        return redirect(index)
+
+    return render(request, 'association/description.html', {'association' : association, 'description' : association.description, 'canEdit' : Adhesion.objects.filter(association=association, eleve_id=request.user.profile.id).exists() })
+
+
+@login_required
+def changeDescription(request, association_pseudo):
+    association = get_object_or_404(Association, pseudo=association_pseudo)
+    if association.est_cachee_a(request.user.profile):
+        return redirect(index)
+
+    if Adhesion.objects.filter(association=association, eleve_id=request.user.profile.id).exists():  # Si l'eleve est membre de l'assoce
+
+        if request.method == 'POST':
+            newDescription = request.POST['description']
+            association.description = newDescription
+            association.save()
+
+        return render(request, 'association/editDescription.html',
+                      {'association': association, 'form': DescriptionForm(initial={"description" : association.description}), 'description': association.description})
+    else:
+        return HttpResponseRedirect(reverse(description, args=[association.nom]))
+
+
+def getNews(request, association_pseudo):
+    association = get_object_or_404(Association, pseudo=association_pseudo)
+    if request.user.profile.en_premiere_annee():
+        news = News.objects.filter(association=association, hiddenFrom1A=False).order_by("-datePubli")
+    else:
+        news = News.objects.filter(association=association).order_by("-datePubli")
+    return render(request, 'association/news.html',
+                  {'association': association, 'news':news,
+                   'canEdit': Adhesion.objects.filter(association=association,
+                                                      eleve_id=request.user.profile.id).exists()})
+
+
+class AjouterNews(CreateView):
+    model = News
+    form_class = NewsForm
+    template_name = 'association/form_news.html'
+
+    def form_valid(self, form):
+        entree = form.save(commit=False)
+        entree.auteur = self.request.user.profile
+        entree.association = get_object_or_404(Association, pseudo=self.kwargs['association_pseudo'])
+        entree.save()
+        #return render(self.request, 'mediamines/form_gallerie.html', {'mineur': self.request.user})
+        return HttpResponseRedirect(reverse(getNews, args=[entree.association.pseudo]))
+
+
+    def dispatch(self, request, *args, **kwargs):
+        association = get_object_or_404(Association, pseudo=self.kwargs['association_pseudo'])
+        if not(Adhesion.objects.filter(association=association, eleve_id=request.user.profile.id).exists()):
+            raise Http404
+
+        return super(AjouterNews, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(CreateView, self).get_context_data(**kwargs)
+
+        context['mineur'] = self.request.user
+        context['association'] = get_object_or_404(Association, pseudo=self.kwargs['association_pseudo'])
+        return context
+
+
+class ModifierNews(UpdateView):
+    model = News
+    form_class = NewsForm
+    template_name = 'association/form_news.html'
+
+    def form_valid(self, form):
+        entree = form.save()
+        return HttpResponseRedirect(reverse(getNews, args=[entree.association.pseudo]))
+
+    def dispatch(self, request, *args, **kwargs):
+        association = get_object_or_404(Association, pseudo=self.kwargs['association_pseudo'])
+        if not (Adhesion.objects.filter(association=association, eleve_id=request.user.profile.id).exists()):
+            raise Http404
+
+        return super(ModifierNews, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(UpdateView, self).get_context_data(**kwargs)
+
+        context['mineur'] = self.request.user
+        context['association'] = get_object_or_404(Association, pseudo=self.kwargs['association_pseudo'])
+
+        return context
+
+class SupprimerNews(DeleteView):
+    model = News
+    template_name = 'association/form_news.html'
+    success_url = reverse_lazy('associations')
+
+    def dispatch(self, request, *args, **kwargs):
+        association = get_object_or_404(Association, pseudo=self.kwargs['association_pseudo'])
+        if not (Adhesion.objects.filter(association=association, eleve_id=request.user.profile.id).exists()):
+            raise Http404
+
+        return super(SupprimerNews, self).dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(DeleteView, self).get_context_data(**kwargs)
+
+        context['mineur'] = self.request.user
+        context['association'] = get_object_or_404(Association, pseudo=self.kwargs['association_pseudo'])
+
+        return context
+

@@ -22,6 +22,6 @@
     </form>
     {{ form.media }}
 
-    <img src="{{ photo.image.url }}" />
+    <a href="{{ photo.image.url }}" target="_blank"><img src="{{ photo.image_thumbnail_2.url }}" /></a>
 
 {% endblock %}

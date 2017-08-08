@@ -2,6 +2,7 @@
 from django.db import models
 from trombi.models import UserProfile
 from django import forms
+from dal import autocomplete
 
 class Produit(models.Model):
  CATEGORIES = (
@@ -73,7 +74,7 @@ class Achat(models.Model):
   return jours
   
 class UpdateSoldeForm(forms.Form):
-  eleve = forms.ModelChoiceField(queryset=UserProfile.objects.all().order_by('est_isupfere', '-promo', 'last_name'))
+  eleve = forms.ModelChoiceField(queryset=UserProfile.objects.all().order_by('est_isupfere', '-promo', 'last_name'), widget=autocomplete.ModelSelect2("trombi-autocomplete"))
   credit = forms.FloatField(initial=0.0)
   debit = forms.FloatField(initial=0.0)
   def __init__(self, *args, **kwargs):

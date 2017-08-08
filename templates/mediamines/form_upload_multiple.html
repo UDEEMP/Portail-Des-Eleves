@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block header %}
+    <link rel="stylesheet" href="{% static "trombi.css" %}" />
+	<link rel="stylesheet" href="{% static "bootstrap-timepicker.min.css" %}" />
+	<link rel="stylesheet" href="{% static "datepicker.css" %}" />
+	<script type="text/javascript" src="{% static "bootstrap-timepicker.min.js" %}"></script>
+	<script type="text/javascript" src="{% static "bootstrap-datepicker.js" %}"></script>
+
+ <script>
+  $(document).ready( function() {
+    $( ".datepicker" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+      yearRange: "1900:2030",
+    });
+
+
+  });
+  </script>
+
+{% endblock %}
+
+
+{% block content %}
+<form action="" method="post" enctype="multipart/form-data">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Confirmer !" />
+</form>
+
+    {{ form.media }}
+
+
+{% endblock %}

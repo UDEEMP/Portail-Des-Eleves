@@ -4,6 +4,7 @@ from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.db.models import F, Count
 from django.db.models.signals import post_save
+from django.apps import apps
 import datetime
 
 class Question(models.Model):
@@ -135,13 +136,26 @@ class UserProfile(models.Model):
         self.solde_bda = self.solde_bda - float(prix)
         self.save()
 
+    def update_solde_mineshake(self,prix):
+        self.solde_mineshake = self.solde_mineshake - float(prix)
+        self.save()
+
     def update_solde_mediamines(self, prix):
         self.solde_mediamines = self.solde_mediamines - float(prix)
         self.save()
 
-    def update_solde_mineshake(self,prix):
-        self.solde_mineshake = self.solde_mineshake - float(prix)
-        self.save()
+    def get_total_price_for_mediamines_commandes(self):
+
+        model = apps.get_app_config("mediamines").get_model(model_name='DemandeImpression')
+        somme = 0
+        for commande in model.objects.filter(userProfile = self):
+            if commande.enAttente():
+                somme += commande.prix
+        return somme
+
+    def has_enough_money_for_mediamines_commande(self):
+        return self.solde_mediamines >= self.get_total_price_for_mediamines_commandes()
+
     ### Années ###
 
     @staticmethod
@@ -292,7 +306,7 @@ class UserProfile(models.Model):
 
 class Historique_assoc(models.Model):
     user_profile = models.ForeignKey(UserProfile)
-    association = models.ForeignKey("association.Association")
+    association = models.ForeignKey("association.Association", null=True, blank=True)
     date_debut = models.DateField(null=False, default=datetime.datetime.now)
     date_fin = models.DateField(null=False, default=datetime.datetime.now)
     role = models.CharField(max_length=128, blank=True, default="")
