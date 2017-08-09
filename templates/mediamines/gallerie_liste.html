@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block header %}
+
+
+<style type="text/css">
+div.gallery {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 180px;
+}
+
+div.representant_gallery {
+    margin: 5px;
+    //border: 1px solid #ccc;
+    //float: left;
+    width:70%;
+    min-width:400px;
+    text-align: center;
+    margin-left:auto;
+    margin-right: auto;
+}
+
+div.gallery:hover {
+    border: 1px solid #777;
+}
+
+div.gallery img, div.representant_gallery img {
+    width: 100%;
+    height: auto;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+}
+</style>
+
+{% endblock %}
+
+{% block content %}
+    <h2>Liste des galleries</h2>
+
+
+    {% if galleries.count > 0 %}
+      <h3>Galleries récentes :</h3>
+
+        {% for gallerie_affichee in galleries %}
+
+            {% if gallerie_affichee.get_photo_representative %}
+
+    <h3 align="center"><a href="{%  url "view_photo" gallerie_affichee.get_photo_representative.id %}">{{ gallerie_affichee.nom }}</a></h3>
+    <p>{% if gallerie_affichee.description %}{{ gallerie_affichee.description }}{% endif %}</p>
+
+        <div class="representant_gallery">
+          <a href="{%  url "view_photo" gallerie_affichee.get_photo_representative.id %}">
+            <img src="{{ gallerie_affichee.get_photo_representative.image_thumbnail_2.url }}" />
+          </a>
+            {% if gallerie_affichee.get_photo_representative.description  %}
+                <div class="desc">{{ gallerie_affichee.get_photo_representative.description }}</div>
+            {% endif %}
+        </div>
+
+                {% if gallerie_affichee.get_photos_miniatures%}
+    <p>Quelques échantillons :</p>
+    {% for photo in gallerie_affichee.get_photos_miniatures %}
+        <div class="gallery">
+           <a href="{%  url "view_photo" photo.id %}">
+        <img src="{{ photo.image_thumbnail_1.url }}" />
+             </a>
+        </div>
+
+    {% endfor %}
+            {% endif %}
+
+            {% endif %}
+
+            <div style="width:100%; clear:both; height:30px; margin-top: 10px;"><hr /></div>
+        {% endfor %}
+
+
+        <br /><br /><br />
+
+    {% if anciennes.count > 0 %}
+        <div style="width:100%; clear:both; margin-top: 10px;">
+        <br /><hr /><br />
+      <h3>Galleries anciennes :</h3>
+        <ul>
+        {% for gallerie_affichee in anciennes %}
+            {% if gallerie_affichee.get_photo_representative %}
+                <li><a href="{%  url "view_photo" gallerie_affichee.get_photo_representative.id %}">{{ gallerie_affichee.nom }}</a></li>
+            {% endif %}
+
+        {% endfor %}
+        </ul>
+        </div>
+    {% endif %}
+
+    {% else %}
+        <h3>Aucune gallerie pour le moment.</h3>
+    {% endif %}
+
+{% endblock %}

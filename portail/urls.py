@@ -15,6 +15,8 @@ from availableClassrooms import views as availableClassrooms_views
 from message import views as message_views
 from boulagnon import views as boulagnon_views
 from mineursmap import views as mineursmap_views
+import mediamines.views as mediamines_views
+from portail.views import accueil as accueil
 from pr import views as pr_views
 #oneY1B_views = __import__('1y1b.views').views
 
@@ -26,14 +28,26 @@ urlpatterns = [
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
-    url(r'^admin/?', include(admin.site.urls)),
+
+    url(r'^$', accueil, name="accueil"),
+    url(r'^accueil/?$', accueil),
+
+    url(r'^mediamines/', include('mediamines.urls')), #  Sera probablement dans assoc.urls, temporaire
+
+    url(r'^people/', include('trombi.urls')),
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^accounts/profile/$', trombi_views.profile),
+    url(
+      r'^trombi-autocomplete/$',
+      trombi_views.TrombiAutocomplete.as_view(),
+      name='trombi-autocomplete'
+    ),
+
+    url(r'^admin/?', include(admin.site.urls)),
     url(r'^token/$', trombi_views.token),
     url(r'^comments/delete/$', message_views.delete_own_comment ),
     url(r'^comments/', include('django_comments.urls')),
     url(r'^comments/post/$', message_views.post_comment, name='comments-post-comment'),
-    url(r'^people/', include('trombi.urls')),
     url(r'^messages/', include('message.urls')),
     url(r'^sondages/', include('sondages.urls')),
     url(r'^pr/', include('pr.urls')),
@@ -54,9 +68,10 @@ urlpatterns = [
     url(r'^notifications/$', notification_views.liste),
     url(r'^notifications/preferences/$', notification_views.preferences),
     url(r'^chat/', include('chat.urls')),
-    #url(r'^tinymce/', include('tinymce.urls')),
+
+    url(r'^tinymce/', include('tinymce.urls')),
+
     #url(r'^accueil/?$','messages.views.index'),
-    url(r'^accueil/?$',trombi_views.profile),
     #url(r'^trombiassos/?$','trombiassos.views.trombi_assos'),
     #url(r'^trombiassos1/?$','trombiassos.views.trombi_assos1'),
     #url(r'^trombiassos2/?$','trombiassos.views.trombi_assos2'),
@@ -67,7 +82,6 @@ urlpatterns = [
     #url(r'^trombiassos4/?$','trombiassos.views.trombi_assos4'),
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt')),
     #url(r'^/?$','messages.views.index'),
-    url(r'^$',trombi_views.profile),
     url(r'^2048/',include('2048.urls')),
     url(r'^xml/evenements.xml',intranetlink_views.getEvents),
     url(r'^availableClassrooms/$', availableClassrooms_views.availableClassrooms),

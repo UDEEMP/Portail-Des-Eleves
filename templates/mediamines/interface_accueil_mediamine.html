@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block header %}
+
+    <style type="text/css">
+
+    table, th, td {
+        border: 1px solid black;
+        text-align: center;
+    }
+    td {
+        padding-right:3px;
+        padding-left:3px;
+    }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+
+
+    <h1>Interface MédiaMines</h1>
+
+    <h2>Soldes MédiaMines</h2>
+    <p><a href="{% url "afficher_soldes" %}">Gérer les soldes</a></p>
+    <h2>Gestion des Galleries :</h2>
+    <p><a href="{%  url "ajouter_gallerie" %}">Créer une nouvelle gallerie</a></p>
+
+    {% if galleries.count > 0 %}
+        <h3>Liste des galleries :</h3>
+    <ul>
+        {% for gal in galleries %}
+            <li>
+            {{ gal.nom }} :  <a href="{% url 'interface_photo_gallerie' gal.id%}">Photos ({{ gal.photo_set.all.count }})</a> / <a href="{% url 'modifier_gallerie' gal.id%}">Modifier infos</a> / <a href="{%  url 'supprimer_gallerie' gal.id%}">Supprimer</a>
+            </li>
+
+
+        {% endfor %}
+    </ul>
+    {% else %}
+        <h3>Aucune gallerie pour le moment.</h3>
+    {% endif %}
+
+    <h2>Gestion des tirages :</h2>
+
+    <h3>Demandes en attente : {{ demandesEnAttente.count }}</h3>
+    <p>Attention, n'affiche que les demandes d'impression des utilisateurs qui ont assez d'argent pour <strong>payer toutes leurs demandes.</strong></p>
+
+    {% if demandesEnAttente.count > 0 %}
+        <table>
+            <tr>
+                <th>N°</th>
+                <th>Date</th>
+                <th>Client</th>
+                <th>N° photo</th>
+                <th>Format</th>
+                <th>Prix</th>
+            </tr>
+
+            {% for demande in demandesEnAttente %}
+            <tr>
+                <td>{{ demande.id }}</td>
+                <td>{{ demande.dateDemande|date:"d/m/y" }}</td>
+                <td>{{ demande.userProfile.user.username }}</td>
+                <td><a href="{% url "modifier_photo" demande.photo.id %}">{{ demande.photo.id }}</a></td>
+                <td>{{ demande.get_str_for_taille }}</td>
+                <td>{{ demande.prix }}</td>
+            </tr>
+
+        {% endfor %}
+        </table>
+
+    <h4><a href="{% url 'generate_recap' %}">Générer un récap</a></h4>
+    {% else %}
+        <p>Aucune commande en attente.</p>
+    {% endif %}
+
+
+
+    {% if recaps.count > 0 %}
+        <h3>Liste des récap de commandes :</h3>
+
+        <table>
+            <tr>
+                <th>N°</th>
+                <th>Date création</th>
+                <th>Créé par</th>
+                <th>Nbr demandes</th>
+                <th>Zip originales</th>
+                <th>Zip miniatures</th>
+                <th>ZIPS</th>
+                <th>Détails</th>
+                <th>Sousous</th>
+                <th>Archiver</th>
+                <th>Supprimer</th>
+            </tr>
+
+            {% for recap in recaps %}
+            <tr>
+                <td>{{ recap.id }}</td>
+                <td>{{ recap.dateGeneration|date:"d/m/y" }}</td>
+                <td>{{ recap.mediamine_user.user.username }}</td>
+                <td>{{ recap.demandes.count }}</td>
+                <td>{% if recap.zipPhotos %}<a href="{{ recap.zipPhotos.url}}">Télécharger</a>{% else %}Pas généré{% endif %}</td>
+                <td>{% if recap.zipMiniatures %}<a href="{{ recap.zipMiniatures.url}}">Télécharger</a>{% else %}Pas généré{% endif %}</td>
+                <td><a href="{% url "change_zip_recap" recap.id %}">{{ recap.get_string_for_zip_action }}</a></td>
+                <td><a href="{% url "details_recap" recap.id %}">Détails</a></td>
+                <td><a href="{% url "debite_or_annule_recap" recap.id %}">{{ recap.get_string_debit }}</a></td>
+                <td><a href="{% url "change_archivage_recap" recap.id %}">{{ recap.get_string_archivage }}</a></td>
+                <td><a href="{% url "cancel_recap" recap.id %}" onclick="return confirm('T\'es sûr de toi négro ? Ca va rembourser cette commande si elle est débitée, et mettre les demandes sous le statut en attente!')">Supprimer</a></td>
+            </tr>
+
+        {% endfor %}
+        </table>
+    {% else %}
+        <h3>Aucun recap pour le moment.</h3>
+    {% endif %}
+
+    <h3>Récaps archivés : {{ archives.count }}</h3>
+
+    {% if archives.count > 0 %}
+
+        <table>
+            <tr>
+                <th>N°</th>
+                <th>Date de création</th>
+                <th>Créé par</th>
+                <th>Nbr de demandes</th>
+                <th>Débité ?</th>
+                <th>Détails</th>
+                <th>Désarchiver</th>
+            </tr>
+
+            {% for recap in archives %}
+            <tr>
+                <td>{{ recap.id }}</td>
+                <td>{{ recap.dateGeneration|date:"d/m/y" }}</td>
+                <td>{{ recap.mediamine_user.user.username }}</td>
+                <td>{{ recap.demandes.count }}</td>
+                <td>{% if recap.hasDebited %}Oui{% else %}Non{% endif %}</td>
+                <td><a href="{% url "details_recap" recap.id %}">Détails</a></td>
+                <td><a href="{% url "change_archivage_recap" recap.id %}">{{ recap.get_string_archivage }}</a></td>
+
+            </tr>
+
+        {% endfor %}
+        </table>
+
+
+    {% else %}
+        <p>Aucun récap archivé.</p>
+    {% endif %}
+
+    {{ mineur.first_name }}
+    {{ mineur.get_total_price_for_mediamines_commandes }}
+
+{% endblock %}

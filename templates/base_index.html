@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block header %}
+
+    <style type="text/css">
+
+    table, th, td {
+        border: 1px solid black;
+        text-align: center;
+    }
+    td {
+        padding-right:3px;
+        padding-left:3px;
+    }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+{% include "mediamines/module_accueil.html" %}
+
+{% endblock %}

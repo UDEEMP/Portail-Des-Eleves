@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block header %}
+
+{% endblock %}
+
+{% block content %}
+
+    <h2><a href="{% url "interface_photo_gallerie" photo.gallerie.id %}">Revenir à la gallerie</a></h2>
+    <h2><a href="{% url "interface_mediamines" %}">Revenir à l'acceuil de l'interface Médiamines</a></h2>
+    <h1>Interface Médiamines - Photo</h1>
+    <p>Appartient à la <a href="{% url "interface_photo_gallerie" photo.gallerie.id %}">gallerie {{ photo.gallerie.nom }} </a></p>
+
+    <p><a href="{% url "supprimer_photo" photo.id %}">Supprimer</a></p>
+
+    <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Confirmer !" />
+    </form>
+    {{ form.media }}
+
+    <a href="{{ photo.image.url }}" target="_blank"><img src="{{ photo.image_thumbnail_2.url }}" /></a>
+
+{% endblock %}

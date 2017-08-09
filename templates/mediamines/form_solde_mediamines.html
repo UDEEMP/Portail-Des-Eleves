@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block header %}
+
+{% endblock %}
+
+
+{% block content %}
+<h3><a href="{% url 'interface_mediamines' %}">Retourner à l'interface MédiaMines</a></h3>
+<h1>Modifier les soldes</h1>
+<form action="" method="post">
+{% csrf_token %}
+{{ form.as_p }}
+<input type="submit" value="Confirmer !" />
+</form>
+{{ form.media }}
+
+
+
+{% endblock %}

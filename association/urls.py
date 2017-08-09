@@ -3,6 +3,7 @@ from django.conf.urls import include, url
 from django.views.generic import TemplateView
 from evenement import views as evenement_views
 from association import views as ass_views
+from django.contrib.auth.decorators import login_required
 from message import views as message_views
 # Views d'autres modules
 urlpatterns = [
@@ -13,7 +14,7 @@ urlpatterns = [
     url(r'^minestryofsound/', include('minestryofsound.urls')),
     url(r'^minesmarket/', include('minesmarket.urls')),
     url(r'^freshbox/', include('freshbox.urls')),
-    #url(r'^mediamines/', include('mediamines.urls')),
+    #url(r'^mediamines_old/', include('mediamines_old.urls')),
     url(r'^paindemine/', include('paindemine.urls')),
     url(r'^abatage/', include('abatage.urls')),
     url(r'^vendome/', include('vendome.urls')),
@@ -33,7 +34,7 @@ urlpatterns = [
 # Views du module association
 urlpatterns += [
     url(r'^$', ass_views.index, name='associations'),
-    url(r'^(?P<association_pseudo>\w+)/$', ass_views.messages),
+    url(r'^(?P<association_pseudo>\w+)/$', ass_views.description),
     url(r'^(?P<association_pseudo>\w+)/equipe/$', ass_views.equipe),
     url(r'^(?P<association_pseudo>\w+)/equipe/changer_ordre/$', ass_views.changer_ordre),    
     url(r'^(?P<association_pseudo>\w+)/equipe/changer_role/(?P<eleve_id>\d+)$', ass_views.changer_role),    
@@ -46,5 +47,13 @@ urlpatterns += [
     url(r'^(?P<association_pseudo>\w+)/medias/video/ajouter/$', ass_views.ajouter_video),
     url(r'^(?P<association_pseudo>\w+)/medias/video/(?P<video_id>\d+)/supprimer/$', ass_views.supprimer_video),
     url(r'^(?P<association_pseudo>\w+)/medias/affiche/ajouter/$', ass_views.ajouter_affiche),
-    url(r'^(?P<association_pseudo>\w+)/medias/affiche/(?P<affiche_id>\d+)/supprimer/$', ass_views.supprimer_affiche)
+    url(r'^(?P<association_pseudo>\w+)/medias/affiche/(?P<affiche_id>\d+)/supprimer/$', ass_views.supprimer_affiche),
+    url(r'^(?P<association_pseudo>\w+)/description/$', ass_views.description, name="description_asso"),
+    url(r'^(?P<association_pseudo>\w+)/editDescription/$', ass_views.changeDescription, name="edit_description"),
+
+    url(r'^(?P<association_pseudo>\w+)/news/$', ass_views.getNews, name="news_liste"),
+    url(r'^(?P<association_pseudo>\w+)/news/add/$', login_required(ass_views.AjouterNews.as_view()), name="add_news"),
+    url(r'^(?P<association_pseudo>\w+)/news/change/(?P<pk>\d+)$', login_required(ass_views.ModifierNews.as_view()), name="change_news"),
+    url(r'^(?P<association_pseudo>\w+)/news/delete/(?P<pk>\d+)$', login_required(ass_views.SupprimerNews.as_view()), name="delete_news")
+
 ]

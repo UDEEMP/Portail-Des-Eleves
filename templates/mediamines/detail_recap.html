@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% load  %}
+
+
+{% block header %}
+
+    <style type="text/css">
+
+    table, th, td {
+        border: 1px solid black;
+        text-align: center;
+    }
+    td {
+        padding-right:3px;
+        padding-left:3px;
+    }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+
+
+    <h1>Détails du récap n°{{ recap.id }}</h1>
+    <h3><a href="{% url 'interface_mediamines' %}">Retourner à l'interface MédiaMines</a></h3>
+<p>Nbr d'impressions : {{ recap.demandes.count }}; Prix total : {{ recap.get_prix_total }} €; Débité : {% if recap.hasDebited %} OUI {% else %} NON {% endif %}</p>
+
+<h3>Demandes en vrac :</h3>
+        <table>
+            <tr>
+                <th>N°</th>
+                <th>Date</th>
+                <th>Client</th>
+                <th>N° photo</th>
+                <th>Format</th>
+                <th>Prix</th>
+            </tr>
+
+            {% for demande in recap.demandes.all %}
+            <tr>
+                <td>{{ demande.id }}</td>
+                <td>{{ demande.dateDemande|date:"d/m/y" }}</td>
+                <td>{{ demande.userProfile.user.username }}</td>
+                <td><a href="{% url "modifier_photo" demande.photo.id %}">{{ demande.photo.id }}</a></td>
+                <td>{{ demande.get_str_for_taille }}</td>
+                <td>{{ demande.prix }}</td>
+            </tr>
+
+        {% endfor %}
+        </table>
+
+<h3>Demandes triées par utilisateur :</h3>
+{% for profile,commandes in  recap.get_demandes_by_user.items %}
+
+    <h4>{{ profile.user.username }}, {{ commandes.count }} impressions</h4>
+    <table>
+            <tr>
+                <th>N°</th>
+                <th>Date</th>
+                <th>Client</th>
+                <th>N° photo</th>
+                <th>Format</th>
+                <th>Prix</th>
+            </tr>
+
+            {% for demande in commandes%}
+            <tr>
+                <td>{{ demande.id }}</td>
+                <td>{{ demande.dateDemande|date:"d/m/y" }}</td>
+                <td>{{ demande.userProfile.user.username }}</td>
+                <td><a href="{% url "modifier_photo" demande.photo.id %}">{{ demande.photo.id }}</a></td>
+                <td>{{ demande.get_str_for_taille }}</td>
+                <td>{{ demande.prix }}</td>
+            </tr>
+
+        {% endfor %}
+    </table>
+
+{% endfor %}
+
+{% endblock %}

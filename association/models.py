@@ -6,16 +6,21 @@ from django.contrib.auth.models import Group, User
 from django.contrib.contenttypes import fields
 from datetime import datetime
 from trombi.models import UserProfile
+from trombi import tools
 from notification.models import Notification, Envoi
+from tinymce.models import HTMLField
 
 class Association(models.Model):
     nom = models.CharField(max_length=200)
+    icone = models.ImageField(upload_to="associations/icones/", null=True)
     pseudo = models.SlugField(help_text="Nom dans les urls")
     membres = models.ManyToManyField(UserProfile, through='Adhesion', blank=True)
     is_hidden_1A = models.BooleanField(default=False, verbose_name="Cachée aux 1A")
     ordre = models.IntegerField(default=0, help_text="Ordre d'apparition dans la liste des associations (ordre alphabétique pour les valeurs égales)")
     suivi_par = models.ManyToManyField(User, related_name='associations_suivies', blank=True, help_text= "Les élèves recevant les notifications de l'association")
     groupe_permissions = models.OneToOneField(Group, blank=True, null=True, help_text="Groupe de permissions correspondant à l'association")
+
+    description = HTMLField(blank=True, null=True, default=None)
 
     class Meta:
         ordering = ['ordre','nom']
@@ -24,7 +29,7 @@ class Association(models.Model):
         return self.nom
 
     def est_cachee_a(self, eleve):
-        return self.is_hidden_1A and eleve.en_premiere_annee()
+        return self.is_hidden_1A and tools.hidden_from_1A(eleve)
 
     def save(self, *args, **kwargs):
         if not self.groupe_permissions: # On crée un groupe de permissions, si non-existant
@@ -34,6 +39,15 @@ class Association(models.Model):
 
     def get_absolute_url(self):
         return '/associations/' + self.pseudo + '/'
+
+class News(models.Model):
+    titre = models.CharField(max_length=200, blank=True, null=True, default=None)
+    association = models.ForeignKey(Association, blank=True, null=True, default=None)
+    auteur = models.ForeignKey(UserProfile, blank=True, null=True, default=None)
+    datePubli = models.DateTimeField(default=datetime.now())
+    texte = HTMLField(blank=True, null=True, default=None)
+    hiddenFrom1A = models.BooleanField(default=False)
+
 
 class Adhesion(models.Model):
     """
@@ -112,7 +126,7 @@ class Affiche(models.Model):
     """
     association = models.ForeignKey(Association, blank=True, null=True)
     titre = models.CharField(verbose_name='Titre de l\'affiche', max_length=64)
-    fichier = models.ImageField(upload_to = 'affiches')
+    fichier = models.ImageField(upload_to = 'associations/affiches/')
     date = models.DateField(verbose_name='Date de publication', default=datetime.now, blank=True, null=True)
     notification = fields.GenericRelation(Notification)
 
@@ -146,6 +160,8 @@ class Page(models.Model):
     titre = models.CharField(max_length=200)
     lien = models.SlugField(max_length=200, help_text="URL de la page. Ne donner que le nom de l'association si la page est interne.")
     is_externe = models.BooleanField(help_text="Vrai si la page est un site externe au portail", verbose_name = "est externe")
+    icone = models.ImageField(upload_to="associations/pages_icones/", null=True)
+
 
     def __str__(self):
         return self.association.nom + ' - ' + self.titre
@@ -189,3 +205,17 @@ class VideoForm(ModelForm):
     class Meta:
         model = Video
         exclude = ('association',)
+
+class DescriptionForm(ModelForm):
+
+
+    class Meta:
+        model = Association
+        fields = ('description',)
+
+class NewsForm(ModelForm):
+
+
+    class Meta:
+        model = News
+        fields = ('titre','texte','hiddenFrom1A')
