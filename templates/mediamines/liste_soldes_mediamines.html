@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block header %}
+
+    <style type="text/css">
+
+    table, th, td {
+        border: 1px solid black;
+        text-align: center;
+    }
+    td {
+        padding-right:3px;
+        padding-left:3px;
+    }
+    </style>
+{% endblock %}
+
+
+{% block content %}
+    <h3><a href="{% url 'interface_mediamines' %}">Retourner à l'interface MédiaMines</a></h3>
+    <h1>Soldes MédiaMines</h1>
+    <h2><a href="{% url "modifier_solde" %}">Modifier les soldes</a></h2>
+    <table>
+        <tr>
+            <th>Identifiant</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Promo</th>
+            <th>Solde</th>
+            <th>Montant dans le panier</th>
+        </tr>
+    {% for profile in liste %}
+        <tr>
+            <td>{{ profile.user.username }}</td>
+            <td>{{ profile.last_name }}</td>
+            <td>{{ profile.first_name }}</td>
+            <td>{{ profile.promo }}</td>
+            <td>{{ profile.solde_mediamines }} €</td>
+            <td>{{ profile.get_total_price_for_mediamines_commandes }} €</td>
+
+        </tr>
+    {% endfor %}
+    </table>
+
+{% endblock %}

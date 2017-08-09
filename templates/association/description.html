@@ -1,0 +1,29 @@
+﻿{% extends "association/base_assoc.html" %}
+{% load static %}
+{% load tinymce_tags %}
+
+{% load bleach_tags %}
+
+{% block content %}
+    {% if canEdit %}
+
+        <p><a href="{% url "edit_description" association.nom %}">Editer la description</a></p>
+
+    {% endif %}
+    {% if description %}
+    {{ description | bleach }}
+    {% else %}
+    <p>Aucune description disponible pour le moment.</p>
+    {% endif %}
+
+    {% if form %}
+
+        <form method="POST" action="">
+
+        {{ form.as_p }}
+
+        </form>
+        {{ form.media }}
+
+    {% endif %}
+{% endblock %}

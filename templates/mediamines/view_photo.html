@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block header %}
+
+<style type="text/css">
+div.gallery {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 180px;
+    height: 120px;
+}
+
+div.gallery:hover, div.representant_gallery:hover{
+    border: 1px solid #777;
+}
+
+div.gallery img, div.representant_gallery img {
+    width: 100%;
+    height: 100%;
+}
+
+
+.block_photo {
+    margin: 5px;
+    //border: 1px solid #ccc;
+    //float: left;
+    width:80%;
+    min-width:400px;
+    text-align: center;
+    margin-left:auto;
+    margin-right: auto;
+}
+.block_photo select {
+    width:90%;
+}
+
+.haut_block_photo button{
+    margin:0px;
+}
+.haut_block_photo select {
+    width:350px;
+    margin-top: 10px;
+}
+.block_photo .main_photo {
+    width:90%;
+    height:auto;
+    margin:0;
+}
+.helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+.block_photo .milieu_left_block_photo, .block_photo .milieu_right_block_photo {
+    height:100%;
+    width:4%;
+    margin:0;
+    vertical-align: middle;
+    display:inline-block;
+}
+.block_photo .milieu_left_block_photo img, .block_photo .milieu_right_block_photo img {
+    width:100%;
+    margin:0;
+    height:auto;
+    vertical-align: middle;
+}
+
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+
+    <h3 align="center">Gallerie : {{ photo.gallerie.nom }}</h3>
+    <p><a href="{% url "client_galleries" %}">Voir toutes les galleries</a></p>
+
+    {% if has_right_to_modify %}
+
+        <p>Tu appartiens à Médiamines, tu peux :</p>
+            <ul>
+                <li><a target="_blank" href="{% url "modifier_photo" photo.id %}">Modifier les infos de cette photo</a></li>
+                <li><a target="_blank" href="{% url "interface_photo_gallerie" photo.gallerie.id %}">Modifier cette gallerie</a></li>
+            </ul>
+    {% endif %}
+
+<div class="block_photo">
+
+    <div class="haut_block_photo">
+        <div class="block_like" style="float:left; margin-left: 50px; margin-top:20px;">
+
+            {% if iLikedThis %}
+                <a href="{% url "appreciation_photo" photo.id "Stop" %}" class="btn btn-default" disabled="true" style="color: green;">
+                <img src="{% static "glyphicons/png/glyphicons-344-thumbs-up.png" %}" /> {{ nbrOfLikes }} </a>
+            {% else %}
+                <a href="{% url "appreciation_photo" photo.id True %}" class="btn btn-default" style="color: green;">
+                    <img src="{% static "glyphicons/png/glyphicons-344-thumbs-up.png" %}" /> {{ nbrOfLikes }} </a>
+            {% endif %}
+
+         {% if iDislikedThis %}
+            <a href="{% url "appreciation_photo" photo.id "Stop" %}" class="btn btn-default" disabled="true" style="color: red;">
+                <img src="{% static "glyphicons/png/glyphicons-345-thumbs-down.png" %}" /> {{ nbrOfDislikes }} </a>
+        {% else %}
+            <a href="{% url "appreciation_photo" photo.id False %}" class="btn btn-default" style="color: red;">
+                <img src="{% static "glyphicons/png/glyphicons-345-thumbs-down.png" %}" /> {{ nbrOfDislikes }} </a>
+        {% endif %}
+
+        </div>
+        <p align="center">ID de la photo : {{ photo.id }},
+            demander un tirage de cette photo au format : <a href="#">(Kezako ?)</a>
+            <form method="POST" action="{% url "demander_photo" photo.id %}"> {{ impressionForm.taille }}{% csrf_token %}
+        <button type="submit" class="btn btn-default">Demander ce tirage !</button>
+            </form>
+            {{  impressionForm.media }}
+       {% if successMsg %} <p style="color:green;">{{ successMsg }}</p> {% endif %}
+        </p>
+    </div>
+
+    <div class="milieu_block_photo">
+        <a href="{%  url "view_photo" previousPhoto.id %}"><div class="milieu_left_block_photo"><span class="helper"></span><img src="{% static "fleche_d.png" %}" /></div></a>
+        <a href="{{ photo.image.url }}"><img class="main_photo" src="{{ photo.image_thumbnail_2.url }}" /></a>
+        <a href="{%  url "view_photo" nextPhoto.id %}"><div class="milieu_right_block_photo"><img src="{% static "fleche_g.png" %}" /></div></a>
+    </div>
+
+
+    <div class="bas_block_photo">
+
+        {% if photo.description %}
+            <p>Description : {{ photo.description }}</p>
+        {% endif %}
+
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="btn btn-primary" value="Identifier" />
+        </form>
+        {{ form.media }}
+
+    </div>
+
+</div>
+
+
+{% for mini in photos %}
+    <div class="gallery">
+      <a href="{%  url "view_photo" mini.id %}">
+        <img src="{{ mini.image_thumbnail_1.url }}" />
+      </a>
+    </div>
+{% endfor %}
+
+{% endblock %}
